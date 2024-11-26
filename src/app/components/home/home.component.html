@@ -1,1 +1,9 @@
-<p>home works!</p>
+@if(videosInfo) {
+<div class="videos-container">
+    <app-video-card *ngFor="let videoInfo of videosInfo" [info]="videoInfo" />
+</div>
+} @else {
+<div class="full-size flex-center">
+    <app-loading-circle />
+</div>
+}

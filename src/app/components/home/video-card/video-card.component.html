@@ -1,0 +1,11 @@
+@if(info) {
+<img src="{{info.thumbUrl}}" alt="{{info.title}}" />
+<div class="show-on-hover">
+    <p>{{info.title}}</p>
+    <p>{{info.durationInMinutes}}</p>
+</div>
+} @else {
+    <div class="full-size flex-center">
+        <app-loading-circle />
+    </div>
+}

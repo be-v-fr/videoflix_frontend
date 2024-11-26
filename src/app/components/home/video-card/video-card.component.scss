@@ -1,0 +1,35 @@
+@import '../../../../styles.scss';
+
+$thumb-height: 135px;
+
+:host {
+    display: block;
+    width: calc($thumb-height / 0.5625);
+    height: $thumb-height;
+    background-color: blue;
+    border-radius: $b-radius-small;
+    @include transition-ease();
+    .show-on-hover {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        height: 0;
+        overflow: hidden;
+        background: white;
+        border-bottom-left-radius: $b-radius-small;
+        border-bottom-right-radius: $b-radius-small;
+        transition: 130ms ease-out;
+    }
+    &:hover {
+        @include transition-ease();
+        transition-delay: 300ms;
+        transform: scale(1.2) translateY(calc(-1 * $thumb-height / 2));
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        .show-on-hover {
+            transition-delay: inherit;
+            height: $thumb-height;
+        }
+    }
+}

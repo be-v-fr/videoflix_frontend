@@ -1,0 +1,56 @@
+@import '../../../../styles.scss';
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg) scale(1);
+        filter: brightness(1);
+    }
+
+    50% {
+        transform: rotate(370deg) scale(1.2);
+        filter: brightness(1.6);        
+    }
+
+    100% {
+        transform: rotate(720deg) scale(1);
+        filter: brightness(1);
+    }
+}
+
+@-webkit-keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0deg) scale(1);
+        filter: brightness(1);
+    }
+
+    50% {
+        -webkit-transform: rotate(370deg) scale(1.2);
+        filter: brightness(1.6);        
+    }
+
+    100% {
+        -webkit-transform: rotate(720deg) scale(1);
+        filter: brightness(1);
+    }
+}
+
+:host {
+    width: 48px;
+    height: 48px;
+    margin: 16px auto 0;
+    border: solid 6px darkgray;
+    border-radius: 50%;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    -webkit-transition: all 0.5s ease-in;
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: 2.5s;
+    -webkit-animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.755, 0.15, 0.855, 0.26);
+
+    transition: all 0.5s ease-in;
+    animation-name: rotate;
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.755, 0.15, 0.855, 0.26);
+}

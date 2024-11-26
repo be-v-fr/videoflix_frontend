@@ -1,7 +1,30 @@
-$black-darkest: #0A0C11;
+$black-darkest: #0a0c11;
+$black-medium: #101016;
+
+$b-radius-small: 5px;
+$b-radius-large: 24px;
+
+@mixin transition-ease($dur: 100ms) {
+    transition: $dur ease-in-out;
+}
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+html {
+    overflow: hidden;
+}
+
+.full-size {
+    width: 100%;
+    height: 100%;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
