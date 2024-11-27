@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { VideoComponent } from './components/video/video.component';
-import { SignupComponent } from './components/signup/signup.component';
-import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/auth/signup/signup.component';
+import { LoginComponent } from './components/auth/login/login.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { ImprintComponent } from './components/imprint/imprint.component';
+import { AuthComponent } from './components/auth/auth.component';
 
 export const routes: Routes = [
     {
@@ -17,7 +18,9 @@ export const routes: Routes = [
     },
     {
         path: 'auth',
+        component: AuthComponent,
         children: [
+            {path: '', redirectTo: 'login', pathMatch: 'full' },
             { path: 'signup', component: SignupComponent },
             { path: 'login', component: LoginComponent },            
         ],
