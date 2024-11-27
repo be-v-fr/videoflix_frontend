@@ -1,1 +1,32 @@
-<p>login works!</p>
+<h1>Log in</h1>
+<form class="form-std" (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+    <div class="field-wrapper">
+        <div class="field" [class.field-active]="formData.email.length > 0">
+            <span class="material-icons-sharp" [class.to-black]="formData.email.length > 0">mail</span>
+            <input type="email" placeholder="yourname@email.com" [(ngModel)]="formData.email" name="email"
+                autocomplete="off" #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                [class.input-invalid]="email.touched && !email.valid" />
+        </div>
+        <app-form-error [conditions]="[email.touched && !email.valid]" [messages]="['Please enter a valid email address.']" />
+    </div>
+    <div class="field-wrapper">
+        <div class="field">
+            <span class="material-icons-sharp" [class.to-black]="formData.password.length > 0">lock</span>
+            <input type="password" placeholder="Password" [(ngModel)]="formData.password" name="password"
+                #password="ngModel" required [class.input-invalid]="password.touched && !password.valid" />
+        </div>
+        <app-form-error [conditions]="[password.touched && !password.valid]" [messages]="['Please enter a password.']" />
+    </div>
+    <div class="f-width flex-center">
+        <a href="" class="link-blue">I forgot my password</a>
+    </div>
+    <div class="btns-container">
+        <button type="submit" class="btn-primary">Submit</button>
+        <button type="button" class="btn-secondary">Demo</button>
+    </div>
+</form>
+<div class="f-width signup-mode-link-container">
+    <a routerLink="/auth/signup">
+        <h3 class="signup-mode-link-content">Sign up<span class="material-icons-sharp">keyboard_arrow_right</span></h3>
+    </a>
+</div>

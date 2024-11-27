@@ -1,0 +1,78 @@
+@import '../../../styles.scss';
+@import 'material-icons/iconfont/material-icons.scss';
+
+@mixin auth-child-host() {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+:host {
+    display: block;
+    width: 400px;
+    height: 480px;
+    background-color: $white-medium;
+    border-radius: $b-radius-large;
+    padding: 24px;
+    color: $black-medium;
+    box-shadow: $shine-white-shadow;
+}
+
+h1 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 48px;
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid $black-light;
+}
+
+.btns-container {
+    margin-top: 16px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+}
+
+.signup-mode-link-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    .signup-mode-link-content {
+        display: flex;
+        align-items: center;
+        color: $black-darkest;
+        border-radius: $b-radius-large;
+        border: 1px solid #00000000;
+        padding: 7px 3px 7px 11px;
+        @include transition-ease($dur: 75ms);
+        span {
+            font-size: 30px;
+        }
+        &:hover {
+            @include transition-ease();
+            border-color: $grey-medium;
+            @include simple-shadow($alpha: 0.06);
+        }
+
+        &:active {
+            @include transition-ease($dur: 75ms);
+            border-color: $grey-dark;
+            @include simple-shadow($alpha: 0.1);
+        }
+    }
+}

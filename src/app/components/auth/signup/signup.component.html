@@ -1,1 +1,41 @@
-<p>signup works!</p>
+<h1>Sign up</h1>
+<form class="form-std" (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm">
+    <div class="field-wrapper">
+        <div class="field" [class.field-active]="formData.email.length > 0">
+            <span class="material-icons-sharp" [class.to-black]="formData.email.length > 0">mail</span>
+            <input type="email" placeholder="yourname@email.com" [(ngModel)]="formData.email" name="email"
+                autocomplete="off" #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+                [class.input-invalid]="email.touched && !email.valid" />
+        </div>
+        <app-form-error [conditions]="[email.touched && !email.valid]" [messages]="['Please enter a valid email address.']" />
+    </div>
+    <div class="field-wrapper">
+        <div class="field">
+            <span class="material-icons-sharp" [class.to-black]="formData.password.length > 0">lock</span>
+            <input type="password" placeholder="Password" [(ngModel)]="formData.password" name="password"
+                #password="ngModel" required [class.input-invalid]="password.touched && !password.valid" />
+        </div>
+        <app-form-error [conditions]="[password.touched && !password.valid]" [messages]="['Please enter a password.']" />
+    </div>
+    <div class="field-wrapper">
+        <div class="field">
+            <span class="material-icons-sharp" [class.to-black]="formData.password.length > 0">lock</span>
+            <input type="password" placeholder="Confirm password" [(ngModel)]="formData.passwordConfirmation"
+                name="passwordConfirmation" #passwordConfirmation="ngModel" required
+                [class.input-invalid]="passwordConfirmation.touched && formData.password != formData.passwordConfirmation" />
+        </div>
+        <app-form-error [conditions]="[passwordConfirmation.touched && formData.password != formData.passwordConfirmation]" [messages]="['Passwords do not match.']" />
+    </div>
+    <div class="form-bottom">
+        <div class="privacy-field">
+            <input type="checkbox">
+            I accept the<a href="" class="link-blue">privacy policy</a>
+        </div>
+        <button type="submit" class="btn-primary">Submit</button>
+    </div>
+</form>
+<div class="f-width signup-mode-link-container">
+    <a routerLink="/auth/login">
+        <h3 class="signup-mode-link-content"><span class="material-icons-sharp">keyboard_arrow_left</span>Log in</h3>
+    </a>
+</div>

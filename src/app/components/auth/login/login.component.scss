@@ -1,0 +1,6 @@
+@import '../../../../styles.scss';
+@import '../auth.component.scss';
+
+:host {
+    @include auth-child-host();
+}
