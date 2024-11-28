@@ -22,15 +22,15 @@
             ]" />
     </div>
     <div class="f-width flex-center">
-        <a href="" class="link-blue">I forgot my password</a>
+        <a routerLink="/auth/pwReset/request" [queryParams]="{email: formData.email}" class="link-blue">I forgot my password</a>
     </div>
     <div class="btns-container">
         <button type="submit" class="btn-primary" [disabled]="loading">Submit</button>
         <button type="button" class="btn-secondary">Demo</button>
     </div>
 </form>
-<div class="f-width signup-mode-link-container">
+<div class="f-width auth-mode-link-container">
     <a routerLink="/auth/signup">
-        <h3 class="signup-mode-link-content">Sign up<span class="material-icons-sharp">keyboard_arrow_right</span></h3>
+        <h3 class="auth-mode-link-content">Sign up<span class="material-icons-sharp">keyboard_arrow_right</span></h3>
     </a>
 </div>

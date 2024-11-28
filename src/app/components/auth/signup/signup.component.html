@@ -56,9 +56,9 @@
         <p *ngIf="emailSent == 'finally'" class="note">{{emailMsg}}</p>
     </div>
 </form>
-<div class="f-width signup-mode-link-container">
+<div class="f-width auth-mode-link-container">
     <a routerLink="/auth/login">
-        <h3 class="signup-mode-link-content"><span class="material-icons-sharp">keyboard_arrow_left</span>Log in</h3>
+        <h3 class="auth-mode-link-content"><span class="material-icons-sharp">keyboard_arrow_left</span>Log in</h3>
     </a>
 </div>
 <app-toast-notification [show]="emailSent == true" [msg]="emailMsg" (then)="emailSent = 'finally'" />

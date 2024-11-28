@@ -6,6 +6,9 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { ImprintComponent } from './components/imprint/imprint.component';
 import { AuthComponent } from './components/auth/auth.component';
+import { RequestPwResetComponent } from './components/auth/pw-reset/request-pw-reset/request-pw-reset.component';
+import { PwResetComponent } from './components/auth/pw-reset/pw-reset.component';
+import { PerformPwResetComponent } from './components/auth/pw-reset/perform-pw-reset/perform-pw-reset.component';
 
 export const routes: Routes = [
     {
@@ -20,9 +23,18 @@ export const routes: Routes = [
         path: 'auth',
         component: AuthComponent,
         children: [
-            {path: '', redirectTo: 'login', pathMatch: 'full' },
+            { path: '', redirectTo: 'login', pathMatch: 'full' },
             { path: 'signup', component: SignupComponent },
-            { path: 'login', component: LoginComponent },            
+            { path: 'login', component: LoginComponent },
+            {
+                path: 'pwReset',
+                component: PwResetComponent,
+                children: [
+                    { path: '', redirectTo: 'request', pathMatch: 'full' },
+                    { path: 'request', component: RequestPwResetComponent },
+                    { path: 'perform', component: PerformPwResetComponent },
+                ]
+            },
         ],
     },
     {
