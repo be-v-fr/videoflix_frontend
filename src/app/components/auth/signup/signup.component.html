@@ -7,7 +7,10 @@
                 autocomplete="off" #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
                 [class.input-invalid]="email.touched && !email.valid" />
         </div>
-        <app-form-error [conditions]="[email.touched && !email.valid]" [messages]="['Please enter a valid email address.']" />
+        <app-form-error [errors]="[
+                {condition: email.touched && !email.valid, msg: 'Please enter a valid email address.'},
+                errorService.getConditionalFieldErrResp('email', errorResp),
+            ]" />
     </div>
     <div class="field-wrapper">
         <div class="field">
@@ -15,7 +18,10 @@
             <input type="password" placeholder="Password" [(ngModel)]="formData.password" name="password"
                 #password="ngModel" required [class.input-invalid]="password.touched && !password.valid" />
         </div>
-        <app-form-error [conditions]="[password.touched && !password.valid]" [messages]="['Please enter a password.']" />
+        <app-form-error [errors]="[
+                {condition: password.touched && !password.valid, msg: 'Please enter a password.'},
+                errorService.getConditionalFieldErrResp('password', errorResp),
+            ]" />
     </div>
     <div class="field-wrapper">
         <div class="field">
@@ -24,14 +30,30 @@
                 name="passwordConfirmation" #passwordConfirmation="ngModel" required
                 [class.input-invalid]="passwordConfirmation.touched && formData.password != formData.passwordConfirmation" />
         </div>
-        <app-form-error [conditions]="[passwordConfirmation.touched && formData.password != formData.passwordConfirmation]" [messages]="['Passwords do not match.']" />
+        <app-form-error [errors]="[
+                {
+                    condition: passwordConfirmation.touched && formData.password.length > 0 && formData.passwordConfirmation.length == 0,
+                    msg: 'Please confirm your password'
+                },
+                {
+                    condition: passwordConfirmation.touched && formData.password != formData.passwordConfirmation,
+                    msg: 'Passwords do not match.'
+                }  
+            ]" />
     </div>
     <div class="form-bottom">
         <div class="privacy-field">
-            <input type="checkbox">
-            I accept the<a href="" class="link-blue">privacy policy</a>
+            <input type="checkbox" name="privacyCheck" #privacyCheck="ngModel" [(ngModel)]="formData.privacyCheck" required />
+            I accept the<a routerLink="/legal/privacy" target="_blank" class="link-blue">privacy policy</a>
+            <app-form-error [errors]="[
+                    {condition: !privacyCheck.valid && signupForm.submitted, msg: 'You need to accept the privacy policy to sign up.'}
+                ]" />
         </div>
-        <button type="submit" class="btn-primary">Submit</button>
+        <button type="submit" class="btn-primary" [disabled]="loading">Submit</button>
+        <app-form-error [errors]="[
+                errorService.getConditionalFieldErrResp('unknown', errorResp),
+            ]" />
+        <p *ngIf="emailSent == 'finally'" class="note">{{emailMsg}}</p>
     </div>
 </form>
 <div class="f-width signup-mode-link-container">
@@ -39,3 +61,4 @@
         <h3 class="signup-mode-link-content"><span class="material-icons-sharp">keyboard_arrow_left</span>Log in</h3>
     </a>
 </div>
+<app-toast-notification [show]="emailSent == true" [msg]="emailMsg" (then)="emailSent = 'finally'" />

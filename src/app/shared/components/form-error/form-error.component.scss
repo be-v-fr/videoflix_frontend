@@ -3,9 +3,6 @@
 :host {
     transition: opacity 250ms ease-out;
     opacity: 1;
-    position: absolute;
-    left: 0;
-    right: 0;
     top: calc(100% + 2px);
     p {
         font-size: 14px;

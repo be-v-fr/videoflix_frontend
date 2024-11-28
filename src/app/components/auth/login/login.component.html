@@ -7,7 +7,9 @@
                 autocomplete="off" #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
                 [class.input-invalid]="email.touched && !email.valid" />
         </div>
-        <app-form-error [conditions]="[email.touched && !email.valid]" [messages]="['Please enter a valid email address.']" />
+        <app-form-error [errors]="[
+                {condition: email.touched && !email.valid, msg: 'Please enter a valid email address.'},
+            ]" />
     </div>
     <div class="field-wrapper">
         <div class="field">
@@ -15,13 +17,15 @@
             <input type="password" placeholder="Password" [(ngModel)]="formData.password" name="password"
                 #password="ngModel" required [class.input-invalid]="password.touched && !password.valid" />
         </div>
-        <app-form-error [conditions]="[password.touched && !password.valid]" [messages]="['Please enter a password.']" />
+        <app-form-error [errors]="[
+                {condition: password.touched && !password.valid, msg: 'Please enter a password.'},     
+            ]" />
     </div>
     <div class="f-width flex-center">
         <a href="" class="link-blue">I forgot my password</a>
     </div>
     <div class="btns-container">
-        <button type="submit" class="btn-primary">Submit</button>
+        <button type="submit" class="btn-primary" [disabled]="loading">Submit</button>
         <button type="button" class="btn-secondary">Demo</button>
     </div>
 </form>

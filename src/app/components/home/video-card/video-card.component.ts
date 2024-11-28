@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { VideoInfo } from '../../../models/video-info';
+import { VideoInfo } from '../../../shared/models/video-info';
 import { LoadingCircleComponent } from '../../../shared/components/loading-circle/loading-circle.component';
 
 @Component({

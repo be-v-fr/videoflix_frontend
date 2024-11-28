@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { VideoInfo } from '../../models/video-info';
+import { VideoInfo } from '../../shared/models/video-info';
 import { VideoCardComponent } from './video-card/video-card.component';
 import { LoadingCircleComponent } from '../../shared/components/loading-circle/loading-circle.component';
 

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { ConditionalErrorMsg } from '../../interfaces/conditional-error-msg';
 
 @Component({
   selector: 'app-form-error',
@@ -9,15 +10,10 @@ import { Component, Input } from '@angular/core';
   styleUrl: './form-error.component.scss'
 })
 export class FormErrorComponent {
-  @Input() conditions: (boolean | null)[] = [];
-  @Input() messages: string[] = [];
+  @Input() errors: ConditionalErrorMsg[] = [];
 
   get firstError(): string | null {
-    if (this.conditions.length !== this.messages.length) {
-      console.error('Conditions and Messages arrays must have the same length.');
-      return null;
-    }
-    const errorIndex = this.conditions.findIndex(condition => condition === true);
-    return errorIndex !== -1 ? this.messages[errorIndex] : null;
+    const errorIndex = this.errors.findIndex(e => e.condition === true);
+    return errorIndex !== -1 ? this.errors[errorIndex].msg : null;
   }
 }
