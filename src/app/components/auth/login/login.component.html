@@ -7,6 +7,7 @@
             [class.input-invalid]="email.touched && !email.valid" />
         <app-form-error [errors]="[
                 {condition: email.touched && !email.valid, msg: 'Please enter a valid email address.'},
+                errorService.getConditionalFieldErrResp('email', errorResp),
             ]" />
     </div>
     <div class="field">
@@ -14,7 +15,9 @@
         <input type="password" placeholder="Password" [(ngModel)]="formData.password" name="password"
             #password="ngModel" required [class.input-invalid]="password.touched && !password.valid" />
         <app-form-error [errors]="[
-                {condition: password.touched && !password.valid, msg: 'Please enter a password.'},     
+                {condition: password.touched && !password.valid, msg: 'Please enter a password.'},
+                errorService.getConditionalFieldErrResp('password', errorResp),
+                errorService.getConditionalFieldErrResp('non_field_errors', errorResp), 
             ]" />
     </div>
     <div class="f-width flex-center">
@@ -24,6 +27,9 @@
     <div class="btns-container">
         <button type="submit" class="btn-primary" [disabled]="loading">Submit</button>
         <button type="button" class="btn-secondary">Demo</button>
+        <app-form-error [errors]="[
+                errorService.getConditionalFieldErrResp('unknown', errorResp),
+            ]" />
     </div>
 </form>
 <div class="f-width auth-mode-link-container">
@@ -31,3 +37,4 @@
         <h3 class="auth-mode-link-content">Sign up<span class="material-icons-sharp">keyboard_arrow_right</span></h3>
     </a>
 </div>
+<app-toast-notification [show]="loginComplete == true" [msg]="'You logged in successfully'" />

@@ -4,3 +4,7 @@
 :host {
     @include auth-child-host();
 }
+
+.btns-container {
+    position: relative;
+}

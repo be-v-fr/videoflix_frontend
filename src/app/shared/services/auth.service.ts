@@ -46,7 +46,7 @@ export class AuthService {
      * @param password user password
      * @returns authentication result
      */
-    async logIn(email: string, password: string): Promise<Object> {
+    async login(email: string, password: string): Promise<Object> {
         const url = this.AUTH_URL + 'login/';
         const body = {
             email: email,
@@ -121,7 +121,7 @@ export class AuthService {
      * Log out (both as guest and registered user)
      * @returns log out result
      */
-    logOut(): void {
+    logout(): void {
         this.deleteLocalSessionToken();
         this.router.navigateByUrl('');
     }
