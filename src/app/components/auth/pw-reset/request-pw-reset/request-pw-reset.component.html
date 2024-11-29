@@ -6,9 +6,15 @@
             [class.input-invalid]="email.touched && !email.valid" />
         <app-form-error [errors]="[
                 {condition: email.touched && !email.valid, msg: 'Please enter a valid email address.'},
+                errorService.getConditionalFieldErrResp('email', errorResp),
             ]" />
     </div>
     <div class="btns-container">
         <button type="submit" class="btn-primary" [disabled]="loading">Submit</button>
+        <app-form-error [errors]="[
+                errorService.getConditionalFieldErrResp('unknown', errorResp),
+            ]" />
+        <p *ngIf="emailSent == 'finally'" class="note">{{emailMsg}}</p>
     </div>
 </form>
+<app-toast-notification [show]="emailSent == true" [msg]="emailMsg" (then)="emailSent = 'finally'" />

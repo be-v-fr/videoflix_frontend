@@ -5,11 +5,12 @@ import { FormErrorComponent } from '../../../../shared/components/form-error/for
 import { ErrorService } from '../../../../shared/services/error.service';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { ToastNotificationComponent } from '../../../../shared/components/toast-notification/toast-notification.component';
 
 @Component({
   selector: 'app-perform-pw-reset',
   standalone: true,
-  imports: [CommonModule, FormsModule, FormErrorComponent],
+  imports: [CommonModule, FormsModule, FormErrorComponent, ToastNotificationComponent],
   templateUrl: './perform-pw-reset.component.html',
   styleUrl: './perform-pw-reset.component.scss'
 })
@@ -20,6 +21,8 @@ export class PerformPwResetComponent implements OnInit, OnDestroy {
   }
   errorResp: Record<string, string[]> = {};
   token: string | null = null;
+  resetMsg: string = 'Password reset complete.';
+  resetComplete: boolean | 'finally' = false;
 
 
   constructor(
@@ -41,9 +44,11 @@ export class PerformPwResetComponent implements OnInit, OnDestroy {
 
 
   onSubmit(form: NgForm) {
-    if (form.submitted && this.isValid(form)) {
+    if (form.submitted && this.isValid(form) && this.token) {
       this.errorResp = {};
-
+      this.authService.performPasswordReset(this.formData.password, this.token)
+        .then(() => this.onReset())
+        .catch((err) => this.onError(err));
     }
   }
 
@@ -64,5 +69,17 @@ export class PerformPwResetComponent implements OnInit, OnDestroy {
    */
   checkPasswordConfirmation(): boolean {
     return this.formData.password == this.formData.passwordConfirmation;
+  }
+
+
+  onReset() {
+    this.resetComplete = true;
+    this.authService.deleteLocalSessionToken();
+    this.authService.resettingPw = false;
+  }
+
+
+  onError(err: any) {
+    this.errorResp = 'error' in err ? err.error : this.errorService.getUnknownErrResp();
   }
 }

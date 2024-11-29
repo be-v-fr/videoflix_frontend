@@ -26,5 +26,10 @@
     </div>
     <div class="btns-container">
         <button type="submit" class="btn-primary">Submit</button>
+        <app-form-error [errors]="[
+                errorService.getConditionalFieldErrResp('unknown', errorResp),
+            ]" />
+        <p *ngIf="resetComplete == 'finally'" class="note">{{resetMsg}}</p>
     </div>
 </form>
+<app-toast-notification [show]="resetComplete == true" [msg]="resetMsg" (then)="resetComplete = 'finally'" />

@@ -36,7 +36,6 @@ export class AuthService {
             email: email,
             password: password,
         };
-        // returns user data response in first backend version, replace with confirmation email later
         return lastValueFrom(this.http.post(url, body));
     }
 
@@ -74,7 +73,7 @@ export class AuthService {
      * @returns authentication result
      */
     async requestPasswordReset(email: string): Promise<Object> {
-        const url = environment.BASE_URL + 'resetPassword/request/';
+        const url = this.AUTH_URL + 'reset-pw/request/';
         const body = {
             email: email,
         };
@@ -88,8 +87,8 @@ export class AuthService {
      * @param token password reset token
      * @returns authentication result
      */
-    async resetPassword(newPassword: string, key: string): Promise<Object> {
-        const url = environment.BASE_URL + 'resetPassword/';
+    async performPasswordReset(newPassword: string, key: string): Promise<Object> {
+        const url = this.AUTH_URL + 'reset-pw/perform/';
         const body = {
             token: key,
             new_password: newPassword,
