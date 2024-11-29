@@ -12,8 +12,9 @@ import { Router } from "@angular/router";
     providedIn: 'root'
 })
 export class AuthService {
-    readonly AUTH_URL: string = environment.BASE_URL + 'auth/';
-    timeoutErrorMsg: string = 'Server does not respond. Please refresh the page and try again.';
+    private readonly AUTH_URL: string = environment.BASE_URL + 'auth/';
+    private timeoutErrorMsg: string = 'Server does not respond. Please refresh the page and try again.';
+    public resettingPw: boolean = false;
 
     constructor(
         private http: HttpClient,

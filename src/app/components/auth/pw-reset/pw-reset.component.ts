@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { AuthService } from '../../../shared/services/auth.service';
 
 @Component({
   selector: 'app-pw-reset',
@@ -9,5 +10,6 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './pw-reset.component.scss'
 })
 export class PwResetComponent {
-  loading: boolean = false;
+  
+  constructor(public authService: AuthService) {}
 }

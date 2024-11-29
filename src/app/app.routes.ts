@@ -32,7 +32,8 @@ export const routes: Routes = [
                 children: [
                     { path: '', redirectTo: 'request', pathMatch: 'full' },
                     { path: 'request', component: RequestPwResetComponent },
-                    { path: 'perform', component: PerformPwResetComponent },
+                    { path: 'perform', redirectTo: 'request', pathMatch: 'full' },
+                    { path: 'perform/:token', component: PerformPwResetComponent },
                 ]
             },
         ],

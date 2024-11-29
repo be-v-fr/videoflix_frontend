@@ -25,7 +25,7 @@
     </div>
     <div class="field-wrapper">
         <div class="field">
-            <span class="material-icons-sharp" [class.to-black]="formData.password.length > 0">lock</span>
+            <span class="material-icons-sharp" [class.to-black]="formData.passwordConfirmation.length > 0">lock</span>
             <input type="password" placeholder="Confirm password" [(ngModel)]="formData.passwordConfirmation"
                 name="passwordConfirmation" #passwordConfirmation="ngModel" required
                 [class.input-invalid]="passwordConfirmation.touched && formData.password != formData.passwordConfirmation" />

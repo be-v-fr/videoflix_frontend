@@ -1,7 +1,7 @@
 <h1>Reset password</h1>
 <router-outlet />
 <div class="f-width auth-mode-link-container">
-    <button routerLink="/auth/login" [disabled]="loading">
+    <button routerLink="/auth/login" [disabled]="authService.resettingPw">
         <h3 class="auth-mode-link-content"><span class="material-icons-sharp">keyboard_arrow_left</span>Log in</h3>
     </button>
 </div>
