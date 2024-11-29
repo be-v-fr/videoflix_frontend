@@ -1,28 +1,25 @@
 <h1>Log in</h1>
 <form class="form-std" (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
-    <div class="field-wrapper">
-        <div class="field" [class.field-active]="formData.email.length > 0">
-            <span class="material-icons-sharp" [class.to-black]="formData.email.length > 0">mail</span>
-            <input type="email" placeholder="yourname@email.com" [(ngModel)]="formData.email" name="email"
-                autocomplete="off" #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
-                [class.input-invalid]="email.touched && !email.valid" />
-        </div>
+    <div class="field" [class.field-active]="formData.email.length > 0">
+        <span class="material-icons-sharp" [class.to-black]="formData.email.length > 0">mail</span>
+        <input type="email" placeholder="yourname@email.com" [(ngModel)]="formData.email" name="email"
+            autocomplete="off" #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+            [class.input-invalid]="email.touched && !email.valid" />
         <app-form-error [errors]="[
                 {condition: email.touched && !email.valid, msg: 'Please enter a valid email address.'},
             ]" />
     </div>
-    <div class="field-wrapper">
-        <div class="field">
-            <span class="material-icons-sharp" [class.to-black]="formData.password.length > 0">lock</span>
-            <input type="password" placeholder="Password" [(ngModel)]="formData.password" name="password"
-                #password="ngModel" required [class.input-invalid]="password.touched && !password.valid" />
-        </div>
+    <div class="field">
+        <span class="material-icons-sharp" [class.to-black]="formData.password.length > 0">lock</span>
+        <input type="password" placeholder="Password" [(ngModel)]="formData.password" name="password"
+            #password="ngModel" required [class.input-invalid]="password.touched && !password.valid" />
         <app-form-error [errors]="[
                 {condition: password.touched && !password.valid, msg: 'Please enter a password.'},     
             ]" />
     </div>
     <div class="f-width flex-center">
-        <a routerLink="/auth/pwReset/request" [queryParams]="{email: formData.email}" class="link-blue">I forgot my password</a>
+        <a routerLink="/auth/pwReset/request" [queryParams]="{email: formData.email}" class="link-blue">I forgot my
+            password</a>
     </div>
     <div class="btns-container">
         <button type="submit" class="btn-primary" [disabled]="loading">Submit</button>
