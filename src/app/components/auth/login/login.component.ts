@@ -49,7 +49,7 @@ export class LoginComponent {
 
 
   onError(err: any) {
-    this.errorResp = 'error' in err ? err.error : this.errorService.getUnknownErrResp();
+    this.errorResp = this.errorService.generateErrorResp(err);
     this.loading = false;
   }
 }

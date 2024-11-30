@@ -80,6 +80,6 @@ export class PerformPwResetComponent implements OnInit, OnDestroy {
 
 
   onError(err: any) {
-    this.errorResp = 'error' in err ? err.error : this.errorService.getUnknownErrResp();
+    this.errorResp = this.errorService.generateErrorResp(err);;
   }
 }

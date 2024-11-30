@@ -23,4 +23,8 @@ export class ErrorService {
       'unknown': ['Unknown error.']
     }
   }
+
+  generateErrorResp(err: any): Record<string, string[]> {
+    return 'error' in err ? err.error : this.getUnknownErrResp();
+  }
 }
