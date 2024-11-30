@@ -9,6 +9,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { RequestPwResetComponent } from './components/auth/pw-reset/request-pw-reset/request-pw-reset.component';
 import { PwResetComponent } from './components/auth/pw-reset/pw-reset.component';
 import { PerformPwResetComponent } from './components/auth/pw-reset/perform-pw-reset/perform-pw-reset.component';
+import { AccountActivationComponent } from './components/auth/account-activation/account-activation.component';
 
 export const routes: Routes = [
     {
@@ -25,6 +26,7 @@ export const routes: Routes = [
         children: [
             { path: '', redirectTo: 'login', pathMatch: 'full' },
             { path: 'signup', component: SignupComponent },
+            { path: 'signup/activate', redirectTo: 'signup', pathMatch: 'full' },
             { path: 'login', component: LoginComponent },
             {
                 path: 'pwReset',
@@ -38,6 +40,9 @@ export const routes: Routes = [
             },
         ],
     },
+    {
+        path: 'auth/signup/activate/:token',
+        component: AccountActivationComponent },
     {
         path: 'legal',
         children: [

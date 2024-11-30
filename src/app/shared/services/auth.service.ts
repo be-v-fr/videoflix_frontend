@@ -30,11 +30,25 @@ export class AuthService {
      * @returns authentication result
      */
     async register(email: string, password: string): Promise<Object> {
-        console.log('signing up!');
         const url = this.AUTH_URL + 'signup/';
         const body = {
             email: email,
             password: password,
+        };
+        return lastValueFrom(this.http.post(url, body));
+    }
+
+
+    /**
+     * Complete password reset
+     * @param password new password
+     * @param token password reset token
+     * @returns authentication result
+     */
+    async activateAccount(key: string): Promise<Object> {
+        const url = this.AUTH_URL + 'signup/activate/';
+        const body = {
+            token: key,
         };
         return lastValueFrom(this.http.post(url, body));
     }
