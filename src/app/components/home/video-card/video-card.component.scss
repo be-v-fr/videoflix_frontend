@@ -8,7 +8,15 @@ $thumb-height: 135px;
     height: $thumb-height;
     background-color: blue;
     border-radius: $b-radius-small;
+    will-change: transform;
+    cursor: pointer;
     @include transition-ease();
+    .thumb {
+        width: 100%;
+        height: $thumb-height;
+        object-fit: cover;
+        object-position: center;
+    }
     .show-on-hover {
         position: absolute;
         left: 0;
@@ -19,6 +27,7 @@ $thumb-height: 135px;
         background: white;
         border-bottom-left-radius: $b-radius-small;
         border-bottom-right-radius: $b-radius-small;
+        cursor: default;
         transition: 130ms ease-out;
     }
     &:hover {

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VideoCardComponent } from './video-card/video-card.component';
 import { LoadingCircleComponent } from '../../shared/components/loading-circle/loading-circle.component';
 import { VideoMeta } from '../../shared/models/video-meta';
+import { VideosService } from '../../shared/services/videos.service';
 
 @Component({
   selector: 'app-home',
@@ -11,10 +12,14 @@ import { VideoMeta } from '../../shared/models/video-meta';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
-  // videosMeta?: VideoMeta[];
-  videosMeta: VideoMeta[] = [
-    new VideoMeta({title: 'test one', description: 'description one', duration_in_minutes: 20}),
-    new VideoMeta({title: 'test two', description: 'description two', duration_in_minutes: 20}),
-  ];
+export class HomeComponent implements OnInit {
+  constructor(
+    public videoService: VideosService,
+  ) { }
+
+  ngOnInit(): void {
+    console.log('init home...');
+    // try catch
+    this.videoService.syncVideosMeta();
+  }
 }

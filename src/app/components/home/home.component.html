@@ -1,6 +1,6 @@
-@if(videosMeta) {
+@if(videoService.getVideosMeta().length > 0) {
 <div class="videos-container">
-    <app-video-card *ngFor="let videoMeta of videosMeta" [data]="videoMeta" />
+    <app-video-card *ngFor="let videoMeta of videoService.getVideosMeta()" [data]="videoMeta" />
 </div>
 } @else {
 <div class="f-size flex-center">
