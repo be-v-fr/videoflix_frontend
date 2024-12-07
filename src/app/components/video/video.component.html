@@ -1,1 +1,7 @@
-<p>video works!</p>
+@if(metaData) {
+<app-player [options]="{autoplay: true, controls: true, sources: [{ src: metaData.fileUrl, type: 'video/mp4' }]}" />
+} @else {
+<div class="f-size flex-center">
+    <app-loading-circle />
+</div>
+}

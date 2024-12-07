@@ -15,15 +15,20 @@ export class VideosService {
     private http: HttpClient,
   ) { }
 
-  public getVideosMeta(): VideoMeta[] {
-    return this.videosMeta;
-  }
-
   public async syncVideosMeta(): Promise<void> {
     const resp = await lastValueFrom(this.http.get(this.VIDEOS_URL));
     this.videosMeta = [];
     (resp as Array<any>).forEach(vData => {
       this.videosMeta.push(new VideoMeta(vData));
     });
+  }
+
+  public getVideosMeta(): VideoMeta[] {
+    return this.videosMeta;
+  }
+
+  public getVideoMetaFromId(id: number): VideoMeta | undefined {
+    console.log('all metadata:', this.videosMeta);
+    return this.videosMeta.find(v => v.id === id);
   }
 }

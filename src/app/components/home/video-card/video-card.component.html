@@ -1,5 +1,7 @@
 @if(data) {
-<img class="thumb" src="{{data.thumbUrl}}" alt="{{data.title}}" />
+<a class="thumb" [routerLink]="['video', data.id]" >
+    <img src="{{data.thumbUrl}}" alt="{{data.title}}"/>
+</a>
 <div class="show-on-hover">
     <p>{{data.title}}</p>
     <p>{{data.durationInMinutes}}</p>

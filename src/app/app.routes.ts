@@ -17,7 +17,7 @@ export const routes: Routes = [
         component: HomeComponent,
     },
     {
-        path: 'video',
+        path: 'video/:id',
         component: VideoComponent,
     },
     {
