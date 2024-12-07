@@ -1,6 +1,6 @@
-@if(videosInfo) {
+@if(videosMeta) {
 <div class="videos-container">
-    <app-video-card *ngFor="let videoInfo of videosInfo" [info]="videoInfo" />
+    <app-video-card *ngFor="let videoMeta of videosMeta" [data]="videoMeta" />
 </div>
 } @else {
 <div class="f-size flex-center">

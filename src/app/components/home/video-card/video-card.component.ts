@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { VideoInfo } from '../../../shared/models/video-info';
 import { LoadingCircleComponent } from '../../../shared/components/loading-circle/loading-circle.component';
+import { VideoMeta } from '../../../shared/models/video-meta';
 
 @Component({
   selector: 'app-video-card',
@@ -10,5 +10,5 @@ import { LoadingCircleComponent } from '../../../shared/components/loading-circl
   styleUrl: './video-card.component.scss'
 })
 export class VideoCardComponent {
-  @Input() info?: VideoInfo;
+  @Input() data?: VideoMeta;
 }

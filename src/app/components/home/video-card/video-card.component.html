@@ -1,8 +1,9 @@
-@if(info) {
-<img src="{{info.thumbUrl}}" alt="{{info.title}}" />
+@if(data) {
+<img src="{{data.thumbUrl}}" alt="{{data.title}}" />
 <div class="show-on-hover">
-    <p>{{info.title}}</p>
-    <p>{{info.durationInMinutes}}</p>
+    <p>{{data.title}}</p>
+    <p>{{data.durationInMinutes}}</p>
+    <p>{{data.description}}</p>
 </div>
 } @else {
     <div class="f-size flex-center">
