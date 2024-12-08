@@ -1,1 +1,8 @@
-@import '../../../../styles.scss';
+:host {
+    width: inherit;
+    height: inherit;
+    .video-js {
+        width: inherit;
+        height: inherit;
+    }
+}
