@@ -1,3 +1,5 @@
 <div class="page-wrapper flex-center">
   <router-outlet />
 </div>
+<app-toast-notification [show]="toastMsg.length > 0"[status]="'error'"
+  [msg]="toastMsg" (then)="redirectToLogin()" />

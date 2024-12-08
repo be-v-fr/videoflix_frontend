@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
-import { lastValueFrom } from "rxjs";
+import { lastValueFrom, Subject } from "rxjs";
 import { environment } from "../../../environments/environment.development";
 import { Router } from "@angular/router";
+import { User } from "../models/user";
 
 
 /**
@@ -14,6 +15,8 @@ import { Router } from "@angular/router";
 export class AuthService {
     private readonly AUTH_URL: string = environment.BASE_URL + 'auth/';
     private timeoutErrorMsg: string = 'Server does not respond. Please refresh the page and try again.';
+    public currentUser$: Subject<User | null> = new Subject<User | null>();
+    public currentUser: User | null = null;
     public resettingPw: boolean = false;
 
     constructor(
@@ -73,6 +76,28 @@ export class AuthService {
             throw (this.timeoutErrorMsg);
         }
         return promise;
+    }
+
+
+    async authenticateToken(): Promise<Object> {
+        const url = this.AUTH_URL + 'user/';
+        const promise: Promise<Object> = lastValueFrom(this.http.get(url));
+        const timeout: Promise<string> = this.requestTimeout();
+        const result: Object | string = await Promise.race([promise, timeout]);
+        if (result == 'timeout') {
+            throw (this.timeoutErrorMsg);
+        }
+        return promise;
+    }
+
+
+    triggerUser(userData: any) {
+        if(userData) {
+            this.currentUser = (userData instanceof User) ? userData : new User(userData);
+        } else {
+            this.currentUser = null;
+        }
+        this.currentUser$.next(this.currentUser);
     }
 
 
@@ -155,5 +180,10 @@ export class AuthService {
      */
     setLocalSessionToken(tokenValue: string): void {
         localStorage.setItem('token', tokenValue);
+    }
+
+
+    getTimeoutErrorMsg(): string {
+        return this.timeoutErrorMsg;
     }
 }
