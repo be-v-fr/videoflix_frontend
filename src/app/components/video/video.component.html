@@ -1,3 +1,6 @@
+<button [routerLink]="''" class="back-btn">
+    <span class="material-icons-sharp">arrow_back</span>
+</button>
 @if(metaData) {
 <app-player [options]="{autoplay: true, controls: true, sources: [{ src: metaData.fileUrl, type: 'video/mp4' }]}" />
 } @else {

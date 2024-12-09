@@ -10,15 +10,24 @@ import { lastValueFrom } from 'rxjs';
 export class VideosService {
   private readonly VIDEOS_URL: string = environment.BASE_URL + 'videos/';
   private videosMeta: VideoMeta[] = [];
+  public lastVideosMetaSynced: number = 0;
+  private readonly videosMetaSyncSeconds: number = 600;
 
 
   constructor(
     private http: HttpClient,
   ) { }
 
+
+  public isVideosMetaSyncingAllowed(): boolean {
+    return Date.now() - this.lastVideosMetaSynced > this.videosMetaSyncSeconds * 1000;
+  }
+
   
   public async syncVideosMeta(): Promise<void> {
+    // ERROR HANDLING
     const resp = await lastValueFrom(this.http.get(this.VIDEOS_URL));
+    this.lastVideosMetaSynced = Date.now();
     this.videosMeta = [];
     (resp as Array<any>).forEach(vData => {
       this.videosMeta.push(new VideoMeta(vData));

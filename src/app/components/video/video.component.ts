@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VideoMeta } from '../../shared/models/video-meta';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { VideosService } from '../../shared/services/videos.service';
 import { PlayerComponent } from './player/player.component';
 import { LoadingCircleComponent } from '../../shared/components/loading-circle/loading-circle.component';
@@ -13,7 +13,7 @@ import { ToastNotificationComponent } from '../../shared/components/toast-notifi
 @Component({
   selector: 'app-video',
   standalone: true,
-  imports: [CommonModule, PlayerComponent, LoadingCircleComponent, ToastNotificationComponent],
+  imports: [CommonModule, RouterLink, PlayerComponent, LoadingCircleComponent, ToastNotificationComponent],
   templateUrl: './video.component.html',
   styleUrl: './video.component.scss'
 })
