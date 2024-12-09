@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormErrorComponent } from '../../../shared/components/form-error/form-error.component';
 import { AuthService } from '../../../shared/services/auth.service';
 import { ToastNotificationComponent } from '../../../shared/components/toast-notification/toast-notification.component';
@@ -24,6 +24,7 @@ export class LoginComponent {
   loginComplete: boolean = false;
 
   constructor(
+    public router: Router,
     private authService: AuthService,
     public errorService: ErrorService,
   ) {}
@@ -41,10 +42,6 @@ export class LoginComponent {
   onLogin(resp: any) {
     this.authService.setLocalSessionToken(resp.token);
     this.loginComplete = true;
-    setTimeout(() => {
-      console.log('redirect')
-      // redirect logic
-    }, 1000);
   }
 
 

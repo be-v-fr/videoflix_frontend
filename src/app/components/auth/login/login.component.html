@@ -37,4 +37,4 @@
         <h3 class="auth-mode-link-content">Sign up<span class="material-icons-sharp">keyboard_arrow_right</span></h3>
     </a>
 </div>
-<app-toast-notification [show]="loginComplete == true" [msg]="'You logged in successfully'" />
+<app-toast-notification [show]="loginComplete == true" [msg]="'You logged in successfully'" (then)="router.navigateByUrl('')" />
