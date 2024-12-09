@@ -25,6 +25,25 @@ export class ErrorService {
   }
 
   generateErrorResp(err: any): Record<string, string[]> {
-    return 'error' in err ? err.error : this.getUnknownErrResp();
+    const result: Record<string, string[]> = this.getUnknownErrResp();
+    try {
+      for (const key in err.error) {
+        const value = this.formatErrorKeyToStringArray(err, key);
+        if (value) {result[key] = value}
+      }
+    }
+    finally {
+      return result;
+    }
+  }
+
+  formatErrorKeyToStringArray(err: any, key: string): string[] | undefined {
+    const value = err.error[key];
+    if (typeof value === 'string') {
+      return [value];
+    } else if (Array.isArray(value) && value.every(item => typeof item === 'string')) {
+      return value;
+    }
+    return undefined;
   }
 }

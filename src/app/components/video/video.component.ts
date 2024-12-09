@@ -75,6 +75,7 @@ export class VideoComponent implements OnInit, OnDestroy {
 
 
   onError(err: any) {
-    this.toastErrorMsg = ('detail' in err.error) ? err.error['detail'] : this.errorService.getUnknownErrResp()['unknown'][0];
+    const resp: Record<string, string[]> = this.errorService.generateErrorResp(err);
+    this.toastErrorMsg = ('detail' in resp) ? resp['detail'][0] : resp['unknown'][0];
   }
 }
