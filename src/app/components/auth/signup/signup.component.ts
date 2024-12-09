@@ -65,7 +65,7 @@ export class SignupComponent {
   }
 
   onError(err: any) {
-    this.errorResp = this.errorService.generateErrorResp(err);
+    this.errorResp = this.errorService.generateErrRecord(err);
     this.loading = false;
   }
 }

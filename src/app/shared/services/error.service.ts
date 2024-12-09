@@ -19,14 +19,14 @@ export class ErrorService {
     };
   }
 
-  getUnknownErrResp(): Record<string, string[]> {
+  getUnknownErrRecord(): Record<string, string[]> {
     return {
       'unknown': [this.unknownErrorMsg]
     }
   }
 
-  generateErrorResp(err: any): Record<string, string[]> {
-    const result: Record<string, string[]> = this.getUnknownErrResp();
+  generateErrRecord(err: any): Record<string, string[]> {
+    const result: Record<string, string[]> = this.getUnknownErrRecord();
     try {
       for (const key in err.error) {
         const value = this.formatErrorKeyToStringArray(err, key);
