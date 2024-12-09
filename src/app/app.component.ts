@@ -13,12 +13,11 @@ import { ToastNotificationComponent } from './shared/components/toast-notificati
 })
 export class AppComponent implements OnInit {
   title = 'videoflix_frontend';
-  toastMsg: string = '';
+  toastErrorMsg: string = '';
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private videosService: VideosService,
   ) { }
 
 
@@ -48,7 +47,7 @@ export class AppComponent implements OnInit {
 
   onAuthError(err: any) {
     if(!this.isOnAuthRoute()) {
-      this.toastMsg = (err == this.authService.getTimeoutErrorMsg()) ? 'Server does not respond.' : 'Authentication failed.';
+      this.toastErrorMsg = (err == this.authService.getTimeoutErrorMsg()) ? 'Server does not respond.' : 'Authentication failed.';
     }
   }
 }

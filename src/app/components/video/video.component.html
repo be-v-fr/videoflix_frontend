@@ -5,3 +5,5 @@
     <app-loading-circle />
 </div>
 }
+<app-toast-notification [show]="toastErrorMsg.length > 0"[status]="'error'"
+    [msg]="toastErrorMsg" (then)="router.navigateByUrl('')" />

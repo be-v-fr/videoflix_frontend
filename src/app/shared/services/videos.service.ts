@@ -37,7 +37,6 @@ export class VideosService {
 
 
   public getVideoMetaFromId(id: number): VideoMeta | undefined {
-    console.log('all metadata:', this.videosMeta);
     return this.videosMeta.find(v => v.id === id);
   }
 }

@@ -24,6 +24,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    if(this.authService.currentUser) {
+      this.videosService.syncVideosMeta();
+    }
     this.authSub = this.subAuth();
   }
 
