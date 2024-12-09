@@ -31,8 +31,7 @@ export class ErrorService {
         const value = this.formatErrorKeyToStringArray(err, key);
         if (value) {result[key] = value}
       }
-    }
-    finally {
+    } finally {
       return result;
     }
   }
