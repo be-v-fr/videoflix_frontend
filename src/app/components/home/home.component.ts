@@ -24,8 +24,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    if(this.authService.currentUser && this.videosService.isVideosMetaSyncingAllowed()) {
-      this.videosService.syncVideosMeta();
+    if(this.authService.currentUser) {
+      this.videosService.syncVideosMetaIfAllowed();
     }
     this.authSub = this.subAuth();
   }
@@ -38,8 +38,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   subAuth(): Subscription {
     return this.authService.currentUser$.subscribe(user => {
-      if(user && this.videosService.isVideosMetaSyncingAllowed()) {
-        this.videosService.syncVideosMeta();
+      if(user) {
+        this.videosService.syncVideosMetaIfAllowed();
       }
     });
   }

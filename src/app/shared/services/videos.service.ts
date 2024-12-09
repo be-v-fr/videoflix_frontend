@@ -19,12 +19,19 @@ export class VideosService {
   ) { }
 
 
-  public isVideosMetaSyncingAllowed(): boolean {
+  public syncVideosMetaIfAllowed(): void {
+    if(this.isVideosMetaSyncingAllowed()) {
+      this.syncVideosMeta();
+    }
+  }
+
+
+  private isVideosMetaSyncingAllowed(): boolean {
     return Date.now() - this.lastVideosMetaSynced > this.videosMetaSyncSeconds * 1000;
   }
 
   
-  public async syncVideosMeta(): Promise<void> {
+  private async syncVideosMeta(): Promise<void> {
     // ERROR HANDLING
     const resp = await lastValueFrom(this.http.get(this.VIDEOS_URL));
     this.lastVideosMetaSynced = Date.now();
