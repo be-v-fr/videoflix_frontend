@@ -20,7 +20,7 @@ export class VideosService {
 
 
   public syncVideosMetaIfAllowed(): void {
-    if(this.isVideosMetaSyncingAllowed()) {
+    if (this.isVideosMetaSyncingAllowed()) {
       this.syncVideosMeta();
     }
   }
@@ -30,14 +30,14 @@ export class VideosService {
     return Date.now() - this.lastVideosMetaSynced > this.videosMetaSyncSeconds * 1000;
   }
 
-  
-  private async syncVideosMeta(): Promise<void> {
-    // ERROR HANDLING
-    const resp = await lastValueFrom(this.http.get(this.VIDEOS_URL));
-    this.lastVideosMetaSynced = Date.now();
-    this.videosMeta = [];
-    (resp as Array<any>).forEach(vData => {
-      this.videosMeta.push(new VideoMeta(vData));
+
+  private syncVideosMeta(): void {
+    lastValueFrom(this.http.get(this.VIDEOS_URL)).then(resp => {
+      this.lastVideosMetaSynced = Date.now();
+      this.videosMeta = [];
+      (resp as Array<any>).forEach(vData => {
+        this.videosMeta.push(new VideoMeta(vData));
+      });
     });
   }
 
