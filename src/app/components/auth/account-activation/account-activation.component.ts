@@ -16,18 +16,13 @@ import { CommonModule } from '@angular/common';
 export class AccountActivationComponent implements OnInit {
   loading: boolean = true;
   token: string | null = null;
-  success: boolean = false;
-  errorResp: Record<string, string[]> = {};
-
-  get errorKeys(): string[] {
-    return Object.keys(this.errorResp);
-  }
+  error?: string;
 
   constructor(
     private route: ActivatedRoute,
     public router: Router,
     private authService: AuthService,
-    private errorService: ErrorService,
+    public errorService: ErrorService,
   ) { }
 
 
@@ -52,13 +47,13 @@ export class AccountActivationComponent implements OnInit {
 
 
   onActivation() {
-    this.success = true;
     this.loading = false;
   }
 
 
   onError(err: any) {
-    this.errorResp = this.errorService.generateErrRecord(err);
+    const errRecord = this.errorService.generateErrRecord(err);
+    this.error = errRecord.hasOwnProperty('token') ? errRecord['token'][0] : this.errorService.unknownErrorMsg;
     this.loading = false;
   }
 }

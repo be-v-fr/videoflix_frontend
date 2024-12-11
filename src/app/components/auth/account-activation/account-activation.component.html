@@ -1,9 +1,8 @@
 <h2>Activating...</h2>
 <app-loading-circle *ngIf="loading" />
-@if(errorResp == {}) {
-<app-toast-notification [show]="success" [msg]="'Your account has been activated.'"
-    (then)="router.navigateByUrl('auth/login')" />
+@if(error) {
+<app-toast-notification [show]="true" [status]="'error'" [msg]="error" (then)="router.navigateByUrl('auth/signup')" />
 } @else {
-    <app-toast-notification [show]="true" [status]="'error'" [msg]="errorResp[errorKeys[0]][0]"
-        (then)="router.navigateByUrl('auth/signup')" />
+<app-toast-notification [show]="true" [msg]="'Your account has been activated.'"
+    (then)="router.navigateByUrl('auth/login')" />
 }

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { VideosService } from './shared/services/videos.service';
 import { AuthService } from './shared/services/auth.service';
 import { ToastNotificationComponent } from './shared/components/toast-notification/toast-notification.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +13,8 @@ import { ToastNotificationComponent } from './shared/components/toast-notificati
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
+  navigationEndSub: Subscription = new Subscription();
   title = 'videoflix_frontend';
   toastErrorMsg: string = '';
 
@@ -22,7 +25,25 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.navigationEndSub = this.subNavigationEnd();
+  }
+
+
+  ngOnDestroy(): void {
+    this.navigationEndSub.unsubscribe();
+  }
+
+
+  subNavigationEnd(): Subscription {
+    return this.router.events
+    .pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe(() => this.onNavigationEnd());
+  }
+
+
+  onNavigationEnd() {
     localStorage.getItem('token') ? this.handleToken() : this.redirectToLogin();
+    this.navigationEndSub.unsubscribe();    
   }
 
 
@@ -34,7 +55,7 @@ export class AppComponent implements OnInit {
 
 
   isOnAuthRoute(): boolean {
-    return this.router.url.includes('auth');
+    return this.router.url.slice(0, 6) === '/auth/';
   }
 
 
