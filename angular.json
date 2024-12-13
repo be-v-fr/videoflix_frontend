@@ -33,7 +33,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/video.js/dist/video-js.css"
+              "node_modules/@videogular/ngx-videogular/fonts/videogular.css"
             ],
             "scripts": []
           },

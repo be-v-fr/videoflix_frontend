@@ -1,8 +1,12 @@
 :host {
     width: inherit;
     height: inherit;
-    .video-js {
+    vg-player {
         width: inherit;
         height: inherit;
+        video {
+            width: inherit;
+            height: inherit;
+        }
     }
 }

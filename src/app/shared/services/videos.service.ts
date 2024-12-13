@@ -38,6 +38,7 @@ export class VideosService {
       (resp as Array<any>).forEach(vData => {
         this.videosMeta.push(new VideoMeta(vData));
       });
+      console.log(this.videosMeta);
     });
   }
 
