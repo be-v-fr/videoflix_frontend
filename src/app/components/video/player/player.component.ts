@@ -5,12 +5,11 @@ import { VgControlsModule } from '@videogular/ngx-videogular/controls';
 import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
 import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 import { VideoMeta } from '../../../shared/models/video-meta';
-import { LoadingCircleComponent } from '../../../shared/components/loading-circle/loading-circle.component';
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule, LoadingCircleComponent],
+  imports: [VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss'
 })

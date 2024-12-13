@@ -16,11 +16,5 @@
         <vg-volume />
         <vg-fullscreen />
     </vg-controls>
-    @if(videoSrc) {
     <video [vgMedia]="$any(media)" #media id="video" preload="auto" autoplay="true" crossorigin></video>
-    } @else {
-        <div class="f-size flex-center">
-            <app-loading-circle />
-        </div>
-    }
 </vg-player>
