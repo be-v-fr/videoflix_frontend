@@ -14,7 +14,11 @@
         <vg-time-display vgProperty="total" vgFormat="mm:ss" />
         <vg-mute />
         <vg-volume />
+        <vg-quality-selector></vg-quality-selector>
         <vg-fullscreen />
     </vg-controls>
-    <video [vgMedia]="$any(media)" #media id="video" preload="auto" autoplay="true" crossorigin></video>
+    <video [vgMedia]="$any(media)" #media id="video"
+        preload="auto" autoplay="true" crossorigin
+        [vgHls]="videoMeta.playlistUrl">
+    </video>
 </vg-player>

@@ -3,7 +3,7 @@ export class VideoMeta {
     title: string;
     description: string;
     durationInMinutes: number;
-    videoFilesUrl: string;
+    playlistUrl: string;
     thumbUrl: string;
 
     constructor(obj: any) {
@@ -11,7 +11,7 @@ export class VideoMeta {
         this.title = obj.title ? obj.title : '';
         this.description = obj.description ? obj.description : '';
         this.durationInMinutes = obj.duration_in_minutes ? obj.duration_in_minutes : -1;
-        this.videoFilesUrl = obj.video_files_url ? obj.video_files_url : '';
+        this.playlistUrl = obj.playlist_url ? obj.playlist_url : '';
         this.thumbUrl = obj.thumbnail ? obj.thumbnail : '';
     }
 
@@ -21,7 +21,7 @@ export class VideoMeta {
             title: this.title,
             description: this.description,
             duration_in_minutes: this.durationInMinutes,
-            video_files_url: this.videoFilesUrl,
+            playlist_url: this.playlistUrl,
             thumbnail: this.thumbUrl,
         }
     }
