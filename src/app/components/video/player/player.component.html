@@ -14,11 +14,13 @@
         <vg-time-display vgProperty="total" vgFormat="mm:ss" />
         <vg-mute />
         <vg-volume />
-        <vg-quality-selector></vg-quality-selector>
+        @if(hlsBitrates) {
+        <vg-quality-selector [bitrates]="hlsBitrates" (onBitrateChange)="vgHls.setBitrate($event)">
+        </vg-quality-selector>
+        }
         <vg-fullscreen />
     </vg-controls>
-    <video [vgMedia]="$any(media)" #media id="video"
-        preload="auto" autoplay="true" crossorigin
-        [vgHls]="videoMeta.playlistUrl">
+    <video [vgMedia]="$any(media)" #media #vgHls="vgHls" id="video" preload="auto" autoplay="true" crossorigin
+        [vgHls]="videoMeta.playlistUrl" (onGetBitrates)="hlsBitrates = $event">
     </video>
 </vg-player>
