@@ -21,6 +21,6 @@
         <vg-fullscreen />
     </vg-controls>
     <video [vgMedia]="$any(media)" #media #vgHls="vgHls" id="video" preload="auto" autoplay="true" crossorigin
-        [vgHls]="videoMeta.playlistUrl" (onGetBitrates)="hlsBitrates = $event">
+        [vgHls]="videoMeta.playlistUrl" (onGetBitrates)="initBitrates($event)">
     </video>
 </vg-player>

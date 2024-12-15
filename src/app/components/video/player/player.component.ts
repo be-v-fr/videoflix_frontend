@@ -23,4 +23,17 @@ export class PlayerComponent {
   onPlayerReady(source: VgApiService) {
     this.api = source;
   }
+
+
+  initBitrates(bitrates: BitrateOptions[]) {
+    this.hlsBitrates = bitrates;
+    this.hlsBitrates.forEach(b => {
+      switch(b.qualityIndex) {
+        case 0: b.label = 'auto'; break;
+        case 1: b.label = '480p'; break;
+        case 2: b.label = '720p'; break;
+        case 3: b.label = '1080p'
+      }
+    });
+  }
 };
