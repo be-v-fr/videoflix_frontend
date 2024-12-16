@@ -1,5 +1,4 @@
 @import '../../../styles.scss';
-@import 'material-icons/iconfont/material-icons.scss';
 
 :host {
     width: 100vw;
@@ -8,24 +7,5 @@
     app-player {
         width: inherit;
         height: inherit;
-    }
-
-    .back-btn {
-        color: white;
-        position: fixed;
-        z-index: 10;
-        top: 24px;
-        left: 24px;
-        width: 36px;
-        height: 36px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50%;
-        @include transition-ease($dur: 75ms);
-        &:hover {
-            background: #EEEEEE1E;
-            @include transition-ease($dur: 75ms);
-        }
     }
 }

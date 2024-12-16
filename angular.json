@@ -33,7 +33,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/@videogular/ngx-videogular/fonts/videogular.css"
+              "node_modules/@videogular/ngx-videogular/fonts/videogular.css",
+              "src/assets/scss/videogular.scss"
             ],
             "scripts": [
               "node_modules/hls.js/dist/hls.min.js"              
