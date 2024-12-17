@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { LogoComponent } from '../../shared/components/logo/logo.component';
 import { AuthService } from '../../shared/services/auth.service';
+import { SearchComponent } from '../../shared/components/search/search.component';
 import { DialogComponent } from '../dialog/dialog.component';
 import { RequestPwResetComponent } from '../auth/pw-reset/request-pw-reset/request-pw-reset.component';
 import { ToastNotificationComponent } from '../../shared/components/toast-notification/toast-notification.component';
@@ -10,7 +11,7 @@ import { ToastNotificationComponent } from '../../shared/components/toast-notifi
 @Component({
   selector: 'app-navigation',
   standalone: true,
-  imports: [CommonModule, LogoComponent, DialogComponent, ToastNotificationComponent],
+  imports: [CommonModule, LogoComponent, SearchComponent, DialogComponent, ToastNotificationComponent],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss'
 })

@@ -1,0 +1,5 @@
+<form #searchForm="ngForm" (click)="focus()">
+    <span class="material-icons-sharp">search</span>
+    <input type="text" [(ngModel)]="searchFilter" name="searchInput" #searchInput="ngModel" autocomplete="off" />
+    <button *ngIf="searchFilter.length > 0" class="material-icons-sharp close-btn" (click)="clear()">close</button>
+</form>

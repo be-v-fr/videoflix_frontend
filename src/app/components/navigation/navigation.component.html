@@ -3,6 +3,7 @@
         <app-logo />
     </section>
     <section>
+        <app-search />
         <div class="current-user" *ngIf="authService.currentUser">
             <span class="material-icons-sharp">person</span>
             <span class="username">{{authService.currentUser.getNameFromEmail()}}</span>
