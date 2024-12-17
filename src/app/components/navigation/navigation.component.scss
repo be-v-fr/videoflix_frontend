@@ -23,6 +23,7 @@
     align-items: center;
     cursor: default;
     color: $white-medium;
+    padding: 10px 0 10px 14px;
     @include transition-ease($dur: 75ms);
     .username {
         padding-left: 8px;
@@ -35,12 +36,13 @@
     }
     .user-dropdown {
         position: absolute;
-        top: calc(100% + 4px);
+        top: calc(100% - 6px);
         right: 0;
         max-height: 0;
         box-sizing: border-box;
         overflow: hidden;
         @include transition-ease($dur: 250ms);
+        transition-delay: 90ms;
     }
     &:hover {
         @include transition-ease($dur: 75ms);
