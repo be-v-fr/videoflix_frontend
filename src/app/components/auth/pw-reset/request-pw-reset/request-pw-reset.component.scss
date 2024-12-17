@@ -1,2 +1,6 @@
 @import '../../../../../styles.scss';
 @import '../pw-reset.component.scss';
+
+:host.no-shadow {
+    box-shadow: none;
+}

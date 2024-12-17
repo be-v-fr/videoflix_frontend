@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { FormErrorComponent } from '../../../../shared/components/form-error/form-error.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { ToastNotificationComponent } from '../../../../shared/components/toast-notification/toast-notification.component';
 import { ErrorService } from '../../../../shared/services/error.service';
@@ -22,12 +22,16 @@ export class RequestPwResetComponent implements OnInit {
   errorResp: Record<string, string[]> = {};
   emailMsg: string = 'A password reset email was sent to your email address.';
   emailSent: boolean | 'finally' = false;
+  @HostBinding('class.no-shadow') inDialog: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
+    public router: Router,
     private authService: AuthService,
     public errorService: ErrorService,
-  ) { }
+  ) {
+    this.inDialog = !this.router.url.includes('auth');
+  }
 
 
   /**
