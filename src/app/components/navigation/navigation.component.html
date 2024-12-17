@@ -2,9 +2,9 @@
     <section>
         <app-logo />
     </section>
-    <section>
+    <section *ngIf="authService.currentUser && !(awaitingInit === true)" [class.slide-down]="awaitingInit == 'complete'">
         <app-search />
-        <div class="current-user" *ngIf="authService.currentUser">
+        <div class="current-user">
             <span class="material-icons-sharp">person</span>
             <span class="username">{{authService.currentUser.getNameFromEmail()}}</span>
             <span class="material-icons-sharp dropdown-arrow">arrow_drop_down</span>

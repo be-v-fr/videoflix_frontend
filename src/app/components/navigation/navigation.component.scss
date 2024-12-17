@@ -66,6 +66,11 @@ app-search {
     }
 }
 
+.slide-down {
+    animation: slide-down 700ms 300ms ease-out normal forwards;
+    transform: translateY(-240px);
+}
+
 .user-dropdown ul {
     list-style: none;
     color: $white-medium;
@@ -88,5 +93,14 @@ app-search {
             @include transition-ease($dur: 75ms);
             color: $blue-bright;
         }
+    }
+}
+
+@keyframes slide-down {
+    from {
+        transform: translateY(-240px);
+    }
+    to {
+        transform: translateY(0);
     }
 }
