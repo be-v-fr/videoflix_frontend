@@ -1,0 +1,5 @@
+<div class="overlay" [class.hidden]="!showing" (click)="close()">
+    <div class="content" (click)="$event.stopPropagation()">
+        <ng-container *ngComponentOutlet="dialogContent" />
+    </div>
+</div>

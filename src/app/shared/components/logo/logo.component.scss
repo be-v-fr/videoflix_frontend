@@ -1,0 +1,22 @@
+@import "../../../../styles.scss";
+
+:host {
+    height: 48px;
+    a {
+        height: inherit;
+        display: flex;
+        align-items: center;
+        img {
+            object-fit: cover;
+            height: 100%;
+        }
+        .text {
+            margin-left: -12px;
+            padding-top: 16px;
+            font-size: 36px;
+            font-weight: 550;
+            color: $blue-brightest;
+            font-style: italic;
+        }
+    }
+}

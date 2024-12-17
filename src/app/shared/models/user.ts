@@ -15,4 +15,9 @@ export class User {
             email: this.email,
         }
     }
+
+
+    getNameFromEmail(): string {
+        return this.email.split('@')[0];
+    }
 }

@@ -1,0 +1,17 @@
+<section>
+    <app-logo />
+</section>
+<section>
+    <div class="current-user" *ngIf="authService.currentUser">
+        <span class="material-icons-sharp">person</span>
+        <span class="username">{{authService.currentUser.getNameFromEmail()}}</span>
+        <span class="material-icons-sharp dropdown-arrow">arrow_drop_down</span>
+        <div class="user-dropdown">
+            <ul>
+                <li (click)="showChangePwDialog()">Change password</li>
+                <li (click)="authService.logout()">Logout</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<app-dialog [dialog]="requestPwResetComponent" [(showing)]="changePwDialogShowing" />

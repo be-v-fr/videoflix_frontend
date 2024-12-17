@@ -1,0 +1,30 @@
+@import "../../../styles.scss";
+
+:host {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 400;
+    width: 100vw;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .content {
+        max-width: 40vw;
+        max-height: 80dvh;
+        padding: 24px;
+        border-radius: $b-radius-large;
+        background: $white-medium;
+        box-shadow: $shine-white-shadow;
+    }
+}
+
+.hidden {
+    display: none;
+}

@@ -162,7 +162,8 @@ export class AuthService {
      */
     logout(): void {
         this.deleteLocalSessionToken();
-        this.router.navigateByUrl('');
+        this.currentUser$.next(null);
+        this.router.navigateByUrl('auth');
     }
 
 

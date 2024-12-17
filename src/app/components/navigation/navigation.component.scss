@@ -1,0 +1,83 @@
+@import '../../../styles.scss';
+@import 'material-icons/iconfont/material-icons.scss';
+
+:host {
+    width: 100%;
+    padding: 24px;
+    padding-bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    color: $white-medium;
+    section {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.current-user {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: default;
+    color: $white-medium;
+    @include transition-ease($dur: 75ms);
+    .username {
+        padding-left: 8px;
+        padding-right: 4px;
+        @include transition-ease($dur: 75ms);
+    }
+    .dropdown-arrow {
+        transform: rotate(0deg);
+        @include transition-ease($dur: 225ms);
+    }
+    .user-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        max-height: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+        @include transition-ease($dur: 250ms);
+    }
+    &:hover {
+        @include transition-ease($dur: 75ms);
+        color: $grey-lighter;
+        .username:hover {
+            @include transition-ease($dur: 250ms);
+            color: $blue-bright;            
+        }
+        .dropdown-arrow {
+            @include transition-ease($dur: 225ms);
+            transform: rotate(180deg);
+        }
+        .user-dropdown {
+            @include transition-ease($dur: 250ms);
+            max-height: 50dvh;
+        }
+    }
+}
+
+.user-dropdown ul {
+    list-style: none;
+    color: $white-medium;
+    background: $black-light;
+    border-radius: 6px;
+    li {
+        padding: 4px 8px;
+        background: inherit;
+        border-radius: inherit;
+        white-space: nowrap;
+        width: 100%;
+        cursor: pointer;
+        @include transition-ease($dur: 75ms);
+        &:hover {
+            @include transition-ease($dur: 75ms);
+            color: $blue-brightest;
+            filter: brightness(1.2);
+        }
+        &:active {
+            @include transition-ease($dur: 75ms);
+            color: $blue-bright;
+        }
+    }
+}

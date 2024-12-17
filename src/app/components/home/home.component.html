@@ -1,10 +1,12 @@
-@if(videosService.getVideosMeta().length > 0) {
-<div class="videos-container">
-    <app-video-card *ngFor="let videoMeta of videosService.getVideosMeta()"
-        [data]="videoMeta" />
+<app-navigation />
+<div class="content-main">
+    @if(videosService.getVideosMeta().length > 0) {
+    <div class="videos-container">
+        <app-video-card *ngFor="let videoMeta of videosService.getVideosMeta()" [data]="videoMeta" />
+    </div>
+    } @else {
+    <div class="f-size flex-center">
+        <app-loading-circle />
+    </div>
+    }
 </div>
-} @else {
-<div class="f-size flex-center">
-    <app-loading-circle />
-</div>
-}
