@@ -40,7 +40,7 @@ export class LoginComponent {
 
 
   onLogin(resp: any) {
-    this.authService.setLocalSessionToken(resp.token);
+    this.authService.onLogin(resp);
     this.loginComplete = true;
   }
 

@@ -79,6 +79,16 @@ export class AuthService {
     }
 
 
+    onLogin(loginResp: any) {
+        try {
+            this.setLocalSessionToken(loginResp.token);
+            this.triggerUser(loginResp);
+        } catch {
+            throw new Error('Invalid login response:', loginResp);
+        }
+    }
+
+
     async authenticateToken(): Promise<Object> {
         const url = this.AUTH_URL + 'user/';
         const promise: Promise<Object> = lastValueFrom(this.http.get(url));
