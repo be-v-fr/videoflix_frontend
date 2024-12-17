@@ -3,14 +3,17 @@
 
 :host {
     width: 100%;
-    padding: 24px;
-    padding-bottom: 0;
-    display: flex;
-    justify-content: space-between;
-    color: $white-medium;
-    section {
+    .content {
+        width: inherit;
+        padding: 24px;
+        padding-bottom: 0;
         display: flex;
-        align-items: center;
+        justify-content: space-between;
+        color: $white-medium;
+        section {
+            display: flex;
+            align-items: center;
+        }
     }
 }
 
@@ -32,7 +35,7 @@
     }
     .user-dropdown {
         position: absolute;
-        top: 100%;
+        top: calc(100% + 4px);
         right: 0;
         max-height: 0;
         box-sizing: border-box;
@@ -43,7 +46,7 @@
         @include transition-ease($dur: 75ms);
         color: $grey-lighter;
         .username:hover {
-            @include transition-ease($dur: 250ms);
+            @include transition-ease($dur: 150ms);
             color: $blue-bright;            
         }
         .dropdown-arrow {

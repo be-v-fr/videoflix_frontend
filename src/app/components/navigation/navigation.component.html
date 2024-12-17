@@ -1,17 +1,20 @@
-<section>
-    <app-logo />
-</section>
-<section>
-    <div class="current-user" *ngIf="authService.currentUser">
-        <span class="material-icons-sharp">person</span>
-        <span class="username">{{authService.currentUser.getNameFromEmail()}}</span>
-        <span class="material-icons-sharp dropdown-arrow">arrow_drop_down</span>
-        <div class="user-dropdown">
-            <ul>
-                <li (click)="showChangePwDialog()">Change password</li>
-                <li (click)="authService.logout()">Logout</li>
-            </ul>
+<div class="content">
+    <section>
+        <app-logo />
+    </section>
+    <section>
+        <div class="current-user" *ngIf="authService.currentUser">
+            <span class="material-icons-sharp">person</span>
+            <span class="username">{{authService.currentUser.getNameFromEmail()}}</span>
+            <span class="material-icons-sharp dropdown-arrow">arrow_drop_down</span>
+            <div class="user-dropdown">
+                <ul>
+                    <li (click)="showChangePwDialog()">Change password</li>
+                    <li (click)="logout()">Logout</li>
+                </ul>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 <app-dialog [dialog]="requestPwResetComponent" [(showing)]="changePwDialogShowing" />
+<app-toast-notification [show]="loggedOut" [msg]="'You logged out.'" (then)="router.navigateByUrl('auth')" />
