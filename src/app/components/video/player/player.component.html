@@ -1,33 +1,35 @@
 <vg-player (onPlayerReady)="onPlayerReady($event)" [class.hide-player]="!showingPlayer">
     <vg-overlay-play />
-    <vg-buffering />
-    <vg-scrub-bar [vgSlider]="true">
-        <vg-scrub-bar-current-time [vgSlider]="true" />
-        <vg-scrub-bar-buffering-time />
-    </vg-scrub-bar>
-    <vg-controls>
-        <vg-play-pause />
-        <vg-playback-button />
-        <button (click)="seek(-10)" class="skip-back-btn">
-            <img src="assets/img/circular_arrow.svg" alt="" />
-            <span>10</span>
-        </button>
-        <button (click)="seek(10)" class="skip-forward-btn">
-            <img src="assets/img/circular_arrow.svg" alt="" />
-            <span>10</span>
-        </button>
-        <vg-scrub-bar style="pointer-events: none;" />
-        <vg-time-display vgProperty="current" vgFormat="mm:ss" />
-        <span class="time-of-total">/</span>
-        <vg-time-display vgProperty="total" vgFormat="mm:ss" />
-        <vg-mute />
-        <vg-volume />
-        @if(hlsBitrates) {
-        <vg-quality-selector [bitrates]="hlsBitrates"
-            (onBitrateChange)="vgHls.setBitrate($event); onBitrateChange($event)" />
-        }
-        <vg-fullscreen />
-    </vg-controls>
+    <section class="bottom">
+        <vg-buffering />
+        <vg-scrub-bar [vgSlider]="true">
+            <vg-scrub-bar-current-time [vgSlider]="true" />
+            <vg-scrub-bar-buffering-time />
+        </vg-scrub-bar>
+        <vg-controls>
+            <vg-play-pause />
+            <vg-playback-button />
+            <button (click)="seek(-10)" class="skip-back-btn">
+                <img src="assets/img/circular_arrow.svg" alt="" />
+                <span>10</span>
+            </button>
+            <button (click)="seek(10)" class="skip-forward-btn">
+                <img src="assets/img/circular_arrow.svg" alt="" />
+                <span>10</span>
+            </button>
+            <vg-scrub-bar style="pointer-events: none;" />
+            <vg-time-display vgProperty="current" vgFormat="mm:ss" />
+            <span class="time-of-total">/</span>
+            <vg-time-display vgProperty="total" vgFormat="mm:ss" />
+            <vg-mute />
+            <vg-volume />
+            @if(hlsBitrates) {
+            <vg-quality-selector [bitrates]="hlsBitrates"
+                (onBitrateChange)="vgHls.setBitrate($event); onBitrateChange($event)" />
+            }
+            <vg-fullscreen />
+        </vg-controls>
+    </section>
     <video [vgMedia]="$any(media)" #media id="video" preload="auto" autoplay="true" crossorigin #vgHls="vgHls"
         [vgHls]="videoMeta.playlistUrl" (onGetBitrates)="initBitrates($event)">
     </video>

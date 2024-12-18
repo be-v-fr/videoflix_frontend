@@ -1,46 +1,48 @@
 $lightblue: #d2e4fa;
 
 vg-player {
-    vg-scrub-bar {
-        vg-scrub-bar-current-time .slider {
-            width: 18px;
-            height: 18px;
-            @media screen and (max-width: 1440px) {
-                opacity: 0;
-                transform: scale(0.75);
-                transition: 100ms ease;
+    section.bottom {
+        vg-scrub-bar {
+            vg-scrub-bar-current-time .slider {
+                width: 18px;
+                height: 18px;
+                @media screen and (max-width: 1440px) {
+                    opacity: 0;
+                    transform: scale(0.75);
+                    transition: 100ms 150ms ease;
+                }
             }
         }
-        &:hover vg-scrub-bar-current-time .slider {
+        &:hover vg-scrub-bar vg-scrub-bar-current-time .slider {
             transition: 100ms ease;
             opacity: 1;
             transform: scale(1);
         }
-    }
-    vg-quality-selector .container {
-        padding-left: 10px;
-        .quality-selected:not(.vg-icon-hd) {
-            text-transform: none;
-            font-size: 14px;
-            color: $lightblue;
-        }
-        .vg-icon-hd {
-            padding-right: 10px;
-        }
-        select.quality-selector {
-            outline: none;
-            padding: 6px;
-            border-radius: 4px;
-            background-color: #fff0;
-            transition: 250ms ease;
-            option {
-                background-color: black;
+        vg-quality-selector .container {
+            padding-left: 10px;
+            .quality-selected:not(.vg-icon-hd) {
+                text-transform: none;
+                font-size: 14px;
                 color: $lightblue;
-                text-align: right;
             }
-            &:hover {
-                transition: 150ms ease;
-                background-color: #fff2;
+            .vg-icon-hd {
+                padding-right: 10px;
+            }
+            select.quality-selector {
+                outline: none;
+                padding: 6px;
+                border-radius: 4px;
+                background-color: #fff0;
+                transition: 250ms ease;
+                option {
+                    background-color: black;
+                    color: $lightblue;
+                    text-align: right;
+                }
+                &:hover {
+                    transition: 150ms ease;
+                    background-color: #fff2;
+                }
             }
         }
     }
@@ -58,5 +60,6 @@ vg-player {
     }
     to {
         opacity: 0;
+        cursor: none;
     }
 }

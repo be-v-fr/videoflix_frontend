@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BitrateOptions, VgApiService, VgCoreModule } from '@videogular/ngx-videogular/core';
 import { VgControlsModule } from '@videogular/ngx-videogular/controls';
@@ -17,7 +17,7 @@ import { ToastNotificationComponent } from '../../../shared/components/toast-not
   styleUrl: './player.component.scss'
 })
 export class PlayerComponent implements OnInit, OnDestroy {
-  @ViewChild('media', { static: true }) media: any;
+  @ViewChild('media', { static: true }) media?: ElementRef;
   @Input({ required: true }) videoMeta!: VideoMeta;
   api: VgApiService = new VgApiService;
   hlsBitrates?: BitrateOptions[];
@@ -50,14 +50,14 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
 
   getBitrateLabel(bitrate: number): string {
-    switch(bitrate) {
+    switch (bitrate) {
       case 0: return 'auto';
       case 350000: return '120p';
       case 1000000: return '360p';
       case 3000000: return '720p';
       case 5000000: return '1080p';
       default: return bitrate / 1000000 + ' mbit/s';
-    }    
+    }
   }
 
 
@@ -68,6 +68,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   @HostListener('document:mousemove', ['$event'])
   @HostListener('document:mousedown', ['$event'])
+  @HostListener('document:mouseup', ['$event'])
   handleMouseActivity() {
     this.resetInactivityTimer();
     this.showingPlayer = true;
@@ -75,8 +76,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
 
   private setInactivityTimer() {
+    const videoElement: HTMLVideoElement = this.media?.nativeElement;
     this.inactivityTimer = setTimeout(() => {
-      this.showingPlayer = false;
+      if (!videoElement.paused) {
+        this.showingPlayer = false;
+      }
     }, 3500);
   }
 
@@ -90,16 +94,13 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
 
   seek(seconds: number): void {
-    const videoElement: HTMLVideoElement = this.media.nativeElement;
+    const videoElement: HTMLVideoElement = this.media?.nativeElement;
     let newTime = videoElement.currentTime + seconds;
-
-    // Begrenzung auf gültigen Wertebereich
     if (newTime < 0) {
       newTime = 0;
     } else if (newTime > videoElement.duration) {
       newTime = videoElement.duration;
     }
-
     videoElement.currentTime = newTime;
   }
 };
