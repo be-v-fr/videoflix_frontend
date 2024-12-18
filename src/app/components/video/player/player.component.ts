@@ -40,17 +40,20 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
 
   initBitrates(bitrates: BitrateOptions[]) {
-    bitrates.forEach(b => {
-      switch(b.bitrate) {
-        case 0: b.label = 'auto'; break;
-        case 350000: b.label = '120p'; break;
-        case 1000000: b.label = '360p'; break;
-        case 3000000: b.label = '720p'; break;
-        case 5000000: b.label = '1080p'; break;
-        default: b.label = b.bitrate / 1000000 + ' mbit/s';
-      }
-    });
+    bitrates.forEach(b => b.label = this.getBitrateLabel(b.bitrate));
     this.hlsBitrates = bitrates;
+  }
+
+
+  getBitrateLabel(bitrate: number): string {
+    switch(bitrate) {
+      case 0: return 'auto';
+      case 350000: return '120p';
+      case 1000000: return '360p';
+      case 3000000: return '720p';
+      case 5000000: return '1080p';
+      default: return bitrate / 1000000 + ' mbit/s';
+    }    
   }
 
 
