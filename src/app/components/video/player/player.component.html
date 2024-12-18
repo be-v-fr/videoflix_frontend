@@ -8,9 +8,17 @@
     <vg-controls>
         <vg-play-pause />
         <vg-playback-button />
-        <vg-time-display vgProperty="current" vgFormat="mm:ss" />
+        <button (click)="seek(-10)" class="skip-back-btn">
+            <img src="assets/img/circular_arrow.svg" alt="" />
+            <span>10</span>
+        </button>
+        <button (click)="seek(10)" class="skip-forward-btn">
+            <img src="assets/img/circular_arrow.svg" alt="" />
+            <span>10</span>
+        </button>
         <vg-scrub-bar style="pointer-events: none;" />
-        <vg-time-display vgProperty="left" vgFormat="mm:ss" />
+        <vg-time-display vgProperty="current" vgFormat="mm:ss" />
+        <span class="time-of-total">/</span>
         <vg-time-display vgProperty="total" vgFormat="mm:ss" />
         <vg-mute />
         <vg-volume />

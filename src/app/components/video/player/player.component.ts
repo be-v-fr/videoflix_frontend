@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BitrateOptions, VgApiService, VgCoreModule } from '@videogular/ngx-videogular/core';
 import { VgControlsModule } from '@videogular/ngx-videogular/controls';
@@ -17,6 +17,7 @@ import { ToastNotificationComponent } from '../../../shared/components/toast-not
   styleUrl: './player.component.scss'
 })
 export class PlayerComponent implements OnInit, OnDestroy {
+  @ViewChild('media', { static: true }) media: any;
   @Input({ required: true }) videoMeta!: VideoMeta;
   api: VgApiService = new VgApiService;
   hlsBitrates?: BitrateOptions[];
@@ -85,5 +86,20 @@ export class PlayerComponent implements OnInit, OnDestroy {
       clearTimeout(this.inactivityTimer);
     }
     this.setInactivityTimer();
+  }
+
+
+  seek(seconds: number): void {
+    const videoElement: HTMLVideoElement = this.media.nativeElement;
+    let newTime = videoElement.currentTime + seconds;
+
+    // Begrenzung auf gültigen Wertebereich
+    if (newTime < 0) {
+      newTime = 0;
+    } else if (newTime > videoElement.duration) {
+      newTime = videoElement.duration;
+    }
+
+    videoElement.currentTime = newTime;
   }
 };
