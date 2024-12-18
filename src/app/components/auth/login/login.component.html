@@ -6,7 +6,7 @@
             autocomplete="off" #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
             [class.input-invalid]="email.touched && !email.valid" />
         <app-form-error [errors]="[
-                {condition: email.touched && !email.valid, msg: 'Please enter a valid email address.'},
+                {condition: (email.touched || loginForm.submitted) && !email.valid, msg: 'Please enter a valid email address.'},
                 errorService.getConditionalFieldErrResp('email', errorResp),
             ]" />
     </div>
@@ -15,7 +15,7 @@
         <input type="password" placeholder="Password" [(ngModel)]="formData.password" name="password" autocomplete="current-password"
             #password="ngModel" required [class.input-invalid]="password.touched && !password.valid" />
         <app-form-error [errors]="[
-                {condition: password.touched && !password.valid, msg: 'Please enter a password.'},
+                {condition: (password.touched || loginForm.submitted) && !password.valid, msg: 'Please enter a password.'},
                 errorService.getConditionalFieldErrResp('password', errorResp),
                 errorService.getConditionalFieldErrResp('non_field_errors', errorResp), 
             ]" />
