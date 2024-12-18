@@ -9,7 +9,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrl: './toast-notification.component.scss'
 })
 export class ToastNotificationComponent {
-  @Input() status: 'ok' | 'error' = 'ok';
+  @Input() status: 'ok' | 'error' | 'neutral' = 'ok';
   @Input({ required: true }) msg!: string;
 
   /** Event triggered after toast notification has expired */

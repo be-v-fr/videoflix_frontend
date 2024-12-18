@@ -15,7 +15,8 @@
         <vg-mute />
         <vg-volume />
         @if(hlsBitrates) {
-        <vg-quality-selector [bitrates]="hlsBitrates" (onBitrateChange)="vgHls.setBitrate($event)" />
+        <vg-quality-selector [bitrates]="hlsBitrates"
+            (onBitrateChange)="vgHls.setBitrate($event); onBitrateChange($event)" />
         }
         <vg-fullscreen />
     </vg-controls>
@@ -26,3 +27,5 @@
         <span class="material-icons-sharp">arrow_back</span>
     </button>
 </vg-player>
+<app-toast-notification *ngIf="toastBitrateMsg" [show]="true" [status]="'neutral'"
+    [msg]="toastBitrateMsg || 'Bitrate changed.'" (then)="toastBitrateMsg = undefined" />

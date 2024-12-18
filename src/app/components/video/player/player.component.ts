@@ -1,4 +1,5 @@
 import { Component, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { BitrateOptions, VgApiService, VgCoreModule } from '@videogular/ngx-videogular/core';
 import { VgControlsModule } from '@videogular/ngx-videogular/controls';
 import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
@@ -6,11 +7,12 @@ import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 import { VgStreamingModule } from '@videogular/ngx-videogular/streaming';
 import { VideoMeta } from '../../../shared/models/video-meta';
 import { RouterLink } from '@angular/router';
+import { ToastNotificationComponent } from '../../../shared/components/toast-notification/toast-notification.component';
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule, VgStreamingModule, RouterLink],
+  imports: [CommonModule, VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule, VgStreamingModule, RouterLink, ToastNotificationComponent],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss'
 })
@@ -20,6 +22,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   hlsBitrates?: BitrateOptions[];
   showingPlayer: boolean = true;
   private inactivityTimer?: ReturnType<typeof setTimeout>;
+  toastBitrateMsg?: string;
 
 
   ngOnInit(): void {
@@ -54,6 +57,11 @@ export class PlayerComponent implements OnInit, OnDestroy {
       case 5000000: return '1080p';
       default: return bitrate / 1000000 + ' mbit/s';
     }    
+  }
+
+
+  onBitrateChange(bitrate: BitrateOptions): void {
+    this.toastBitrateMsg = bitrate.label;
   }
 
 
