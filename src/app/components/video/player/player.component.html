@@ -33,7 +33,7 @@
     <video [vgMedia]="$any(media)" #media id="video" preload="auto" autoplay="true" crossorigin #vgHls="vgHls"
         [vgHls]="videoMeta.playlistUrl" (onGetBitrates)="initBitrates($event)">
     </video>
-    <button [routerLink]="''" class="back-btn">
+    <button [routerLink]="''" class="back-btn" (click)="saveProgress()">
         <span class="material-icons-sharp">arrow_back</span>
     </button>
 </vg-player>

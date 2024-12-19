@@ -1,14 +1,23 @@
-@if(data) {
-<a class="thumb" [routerLink]="['video', data.id]" >
-    <img src="{{data.thumbUrl}}" alt="{{data.title}}"/>
+@if(metaData) {
+<a class="thumb" [routerLink]="['video', metaData.id]">
+    <img src="{{metaData.thumbUrl}}" alt="{{metaData.title}}" />
 </a>
 <div class="show-on-hover">
-    <p>{{data.title}}</p>
-    <p>{{data.durationInMinutes}}</p>
-    <p>{{data.description}}</p>
+    <p>{{metaData.title}}</p>
+    @if(completion && progressText) {
+    <div class="progress-container">
+        <div class="progress-bg">
+            <div *ngIf="completion" class="progress-bar" [style.width]="progressWidth"></div>
+        </div>
+        <p>{{progressText}}</p>
+    </div>
+    } @else {
+    <p>{{metaData.showDuration()}}</p>
+    }
+    <p>{{metaData.description}}</p>
 </div>
 } @else {
-    <div class="f-size flex-center">
-        <app-loading-circle />
-    </div>
+<div class="f-size flex-center">
+    <app-loading-circle />
+</div>
 }

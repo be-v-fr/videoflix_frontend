@@ -8,6 +8,8 @@ import { VgStreamingModule } from '@videogular/ngx-videogular/streaming';
 import { VideoMeta } from '../../../shared/models/video-meta';
 import { RouterLink } from '@angular/router';
 import { ToastNotificationComponent } from '../../../shared/components/toast-notification/toast-notification.component';
+import { VideosService } from '../../../shared/services/videos.service';
+import { VideoCompletion } from '../../../shared/models/video-completion';
 
 @Component({
   selector: 'app-player',
@@ -17,8 +19,9 @@ import { ToastNotificationComponent } from '../../../shared/components/toast-not
   styleUrl: './player.component.scss'
 })
 export class PlayerComponent implements OnInit, OnDestroy {
-  @ViewChild('media', { static: true }) media?: ElementRef;
+  @ViewChild('media', { static: true }) media!: ElementRef<HTMLVideoElement>;
   @Input({ required: true }) videoMeta!: VideoMeta;
+  videoCompletion: VideoCompletion = new VideoCompletion({});
   api: VgApiService = new VgApiService;
   hlsBitrates?: BitrateOptions[];
   showingPlayer: boolean = true;
@@ -26,8 +29,15 @@ export class PlayerComponent implements OnInit, OnDestroy {
   toastBitrateMsg?: string;
 
 
+  constructor(
+    private videosService: VideosService,
+  ) { }
+
+
   ngOnInit(): void {
+    this.initVideoCompletion();
     this.setInactivityTimer();
+    this.startProgressTracking();
   }
 
 
@@ -44,12 +54,12 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
 
   initBitrates(bitrates: BitrateOptions[]) {
-    bitrates.forEach(b => b.label = this.getBitrateLabel(b.bitrate));
+    bitrates.forEach(b => b.label = this.generateBitrateLabel(b.bitrate));
     this.hlsBitrates = bitrates;
   }
 
 
-  getBitrateLabel(bitrate: number): string {
+  generateBitrateLabel(bitrate: number): string {
     switch (bitrate) {
       case 0: return 'auto';
       case 350000: return '120p';
@@ -76,7 +86,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
 
   private setInactivityTimer() {
-    const videoElement: HTMLVideoElement = this.media?.nativeElement;
+    const videoElement: HTMLVideoElement = this.media.nativeElement;
     this.inactivityTimer = setTimeout(() => {
       if (!videoElement.paused) {
         this.showingPlayer = false;
@@ -94,7 +104,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
 
   seek(seconds: number): void {
-    const videoElement: HTMLVideoElement = this.media?.nativeElement;
+    const videoElement: HTMLVideoElement = this.media.nativeElement;
     let newTime = videoElement.currentTime + seconds;
     if (newTime < 0) {
       newTime = 0;
@@ -102,5 +112,35 @@ export class PlayerComponent implements OnInit, OnDestroy {
       newTime = videoElement.duration;
     }
     videoElement.currentTime = newTime;
+  }
+
+
+  initVideoCompletion(): void {
+    const completion: VideoCompletion | undefined = this.videosService.getVideoCompletion(this.videoMeta.id);
+    this.videoCompletion.videoId = this.videoMeta.id;
+    if(completion) {
+      this.videoCompletion = completion;
+      if (completion.currentTime > 0) {
+        const videoElement: HTMLVideoElement = this.media.nativeElement;
+        videoElement.currentTime = completion.currentTime;
+      }
+    }
+  }
+
+
+  startProgressTracking() {
+    setInterval(() => {
+      this.saveProgress();
+    }, 1000);
+  }
+
+
+  saveProgress() {
+    const videoElement: HTMLVideoElement = this.media.nativeElement;
+    if (!videoElement.paused) {
+      this.videoCompletion.currentTime = videoElement.currentTime;
+      this.videoCompletion.updatedAt = Date.now();
+      this.videosService.saveVideoCompletion(this.videoCompletion);
+    }
   }
 };
