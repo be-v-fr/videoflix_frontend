@@ -118,7 +118,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
   initVideoCompletion(): void {
     const completion: VideoCompletion | undefined = this.videosService.getVideoCompletion(this.videoMeta.id);
     this.videoCompletion.videoId = this.videoMeta.id;
-    if(completion) {
+    if (completion) {
       this.videoCompletion = completion;
       if (completion.currentTime > 0) {
         const videoElement: HTMLVideoElement = this.media.nativeElement;
@@ -138,9 +138,20 @@ export class PlayerComponent implements OnInit, OnDestroy {
   saveProgress() {
     const videoElement: HTMLVideoElement = this.media.nativeElement;
     if (!videoElement.paused) {
-      this.videoCompletion.currentTime = videoElement.currentTime;
-      this.videoCompletion.updatedAt = Date.now();
-      this.videosService.saveVideoCompletion(this.videoCompletion);
+      this.saveProgressInRuntime(videoElement);
+      this.videosService.saveVideoCompletionOnServer(this.videoCompletion)
+        .then((resp: any) => {
+          this.videoCompletion.id = resp.id;
+          this.saveProgressInRuntime(videoElement);
+        })
+        .catch((err: any) => console.error(err));
     }
+  }
+
+
+  saveProgressInRuntime(videoElement: HTMLVideoElement) {
+    this.videoCompletion.currentTime = videoElement.currentTime;
+    this.videoCompletion.updatedAt = Date.now();
+    this.videosService.saveVideoCompletionInRuntime(this.videoCompletion);
   }
 };

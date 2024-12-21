@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { VideoMeta } from '../models/video-meta';
 import { environment } from '../../../environments/environment.development';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Subject } from 'rxjs';
 import { VideoCompletion } from '../models/video-completion';
 
 @Injectable({
@@ -14,6 +14,7 @@ export class VideosService {
   public lastVideosMetaSynced: number = 0;
   private readonly videosMetaSyncSeconds: number = 600;
   public videoCompletionList: VideoCompletion[] = [];
+  public loadingState: Subject<null | 'meta' | 'completion' | 'complete'> = new Subject<null | 'meta' | 'completion' | 'complete'>();
 
 
   constructor(
@@ -34,7 +35,8 @@ export class VideosService {
 
 
   private syncVideosMeta(): void {
-    lastValueFrom(this.http.get(this.VIDEOS_URL)).then(resp => {
+    this.loadingState.next('meta');
+    lastValueFrom(this.http.get(this.VIDEOS_URL + 'main/')).then(resp => {
       this.lastVideosMetaSynced = Date.now();
       this.videosMeta = [];
       (resp as Array<any>).forEach(vData => {
@@ -45,7 +47,7 @@ export class VideosService {
 
 
   public async retrieveVideoMeta(id: number): Promise<Object> {
-    return await lastValueFrom(this.http.get(this.VIDEOS_URL + id + '/'));
+    return await lastValueFrom(this.http.get(this.VIDEOS_URL + 'main/' + id + '/'));
   }
 
 
@@ -59,32 +61,58 @@ export class VideosService {
   }
 
 
-  public getVideoCompletion(id: number): VideoCompletion | undefined {
-    return this.videoCompletionList.find(vc => vc.videoId == id);
+  public initVideoCompletionData(): void {
+    this.loadingState.next('completion');
+    const url = this.VIDEOS_URL + 'completion/';
+    lastValueFrom(this.http.get(url)).then(resp => {
+      this.videoCompletionList = [];
+      (resp as Array<any>).forEach(vcData => {
+        this.videoCompletionList.push(new VideoCompletion(vcData));
+      });
+      this.loadingState.next('complete');
+    });
   }
 
 
-  public saveVideoCompletion(updatedCompletion: VideoCompletion) {
-    this.saveVideoCompletionInRuntime(updatedCompletion);
-    this.saveVideoCompletionOnServer(updatedCompletion);
+  public getVideoCompletion(videoId: number): VideoCompletion | undefined {
+    return this.videoCompletionList.find(vc => vc.videoId == videoId);
   }
 
 
-  private saveVideoCompletionInRuntime(updatedCompletion: VideoCompletion) {
+  public saveVideoCompletionInRuntime(updatedCompletion: VideoCompletion) {
     if (this.videoCompletionList) {
-      console.log(this.videoCompletionList);
       const index = this.videoCompletionList.findIndex(vC => vC.videoId == updatedCompletion.videoId);
       if (index == -1) {
         this.videoCompletionList.push(updatedCompletion);
       } else {
         this.videoCompletionList[index] = updatedCompletion;
       }
-      console.log(this.videoCompletionList);
     }
   }
 
 
-  private saveVideoCompletionOnServer(updatedCompletion: VideoCompletion) {
-    console.log('server post request logic here');
+  public saveVideoCompletionOnServer(updatedCompletion: VideoCompletion): Promise<Object> {
+    if (updatedCompletion.id >= 1) {
+      return this.updateVideoCompletionOnServer(updatedCompletion);
+    } else {
+      return this.createVideoCompletionOnServer(updatedCompletion);
+    }
+  }
+
+
+  private updateVideoCompletionOnServer(updatedCompletion: VideoCompletion): Promise<Object> {
+    const url = this.VIDEOS_URL + 'completion/' + updatedCompletion.id + '/';
+    const data = { current_time: updatedCompletion.currentTime };
+    return lastValueFrom(this.http.patch(url, data))
+  }
+
+
+  private createVideoCompletionOnServer(updatedCompletion: VideoCompletion): Promise<Object> {
+    const url = this.VIDEOS_URL + 'completion/';
+    const data = {
+      video_id: updatedCompletion.videoId,
+      current_time: updatedCompletion.currentTime
+    };
+    return lastValueFrom(this.http.post(url, data));
   }
 }

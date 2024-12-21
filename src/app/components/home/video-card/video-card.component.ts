@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoadingCircleComponent } from '../../../shared/components/loading-circle/loading-circle.component';
 import { VideoMeta } from '../../../shared/models/video-meta';
 import { RouterLink } from '@angular/router';
 import { VideoCompletion } from '../../../shared/models/video-completion';
 import { VideosService } from '../../../shared/services/videos.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-video-card',
@@ -13,9 +14,10 @@ import { VideosService } from '../../../shared/services/videos.service';
   templateUrl: './video-card.component.html',
   styleUrl: './video-card.component.scss'
 })
-export class VideoCardComponent implements OnInit {
+export class VideoCardComponent implements OnInit, OnDestroy {
   @Input({ required: true }) metaData!: VideoMeta;
   completion?: VideoCompletion;
+  completionSub: Subscription = new Subscription();
   progressWidth?: string;
   progressText?: string;
 
@@ -27,16 +29,30 @@ export class VideoCardComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.completion) {
-      this.completion = this.videosService.getVideoCompletion(this.metaData.id);
+      this.completionSub = this.subCompletion();
     }
-    this.progressWidth = this.calcProgressWidth();
-    this.progressText = this.generateProgressText();
+  }
+
+
+  ngOnDestroy(): void {
+    this.completionSub.unsubscribe();
+  }
+
+
+  subCompletion(): Subscription {
+    return this.completionSub = this.videosService.loadingState.subscribe(s => {
+      if(s == 'complete') {
+        this.completion = this.videosService.getVideoCompletion(this.metaData.id);
+        this.progressWidth = this.calcProgressWidth();
+        this.progressText = this.generateProgressText();
+        this.completionSub.unsubscribe();
+      }
+    })
   }
 
 
   calcProgressWidth(): string {
     const relativeProgress: number = this.completion ? this.completion.currentTime / this.metaData.durationInSeconds : 0;
-    console.log('progress:', relativeProgress);
     return relativeProgress * 100 + '%';
   }
 
