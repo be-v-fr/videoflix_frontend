@@ -4,13 +4,8 @@
 </a>
 <div class="show-on-hover">
     <p>{{metaData.title}}</p>
-    @if(completion && progressText) {
-    <div class="progress-container">
-        <div class="progress-bg">
-            <div *ngIf="completion" class="progress-bar" [style.width]="progressWidth"></div>
-        </div>
-        <p>{{progressText}}</p>
-    </div>
+    @if(completion) {
+    <app-watching-progress [completion]="completion" [metaData]="metaData" />
     } @else {
     <p>{{metaData.showDuration()}}</p>
     }
@@ -21,3 +16,5 @@
     <app-loading-circle />
 </div>
 }
+<app-dialog [dialog]="continueWatchingComponent" [dialogData]="{ metaData: metaData, completion: completion }"
+    [(showing)]="showingContinueWatchingDialog" />

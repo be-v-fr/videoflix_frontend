@@ -3,6 +3,6 @@
         <div class="header">
             <button class="material-icons-sharp close-btn" (click)="close()">close</button>
         </div>
-        <ng-container *ngComponentOutlet="dialogContent" />
+        <ng-container *ngComponentOutlet="dialogContent; injector: dialogContentInjector" (close)="close()" />
     </div>
 </div>

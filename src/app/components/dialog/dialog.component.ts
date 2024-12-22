@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Type, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Type, Input, Output, EventEmitter, Injector, inject } from '@angular/core';
 
 @Component({
   selector: 'app-dialog',
@@ -10,6 +10,7 @@ import { Component, Type, Input, Output, EventEmitter } from '@angular/core';
 })
 export class DialogComponent {
   @Input({alias: 'dialog', required: true}) dialogContent!: Type<object>;
+  @Input() dialogData?: any;
 
   private _showing: boolean = false;
   @Output() showingChange = new EventEmitter<boolean>();
@@ -34,5 +35,18 @@ export class DialogComponent {
       this.showing = false;
       this.slidingOut = false;
     }, 250);
+  }
+
+
+  get dialogContentInjector(): Injector | undefined {
+    if (!this.dialogData) {
+      return undefined;
+    }
+    return Injector.create({
+      providers: [
+        { provide: 'DIALOG_DATA', useValue: this.dialogData }
+      ],
+      parent: inject(Injector)
+    });
   }
 }
