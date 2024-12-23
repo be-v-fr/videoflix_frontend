@@ -1,7 +1,15 @@
-Continue watching?
+<h3>Continue watching?</h3>
 <app-watching-progress *ngIf="metaData && completion" [metaData]="metaData" [completion]="completion" />
 <div class="btns-container">
-    <button (click)="playVideoFromStart()">Play from start</button>
-    <button (click)="playVideo()">Continue</button>
-    <!-- add video play icons (play/play from start) -->
+    <button class="btn-secondary" (click)="playVideoFromStart()">
+        <div class="resume-icon">
+            <div class="resume-line"></div>
+            <span class="material-icons-sharp resume-icon">play_arrow</span>
+        </div>
+        Resume
+    </button>
+    <button class="btn-primary" (click)="playVideo()">
+        <span class="material-icons-sharp">play_arrow</span>
+        Continue
+    </button>
 </div>

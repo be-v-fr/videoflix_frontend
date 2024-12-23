@@ -1,5 +1,5 @@
 @if(metaData) {
-<a class="thumb" [routerLink]="['video', metaData.id]">
+<a class="thumb" (click)="playVideo()">
     <img src="{{metaData.thumbUrl}}" alt="{{metaData.title}}" />
 </a>
 <div class="show-on-hover">
@@ -16,5 +16,3 @@
     <app-loading-circle />
 </div>
 }
-<app-dialog [dialog]="continueWatchingComponent" [dialogData]="{ metaData: metaData, completion: completion }"
-    [(showing)]="showingContinueWatchingDialog" />

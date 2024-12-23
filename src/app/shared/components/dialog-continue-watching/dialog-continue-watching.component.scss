@@ -1,2 +1,27 @@
 @import '../../../../styles.scss';
 @import 'material-icons/iconfont/material-icons.scss';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    .btns-container {
+        display: flex;
+        gap: 10px;
+        .btn-primary, .btn-secondary {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            .resume-icon {
+                display: flex;
+                align-items: center;
+                .resume-line {
+                    width: 2px;
+                    height: 14px;
+                    margin-right: -5px;
+                    background: $blue-darkest;
+                }
+            }
+        }
+    }
+}

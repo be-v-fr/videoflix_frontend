@@ -2,7 +2,7 @@
 <div class="content-main">
     @if(videosService.getVideosMeta().length > 0) {
     <div class="videos-container">
-        <app-video-card *ngFor="let videoMeta of videosService.getVideosMeta()" [metaData]="videoMeta" />
+        <app-video-card *ngFor="let videoMeta of videosService.getVideosMeta()" [metaData]="videoMeta" (continue)="continueVideo($event)" />
     </div>
     } @else {
     <div class="f-size flex-center">
@@ -10,3 +10,5 @@
     </div>
     }
 </div>
+<app-dialog *ngIf="continueWatchingData" [dialog]="continueWatchingComponent" [(showing)]="showingContinueWatchingDialog"
+    [dialogData]="{ metaData: continueWatchingData.meta, completion: continueWatchingData.completion}" />

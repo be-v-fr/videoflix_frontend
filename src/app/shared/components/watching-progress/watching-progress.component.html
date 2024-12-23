@@ -1,4 +1,4 @@
-<div class="progress-bg">
+<div class="progress-bg" *ngIf="width">
     <div class="progress-bar" [style.width]="width"></div>
 </div>
-<p>{{text}}</p>
+<p *ngIf="text">{{text}}</p>

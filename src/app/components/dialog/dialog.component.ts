@@ -11,6 +11,7 @@ import { Component, Type, Input, Output, EventEmitter, Injector, inject } from '
 export class DialogComponent {
   @Input({alias: 'dialog', required: true}) dialogContent!: Type<object>;
   @Input() dialogData?: any;
+  injector: Injector = inject(Injector);
 
   private _showing: boolean = false;
   @Output() showingChange = new EventEmitter<boolean>();
@@ -46,7 +47,7 @@ export class DialogComponent {
       providers: [
         { provide: 'DIALOG_DATA', useValue: this.dialogData }
       ],
-      parent: inject(Injector)
+      parent: this.injector
     });
   }
 }

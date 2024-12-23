@@ -1,19 +1,26 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { VideoCompletion } from '../../models/video-completion';
 import { VideoMeta } from '../../models/video-meta';
 
 @Component({
   selector: 'app-watching-progress',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './watching-progress.component.html',
   styleUrl: './watching-progress.component.scss'
 })
-export class WatchingProgressComponent {
+export class WatchingProgressComponent implements OnInit {
   @Input({ required: true }) metaData!: VideoMeta;
   @Input({ required: true }) completion!: VideoCompletion;
   width?: string;
   text?: string;
+
+
+  ngOnInit(): void {
+    this.width = this.calcProgressWidth();
+    this.text = this.generateProgressText();
+  }
 
 
   calcProgressWidth(): string {
