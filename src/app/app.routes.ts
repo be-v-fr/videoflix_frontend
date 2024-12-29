@@ -10,8 +10,13 @@ import { RequestPwResetComponent } from './components/auth/pw-reset/request-pw-r
 import { PwResetComponent } from './components/auth/pw-reset/pw-reset.component';
 import { PerformPwResetComponent } from './components/auth/pw-reset/perform-pw-reset/perform-pw-reset.component';
 import { AccountActivationComponent } from './components/auth/account-activation/account-activation.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 
 export const routes: Routes = [
+    {
+        path: 'welcome',
+        component: LandingPageComponent,
+    },
     {
         path: '',
         component: HomeComponent,

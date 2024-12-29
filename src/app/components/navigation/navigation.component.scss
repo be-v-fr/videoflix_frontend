@@ -3,10 +3,12 @@
 
 :host {
     width: 100%;
+    height: $nav-height;
+    display: flex;
+    align-items: center;
     .content {
         width: inherit;
-        padding: 24px;
-        padding-bottom: 0;
+        padding: 10px 96px;
         display: flex;
         justify-content: space-between;
         color: $plain-white;

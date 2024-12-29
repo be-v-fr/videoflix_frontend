@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -10,4 +10,7 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AuthComponent {
 
+  constructor(
+    public router: Router
+  ) { }
 }

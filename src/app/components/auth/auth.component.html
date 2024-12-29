@@ -1,1 +1,5 @@
-<router-outlet />
+<div class="wrapper auth-bg" [class.auth-alternate-bg]="this.router.url.includes('signup')">
+    <div class="content">
+        <router-outlet />
+    </div>
+</div>

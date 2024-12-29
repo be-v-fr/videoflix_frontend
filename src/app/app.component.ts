@@ -51,7 +51,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   initAuth() {
-    localStorage.getItem('token') ? this.handleToken() : this.redirectToLogin();
+    localStorage.getItem('token') ? this.handleToken() : this.redirect();
   }
 
 
@@ -63,12 +63,31 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   isOnAuthRoute(): boolean {
-    return this.router.url.slice(0, 6) === '/auth/';
+    return this.router.url.split('/')[1] === 'auth';
+  }
+
+
+  isOnEmptyRoute(): boolean {
+    return this.router.url.split('/')[1].length === 0;
+  }
+
+
+  isOnLandingPage(): boolean {
+    return this.router.url.split('/')[1] === 'welcome';
+  }
+
+
+  redirect() {
+    if(this.isOnEmptyRoute()) {
+      this.router.navigateByUrl('welcome');
+    } else {
+      this.redirectToLogin();
+    }
   }
 
 
   redirectToLogin() {
-    if (!this.isOnAuthRoute()) {
+    if (!this.isOnLandingPage() && !this.isOnAuthRoute()) {
       this.router.navigateByUrl('auth/login');
     }
   }
@@ -85,6 +104,7 @@ export class AppComponent implements OnInit, OnDestroy {
     const urlSegments: string[] = this.router.url.split('/');
     switch(urlSegments[1]) {
       case 'auth': this.navMode = urlSegments.includes('login') ? 'signup' : 'login'; break;
+      case 'welcome': this.navMode = 'login'; break;
       case 'legal': this.navMode = 'back'; break;
       default: this.navMode = 'home';
     }
