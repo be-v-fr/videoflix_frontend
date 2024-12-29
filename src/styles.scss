@@ -1,29 +1,20 @@
 @import './fonts.scss';
 
-$black-darkest: #0a0c11;
-$black-medium: #101016;
-$black-light: #19191c;
-$grey-dark: #424e4e;
-$grey-medium: #778077;
-$grey-light: #8f9794;
-$grey-lighter: #abafae;
-$white-darkest: #dee4e7;
-$white-medium: #e8eeee;
-$red: #e71143;
-$blue-darkest: #082b47;
-$blue-dark: #0e385a;
-$blue-medium: #004890;
-$blue-bright: #0651b4;
-$blue-brightest: #3d90dd;
-$green-light: #17ce60;
+$plain-white: #FFFFFF;
+$plain-black: #000000;
+$grey-light: #888888;
+$purple: #2E3EDF;
+$purple-bright: #3646f0;
+$purple-trans: #2E3EDF80;
+$error-red: #FF002E;
+$green-light: #32be39;
 
-$b-radius-small: 5px;
-$b-radius-medium: 11px;
-$b-radius-large: 24px;
+$b-radius-small: 10px;
+$b-radius-medium: 24px;
+$b-radius-large: 48px;
 
-$fs-tiny: 14px;
-$fs-small: 16px;
-$fs-normal: 20px;
+$fs-tiny: 15px;
+$fs-normal: 18px;
 
 $shine-white-shadow: 0px 1px 3px 3px #DDFFFF33;
 
@@ -39,6 +30,7 @@ $shine-white-shadow: 0px 1px 3px 3px #DDFFFF33;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'DM Sans', sans-serif;
 }
 
 html {
@@ -47,15 +39,8 @@ html {
 
 body,
 input {
-    font-family: 'Raleway', sans-serif;
     font-weight: 500;
     font-size: $fs-normal;
-}
-
-h1,
-h2,
-h3 {
-    font-family: 'Abel', sans-serif;
 }
 
 h1 {
@@ -117,19 +102,18 @@ a {
             display: flex;
             align-items: center;
             @include transition-ease($dur: 75ms);
-            color: $grey-dark;
+            color: $purple;
         }
 
         input {
             width: inherit;
             padding: 8px 16px 8px 48px;
             border-radius: 20px;
-            background: $white-darkest;
-            border: 1px solid $blue-medium;
+            border: 1px solid $purple;
             @include transition-ease($dur: 75ms);
 
             &::placeholder {
-                color: $grey-dark;
+                color: $purple;
             }
 
             &:placeholder-shown {
@@ -138,63 +122,60 @@ a {
 
                 &:hover {
                     @include transition-ease($dur: 75ms);
-                    border-color: $grey-medium;
                 }
 
                 &:active {
                     @include transition-ease($dur: 75ms);
-                    border-color: $grey-dark;
                 }
             }
         }
 
         .input-invalid {
             @include transition-ease($dur: 75ms);
-            border-color: $red;
+            border-color: $error-red;
         }
     }
 }
 
 .btn-sizing {
-    padding: 10px 14px;
+    padding: 11px 14px;
     border-radius: $b-radius-medium;
     border: 1px solid #00000000;
-    font-size: 21px;
+    font-size: $fs-normal;
     @include transition-ease();
 
     &:hover {
         @include transition-ease();
         color: white;
         @include simple-shadow($alpha: 0.2);
-        background-color: $blue-dark;
+        background-color: $purple;
         border-color: #00000000;
     }
 
     &:active {
         @include transition-ease($dur: 75ms);
         @include simple-shadow($alpha: 0.3);
-        background-color: $blue-medium;
+        background-color: $purple-bright;
         border-color: #00000000;
     }
 
     &:disabled {
-        background-color: $grey-light;
+        background-color: $purple-trans;
         border-color: #00000000;
     }
 }
 
 .btn-primary {
     @extend .btn-sizing;
-    background-color: $blue-darkest;
-    color: $white-medium;
+    background-color: $purple;
+    color: $plain-white;
 }
 
 .btn-secondary {
     @extend .btn-sizing;
-    background-color: $white-medium;
-    ;
-    border-color: $blue-darkest;
-    color: $blue-darkest;
+    background-color: $plain-white;
+    border-color: $purple;
+    color: $purple;
 }
 
 .to-black {
@@ -203,9 +184,9 @@ a {
 }
 
 .link-blue {
-    font-size: $fs-small;
+    font-size: $fs-normal;
     font-weight: 600;
-    color: $blue-bright;
+    color: $purple;
 
     &:hover {
         text-decoration: underline;
@@ -225,7 +206,7 @@ app-form-error {
 }
 
 .close-btn {
-    color: $blue-darkest;
+    color: $purple;
     font-size: 34px;
     transform: scale(0.8);
     will-change: transform;

@@ -23,7 +23,7 @@ $slide-duration: 250ms;
         max-height: 80dvh;
         padding: 24px;
         border-radius: $b-radius-large;
-        background: $white-medium;
+        background: $plain-white;
         box-shadow: $shine-white-shadow;
         animation: slide-in $slide-duration ease-out forwards;
         .header {

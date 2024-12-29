@@ -14,10 +14,10 @@
 :host {
     display: block;
     width: 400px;
-    background-color: $white-medium;
+    background-color: $plain-white;
     border-radius: $b-radius-large;
     padding: 24px;
-    color: $black-medium;
+    color: $plain-black;
     box-shadow: $shine-white-shadow;
 }
 
@@ -27,7 +27,6 @@ h1 {
     justify-content: center;
     padding-bottom: 8px;
     margin-bottom: 4px;
-    border-bottom: 1px solid $black-light;
 }
 
 .btns-container {
@@ -52,7 +51,7 @@ form {
     .auth-mode-link-content {
         display: flex;
         align-items: center;
-        color: $black-darkest;
+        color: $plain-black;
         border-radius: $b-radius-large;
         border: 1px solid #00000000;
         padding: 7px 3px 7px 11px;
@@ -63,26 +62,24 @@ form {
         }
         &:hover {
             @include transition-ease();
-            border-color: $grey-medium;
             @include simple-shadow($alpha: 0.06);
         }
 
         &:active {
             @include transition-ease($dur: 75ms);
-            border-color: $grey-dark;
             @include simple-shadow($alpha: 0.1);
         }
     }
     button:disabled .auth-mode-link-content {
-        color: $grey-light;
+        color: $purple-trans;
         &:hover, &:active {
-            border-color: $grey-light;
+            border-color: $purple-trans;
         }
     }
 }
 
 .notice {
-    font-size: $fs-small;
+    font-size: $fs-tiny;
     margin-bottom: 4px;
 }
 

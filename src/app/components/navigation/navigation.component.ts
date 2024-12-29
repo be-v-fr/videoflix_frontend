@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit, Type } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LogoComponent } from '../../shared/components/logo/logo.component';
 import { AuthService } from '../../shared/services/auth.service';
 import { SearchComponent } from '../../shared/components/search/search.component';
@@ -12,11 +12,12 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-navigation',
   standalone: true,
-  imports: [CommonModule, LogoComponent, SearchComponent, DialogComponent, ToastNotificationComponent],
+  imports: [CommonModule, RouterLink, LogoComponent, SearchComponent, DialogComponent, ToastNotificationComponent],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss'
 })
 export class NavigationComponent implements OnInit, OnDestroy {
+  @Input() mode?: 'login' | 'signup' | 'home' | 'back';
   requestPwResetComponent: Type<object> = RequestPwResetComponent;
   changePwDialogShowing: boolean = false;
   loggedOut: boolean = false;
@@ -29,7 +30,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    if(!this.authService.currentUser) {
+    if (!this.authService.currentUser) {
       this.awaitingInit = true;
       this.authSub = this.subAuth();
     }
@@ -41,7 +42,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   subAuth(): Subscription {
     return this.authService.currentUser$.subscribe(user => {
-      if(user) {
+      if (user) {
         this.awaitingInit = 'complete';
         this.authSub.unsubscribe();
       }

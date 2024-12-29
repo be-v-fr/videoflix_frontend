@@ -1,7 +1,7 @@
 @import "../../../../styles.scss";
 
 :host {
-    height: 48px;
+    height: 32px;
     a {
         height: inherit;
         display: flex;
@@ -9,14 +9,6 @@
         img {
             object-fit: cover;
             height: 100%;
-        }
-        .text {
-            margin-left: -12px;
-            padding-top: 16px;
-            font-size: 36px;
-            font-weight: 550;
-            color: $blue-brightest;
-            font-style: italic;
         }
     }
 }

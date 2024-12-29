@@ -3,5 +3,10 @@
 .page-wrapper {
     width: 100vw;
     height: 100dvh;
-    background: $black-darkest;
+    background: $plain-black;
+    display: flex;
+    flex-direction: column;
+    .page-content {
+        flex: 1;
+    }
 }

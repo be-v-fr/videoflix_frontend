@@ -6,7 +6,7 @@
     top: calc(100% + 2px);
     p {
         font-size: 14px;
-        color: $red;
+        color: $error-red;
     }
     &:empty {
         opacity: 0;

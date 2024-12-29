@@ -2,7 +2,20 @@
     <section>
         <app-logo />
     </section>
-    <section *ngIf="authService.currentUser && !(awaitingInit === true)" [class.slide-down]="awaitingInit == 'complete'">
+    @if(mode) {
+    @if(mode === 'login') {
+    <section>
+        <a [routerLink]="['auth', 'login']" class="btn-primary">Log in</a>
+    </section>
+    }
+    @else if(mode === 'signup') {
+        <section>
+            <a [routerLink]="['auth', 'signup']" class="btn-primary">Sign up</a>
+        </section>
+        }
+    @else if(mode === 'home') {
+    <section *ngIf="authService.currentUser && !(awaitingInit === true)"
+        [class.slide-down]="awaitingInit == 'complete'">
         <app-search />
         <div class="current-user">
             <span class="material-icons-sharp">person</span>
@@ -16,6 +29,8 @@
             </div>
         </div>
     </section>
+    }
+    }
 </div>
 <app-dialog [dialog]="requestPwResetComponent" [(showing)]="changePwDialogShowing" />
 <app-toast-notification [show]="loggedOut" [msg]="'You logged out.'" (then)="router.navigateByUrl('auth')" />

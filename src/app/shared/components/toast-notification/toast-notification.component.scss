@@ -6,17 +6,17 @@
     p {
         padding: 20px;
         background-color: $green-light;
-        color: whitesmoke;
+        color: $plain-white;
         font-weight: 600;
         border-radius: 20px;
         @include simple-shadow($alpha: 0.16);
         animation: slide-bottom-center 0.4s ease-out;
     }
     .error {
-        background-color: $red;
+        background-color: $error-red;
     }
     .neutral {
-        background-color: $blue-medium;
+        background-color: $purple;
     }
 }
 

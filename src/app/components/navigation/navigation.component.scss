@@ -9,7 +9,7 @@
         padding-bottom: 0;
         display: flex;
         justify-content: space-between;
-        color: $white-medium;
+        color: $plain-white;
         section {
             display: flex;
             align-items: center;
@@ -26,7 +26,7 @@ app-search {
     display: flex;
     align-items: center;
     cursor: default;
-    color: $white-medium;
+    color: $plain-white;
     padding: 10px 0 10px 14px;
     @include transition-ease($dur: 75ms);
     .username {
@@ -50,10 +50,8 @@ app-search {
     }
     &:hover {
         @include transition-ease($dur: 75ms);
-        color: $grey-lighter;
         .username:hover {
             @include transition-ease($dur: 150ms);
-            color: $blue-bright;            
         }
         .dropdown-arrow {
             @include transition-ease($dur: 225ms);
@@ -73,8 +71,8 @@ app-search {
 
 .user-dropdown ul {
     list-style: none;
-    color: $white-medium;
-    background: $black-light;
+    color: $plain-white;
+    background: $plain-black;
     border-radius: 6px;
     li {
         padding: 4px 8px;
@@ -86,12 +84,12 @@ app-search {
         @include transition-ease($dur: 75ms);
         &:hover {
             @include transition-ease($dur: 75ms);
-            color: $blue-brightest;
+            color: $purple;
             filter: brightness(1.2);
         }
         &:active {
             @include transition-ease($dur: 75ms);
-            color: $blue-bright;
+            color: $purple-bright;
         }
     }
 }
