@@ -3,6 +3,7 @@
   <div class="page-content flex-center">
     <router-outlet />
   </div>
+  <app-footer *ngIf="!isOnMainRoute(['legal', 'video'])" [class.footer-home]="isOnEmptyRoute()"/>
 </div>
 <app-toast-notification [show]="toastErrorMsg.length > 0" [status]="'error'" [msg]="toastErrorMsg"
   (then)="redirectToLogin()" />

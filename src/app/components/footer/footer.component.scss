@@ -1,0 +1,14 @@
+@import '../../../styles.scss';
+
+:host {
+    @extend .flex-center;
+    gap: 48px;
+    padding: 30px 96px;
+}
+
+a {
+    color: $plain-white;
+    &:hover {
+        text-decoration: underline;
+    }
+}

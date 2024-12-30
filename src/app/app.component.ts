@@ -2,14 +2,16 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { AuthService } from './shared/services/auth.service';
 import { ToastNotificationComponent } from './shared/components/toast-notification/toast-notification.component';
 import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavigationComponent, ToastNotificationComponent],
+  imports: [CommonModule, RouterOutlet, NavigationComponent, FooterComponent, ToastNotificationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -62,18 +64,23 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
 
-  isOnAuthRoute(): boolean {
-    return this.router.url.split('/')[1] === 'auth';
+  getFirstRouteSegment() {
+    return this.router.url.split('/')[1]
+  }
+
+
+  isOnMainRoute(firstSegments: string[]) {
+    return firstSegments.includes(this.getFirstRouteSegment());
   }
 
 
   isOnEmptyRoute(): boolean {
-    return this.router.url.split('/')[1].length === 0;
+    return this.getFirstRouteSegment().length === 0;
   }
 
 
-  isOnLandingPage(): boolean {
-    return this.router.url.split('/')[1] === 'welcome';
+  isOnProtectedRoute(): boolean {
+    return !this.isOnMainRoute(['welcome', 'auth', 'legal']);
   }
 
 
@@ -87,23 +94,22 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   redirectToLogin() {
-    if (!this.isOnLandingPage() && !this.isOnAuthRoute()) {
+    if (this.isOnProtectedRoute()) {
       this.router.navigateByUrl('auth/login');
     }
   }
 
 
   onAuthError(err: any) {
-    if (!this.isOnAuthRoute()) {
+    if (!this.isOnMainRoute(['auth'])) {
       this.toastErrorMsg = (err == this.authService.getTimeoutErrorMsg()) ? 'Server does not respond.' : 'Authentication failed.';
     }
   }
 
 
   setNavMode() {
-    const urlSegments: string[] = this.router.url.split('/');
-    switch(urlSegments[1]) {
-      case 'auth': this.navMode = urlSegments.includes('login') ? 'signup' : 'login'; break;
+    switch(this.getFirstRouteSegment()) {
+      case 'auth': this.navMode = this.router.url.includes('login') ? 'signup' : 'login'; break;
       case 'welcome': this.navMode = 'login'; break;
       case 'legal': this.navMode = 'back'; break;
       default: this.navMode = 'home';
