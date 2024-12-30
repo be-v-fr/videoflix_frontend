@@ -2,7 +2,7 @@
     <p class="notice">Submit your email address to request a password reset link. You may only receive an email if your address is registered.</p>
     <div class="field" [class.field-active]="formData.email.length > 0">
         <span class="material-icons-sharp" [class.to-black]="formData.email.length > 0">mail</span>
-        <input type="email" placeholder="yourname@email.com" [(ngModel)]="formData.email" name="email"
+        <input type="email" placeholder="Email address" [(ngModel)]="formData.email" name="email"
             autocomplete="off" #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
             [class.input-invalid]="email.touched && !email.valid" />
         <app-form-error [errors]="[

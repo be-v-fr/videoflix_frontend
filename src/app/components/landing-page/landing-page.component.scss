@@ -1,4 +1,5 @@
 @import '../../../styles.scss';
+@import 'material-icons/iconfont/material-icons.scss';
 
 :host {
     width: 100%;
@@ -8,4 +9,8 @@
         $bg-gradient-dark,
         url('../../../assets/img/landing_page_bg.jpeg') no-repeat center center;
     background-size: cover;
+    @extend .flex-center;
+    flex-direction: column;
+    gap: 32px;
+    color: $plain-white;
 }

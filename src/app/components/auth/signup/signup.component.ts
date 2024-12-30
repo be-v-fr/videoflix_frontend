@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormErrorComponent } from '../../../shared/components/form-error/form-error.component';
 import { AuthService } from '../../../shared/services/auth.service';
 import { ErrorService } from '../../../shared/services/error.service';
@@ -14,7 +14,8 @@ import { ToastNotificationComponent } from '../../../shared/components/toast-not
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
-export class SignupComponent {
+export class SignupComponent implements OnInit {
+  @ViewChild('passwordInput', { static: true }) passwordRef!: ElementRef<HTMLInputElement>;
   loading: boolean = false;
   formData: any = {
     email: '',
@@ -26,10 +27,25 @@ export class SignupComponent {
   emailMsg: string = 'A confirmation email was sent to your email address.';
   emailSent: boolean | 'finally' = false;
 
+
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     private authService: AuthService,
     public errorService: ErrorService,
   ) { }
+
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(paramMap => {
+      const email: string | null = paramMap.get('email');
+      if (email) {
+        this.formData.email = email;
+        this.passwordRef.nativeElement.focus();
+      }
+    });
+  }
+
 
   onSubmit(form: NgForm) {
     if (form.submitted && this.isValid(form)) {

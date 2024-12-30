@@ -7,18 +7,6 @@
 
 form {
     width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    height: 40px;
-    color: $plain-white;
-    border: 1px solid $plain-white;
-    border-radius: 20px;
-    padding: 0 8px;
-    input {
-        flex: 1;
-        color: inherit;
-    }
     .close-btn {
         color: inherit;
     }

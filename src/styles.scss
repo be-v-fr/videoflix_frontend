@@ -92,6 +92,16 @@ a {
     align-items: center;
 }
 
+.form-field-icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 16px;
+    display: flex;
+    align-items: center;
+    @include transition-ease($dur: 75ms);
+}
+
 .form-std {
     width: 100%;
 
@@ -101,13 +111,7 @@ a {
         margin-bottom: 21px;
 
         span {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 16px;
-            display: flex;
-            align-items: center;
-            @include transition-ease($dur: 75ms);
+            @extend .form-field-icon;
             color: $purple;
         }
 
@@ -139,6 +143,32 @@ a {
         .input-invalid {
             @include transition-ease($dur: 75ms);
             border-color: $error-red;
+        }
+    }
+}
+
+.form-horizontal-white {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .field {
+        position: relative;
+        width: inherit;
+
+        span {
+            @extend .form-field-icon;
+            color: $purple;
+        }
+
+        input {
+            gap: 4px;
+            height: 47px;
+            color: $plain-white;
+            border: 1px solid $plain-white;
+            border-radius: 24px;
+            padding: 0 24px;
+            flex: 1;
         }
     }
 }
@@ -217,6 +247,7 @@ app-form-error {
     transform: scale(0.8);
     will-change: transform;
     @include transition-ease($dur: 75ms);
+
     &:hover {
         @include transition-ease($dur: 75ms);
         transform: scale(1);
@@ -234,7 +265,7 @@ app-form-error {
 }
 
 .prevent-select {
-    -webkit-user-select: none; 
+    -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }

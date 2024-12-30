@@ -1,1 +1,13 @@
-
+<h1>Movies, TV shows, and more</h1>
+<p>Enter your email to create or restart your subscription</p>
+<form (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm" class="form-horizontal-white">
+    <div class="field">
+        <input type="email" placeholder="Email address" [(ngModel)]="formData.email" name="email" autocomplete="off"
+            #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+            [class.input-invalid]="email.touched && !email.valid" />
+        <app-form-error [errors]="[
+            {condition: (email.touched || signupForm.submitted) && !email.valid, msg: 'Please enter a valid email address.'},
+        ]" />
+    </div>
+    <button type="submit" class="btn-primary">Sign up</button>
+</form>
