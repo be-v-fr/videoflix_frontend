@@ -45,7 +45,7 @@ html {
 
 body,
 input {
-    font-weight: 500;
+    font-weight: 300;
     font-size: $fs-normal;
 }
 
@@ -67,6 +67,7 @@ button {
 button,
 a {
     cursor: pointer;
+    font-weight: 600;
 }
 
 button:disabled {
@@ -169,6 +170,10 @@ a {
             border-radius: 24px;
             padding: 0 24px;
             flex: 1;
+
+            &::placeholder {
+                color: inherit;
+            }
         }
     }
 }
@@ -178,6 +183,8 @@ a {
     border-radius: $b-radius-medium;
     border: 1px solid #00000000;
     font-size: $fs-normal;
+    @extend .flex-center;
+    gap: 6px;
     @include transition-ease();
 
     &:hover {

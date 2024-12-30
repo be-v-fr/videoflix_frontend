@@ -3,11 +3,13 @@
 <form (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm" class="form-horizontal-white">
     <div class="field">
         <input type="email" placeholder="Email address" [(ngModel)]="formData.email" name="email" autocomplete="off"
-            #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+            #email="ngModel" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
             [class.input-invalid]="email.touched && !email.valid" />
         <app-form-error [errors]="[
             {condition: (email.touched || signupForm.submitted) && !email.valid, msg: 'Please enter a valid email address.'},
         ]" />
     </div>
-    <button type="submit" class="btn-primary">Sign up</button>
+    <button type="submit" class="btn-primary">
+        Sign up<span class="material-icons-sharp">keyboard_arrow_right</span>
+    </button>
 </form>
