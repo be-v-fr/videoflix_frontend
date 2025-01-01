@@ -20,9 +20,11 @@
                 errorService.getConditionalFieldErrResp('non_field_errors', errorResp), 
             ]" />
     </div>
-    <div class="f-width flex-center">
-        <a routerLink="/auth/pwReset/request" [queryParams]="{email: formData.email}" class="link-blue">I forgot my
-            password</a>
+    <div class="checkbox-field">
+        <input type="checkbox" name="rememberMeCheck" #rememberMeCheck="ngModel" #rememberMeCheckbox
+            [(ngModel)]="formData.rememberMe" />
+        <app-custom-checkbox [checked]="formData.rememberMe" />
+        <label for="rememberMeCheckbox">Remember me</label>
     </div>
     <div class="btns-container">
         <button type="submit" class="btn-primary" [disabled]="loading">Log in</button>
@@ -30,6 +32,11 @@
         <app-form-error [errors]="[
                 errorService.getConditionalFieldErrResp('unknown', errorResp),
             ]" />
+    </div>
+    <div class="f-width flex-center">
+        <a routerLink="/auth/pwReset/request" [queryParams]="{email: formData.email}" class="link-blue">
+            Forgot password?
+        </a>
     </div>
 </form>
 <app-toast-notification [show]="loginComplete == true" [msg]="'You logged in successfully'" (then)="router.navigateByUrl('')" />

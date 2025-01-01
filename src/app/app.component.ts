@@ -53,7 +53,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   initAuth() {
-    localStorage.getItem('token') ? this.handleToken() : this.redirect();
+    (localStorage.getItem('rememberMe') === 'true') && localStorage.getItem('token') ? this.handleToken() : this.redirect();
   }
 
 
