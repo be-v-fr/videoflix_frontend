@@ -33,11 +33,15 @@ export class ToastNotificationComponent {
    * Triggered after the "showing" property has been set to true. 
    */
   onShow() {
-    setTimeout(() => {
-      if (this._showing) {
-        this._showing = false;
-        this.then.emit();
-      }
-    }, 2000);
+    const timeoutLength = (this.status == 'error') ? 5000 : 2000;
+    setTimeout(() => this.close(), timeoutLength);
+  }
+
+
+  close() {
+    if (this._showing) {
+      this._showing = false;
+      this.then.emit();
+    }
   }
 }

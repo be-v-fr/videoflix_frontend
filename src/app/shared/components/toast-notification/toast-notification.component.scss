@@ -1,23 +1,58 @@
 @import '../../../../styles.scss';
+@import 'material-icons/iconfont/material-icons.scss';
 
 .overlay {
     position: fixed;
     inset: 0;
-    p {
-        padding: 20px;
-        background-color: $green-light;
-        color: $plain-white;
-        font-weight: 600;
-        border-radius: 20px;
+    .notification {
         @include simple-shadow($alpha: 0.16);
         animation: slide-bottom-center 0.4s ease-out;
-    }
-    .error {
-        background-color: $error-red;
-    }
-    .neutral {
+        height: 80px;
+        border-radius: 20px;
+        font-size: $fs-small;
+        font-weight: 400;
+        color: $plain-white;
         background-color: $purple;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        .status-mark {
+            width: 24px;
+            height: 100%;
+            &.ok {
+                background: $green-light;
+            }
+            &.error {
+                background: $error-red;
+            }
+        }
+        .status-icon {
+            margin-left: 6px;
+            font-size: 36px;
+        }
+        p {
+            max-width: 360px;
+            padding: 10px;
+        }
+        .close-toast-btn {
+            cursor: pointer;
+            font-size: inherit;
+            width: 40px;
+            height: 32px;
+            border-left: 1px solid $plain-white;
+            margin-left: 4px;
+            padding-left: 14px;
+            margin-right: 16px;
+            display: flex;
+            align-items: center;
+            @include transition-ease($dur: 75ms);
+            &:hover {
+                @include transition-ease($dur: 75ms);
+                @include simple-shadow($alpha: 0.2);
+            }
+        }
     }
+
 }
 
 @keyframes slide-bottom-center {
