@@ -49,6 +49,7 @@ h1 {
     justify-content: center;
     padding-bottom: 8px;
     margin-bottom: 4px;
+    color: $purple;
 }
 
 .btns-container {
@@ -64,46 +65,6 @@ form {
     flex-direction: column;
     justify-content: center;
     gap: 6px;
-}
-
-.auth-mode-link-container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-
-    .auth-mode-link-content {
-        display: flex;
-        align-items: center;
-        color: $plain-black;
-        border-radius: $b-radius-large;
-        border: 1px solid #00000000;
-        padding: 7px 3px 7px 11px;
-        @include transition-ease($dur: 75ms);
-        font-size: 24px;
-
-        span {
-            font-size: 30px;
-        }
-
-        &:hover {
-            @include transition-ease();
-            @include simple-shadow($alpha: 0.06);
-        }
-
-        &:active {
-            @include transition-ease($dur: 75ms);
-            @include simple-shadow($alpha: 0.1);
-        }
-    }
-
-    button:disabled .auth-mode-link-content {
-        color: $purple-trans;
-
-        &:hover,
-        &:active {
-            border-color: $purple-trans;
-        }
-    }
 }
 
 .notice {

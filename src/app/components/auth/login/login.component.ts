@@ -6,11 +6,12 @@ import { FormErrorComponent } from '../../../shared/components/form-error/form-e
 import { AuthService } from '../../../shared/services/auth.service';
 import { ToastNotificationComponent } from '../../../shared/components/toast-notification/toast-notification.component';
 import { ErrorService } from '../../../shared/services/error.service';
+import { DynamicPwIconComponent } from '../../../shared/components/dynamic-pw-icon/dynamic-pw-icon.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, FormErrorComponent, RouterLink, ToastNotificationComponent],
+  imports: [CommonModule, FormsModule, FormErrorComponent, DynamicPwIconComponent, RouterLink, ToastNotificationComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

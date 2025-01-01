@@ -5,15 +5,17 @@ $plain-black: #000000;
 $grey-light: #888888;
 $purple: #2E3EDF;
 $purple-bright: #3646f0;
+$purple-dark: #2937d0;
 $purple-trans: #2E3EDF80;
 $error-red: #FF002E;
 $green-light: #32be39;
 
-$b-radius-small: 10px;
+$b-radius-small: 12px;
 $b-radius-medium: 24px;
 $b-radius-large: 48px;
 
 $fs-tiny: 15px;
+$fs-small: 16px;
 $fs-normal: 18px;
 
 $shine-white-shadow: 0px 1px 3px 3px #DDFFFF33;
@@ -97,7 +99,7 @@ a {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 16px;
+    right: 16px;
     display: flex;
     align-items: center;
     @include transition-ease($dur: 75ms);
@@ -118,32 +120,45 @@ a {
 
         input {
             width: inherit;
-            padding: 8px 16px 8px 48px;
-            border-radius: 20px;
+            padding: 8px 48px 8px 16px;
+            border-radius: $b-radius-small;
             border: 1px solid $purple;
             @include transition-ease($dur: 75ms);
 
             &::placeholder {
                 color: $purple;
             }
-
-            &:placeholder-shown {
-                @include transition-ease($dur: 75ms);
-                border-color: #00000000;
-
-                &:hover {
-                    @include transition-ease($dur: 75ms);
-                }
-
-                &:active {
-                    @include transition-ease($dur: 75ms);
-                }
-            }
         }
 
         .input-invalid {
             @include transition-ease($dur: 75ms);
             border-color: $error-red;
+        }
+    }
+
+    .checkbox-field {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-bottom: 18px;
+        font-size: $fs-small;
+
+        input[type="checkbox"] {
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+        }
+
+        label {
+            font-size: inherit;
+            display: flex;
+            gap: 4px;
+
+            a {
+                font-size: inherit;
+            }
         }
     }
 }
@@ -163,7 +178,7 @@ a {
         }
 
         input {
-            gap: 4px;
+            width: 100%;
             height: 47px;
             color: $plain-white;
             border: 1px solid $plain-white;
@@ -191,14 +206,14 @@ a {
         @include transition-ease();
         color: white;
         @include simple-shadow($alpha: 0.2);
-        background-color: $purple;
+        background-color: $purple-bright;
         border-color: #00000000;
     }
 
     &:active {
         @include transition-ease($dur: 75ms);
         @include simple-shadow($alpha: 0.3);
-        background-color: $purple-bright;
+        background-color: $purple-dark;
         border-color: #00000000;
     }
 

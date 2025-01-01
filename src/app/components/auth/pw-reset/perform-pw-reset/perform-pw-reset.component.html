@@ -1,17 +1,17 @@
 <form class="form-std" (ngSubmit)="onSubmit(resetForm)" #resetForm="ngForm">
     <div class="field">
-        <span class="material-icons-sharp" [class.to-black]="formData.password.length > 0">lock</span>
+        <app-dynamic-pw-icon [inputElement]="passwordInput" />
         <input type="password" placeholder="New password" [(ngModel)]="formData.password" name="password"
-            #password="ngModel" required [class.input-invalid]="password.touched && !password.valid" />
+            #password="ngModel" required #passwordInput [class.input-invalid]="password.touched && !password.valid" />
         <app-form-error [errors]="[
                 {condition: password.touched && !password.valid, msg: 'Please enter a password.'},
                 errorService.getConditionalFieldErrResp('password', errorResp),
             ]" />
     </div>
     <div class="field">
-        <span class="material-icons-sharp" [class.to-black]="formData.passwordConfirmation.length > 0">lock</span>
+        <app-dynamic-pw-icon [inputElement]="passwordConfirmationInput" />
         <input type="password" placeholder="Confirm new password" [(ngModel)]="formData.passwordConfirmation"
-            name="passwordConfirmation" #passwordConfirmation="ngModel" required
+            name="passwordConfirmation" #passwordConfirmation="ngModel" required #passwordConfirmationInput
             [class.input-invalid]="passwordConfirmation.touched && formData.password != formData.passwordConfirmation" />
         <app-form-error [errors]="[
                 {

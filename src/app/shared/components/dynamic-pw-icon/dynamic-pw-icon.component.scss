@@ -1,0 +1,10 @@
+@import '../../../../styles.scss';
+@import 'material-icons/iconfont/material-icons.scss';
+
+:host {
+    color: $purple;
+    @extend .prevent-select;
+    .visibility-icon {
+        cursor: pointer;
+    }
+}

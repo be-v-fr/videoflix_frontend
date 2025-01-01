@@ -1,0 +1,38 @@
+@import '../../../../styles.scss';
+@import 'material-icons/iconfont/material-icons.scss';
+
+:host {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    @extend .flex-center;
+    @extend .prevent-select;
+    .check-field {
+        width: 12px;
+        height: 12px;
+        border: 1px solid $purple;
+        border-radius: 3px;
+        .check {
+            position: absolute;
+            top: 0;
+            bottom: 0.5px;
+            left: 0;
+            color: $purple;
+            font-size: 12px;
+            @extend .flex-center;
+        }
+    }
+    .check-animation {
+        animation: bg-blue-to-trans 250ms ease;
+    }
+}
+
+@keyframes bg-blue-to-trans {
+    from {
+        background: $purple;
+    }
+    to {
+        background: #2E3EDF00;
+    }
+}

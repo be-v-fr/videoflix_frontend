@@ -2,8 +2,8 @@
 <form class="form-std" (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm">
     <div class="field" [class.field-active]="formData.email.length > 0">
         <span class="material-icons-sharp" [class.to-black]="formData.email.length > 0">mail</span>
-        <input type="email" placeholder="Email address" [(ngModel)]="formData.email" name="email"
-            autocomplete="off" #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+        <input type="email" placeholder="Email address" [(ngModel)]="formData.email" name="email" autocomplete="off"
+            #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
             [class.input-invalid]="email.touched && !email.valid" />
         <app-form-error [errors]="[
                 {condition: (email.touched || signupForm.submitted) && !email.valid, msg: 'Please enter a valid email address.'},
@@ -11,7 +11,7 @@
             ]" />
     </div>
     <div class="field">
-        <span class="material-icons-sharp" [class.to-black]="formData.password.length > 0">lock</span>
+        <app-dynamic-pw-icon [inputElement]="passwordInput" />
         <input type="password" placeholder="Password" [(ngModel)]="formData.password" name="password"
             autocomplete="new-password" #password="ngModel" required #passwordInput
             [class.input-invalid]="password.touched && !password.valid" />
@@ -21,9 +21,9 @@
             ]" />
     </div>
     <div class="field">
-        <span class="material-icons-sharp" [class.to-black]="formData.passwordConfirmation.length > 0">lock</span>
+        <app-dynamic-pw-icon [inputElement]="passwordConfirmationInput" />
         <input type="password" placeholder="Confirm password" [(ngModel)]="formData.passwordConfirmation"
-            name="passwordConfirmation" autocomplete="new-password" #passwordConfirmation="ngModel" required
+            name="passwordConfirmation" autocomplete="new-password" #passwordConfirmation="ngModel" required #passwordConfirmationInput
             [class.input-invalid]="passwordConfirmation.touched && formData.password != formData.passwordConfirmation" />
         <app-form-error [errors]="[
                 {
@@ -37,25 +37,23 @@
                 }  
             ]" />
     </div>
-    <div class="form-bottom">
-        <div class="privacy-field">
-            <input type="checkbox" name="privacyCheck" #privacyCheck="ngModel" [(ngModel)]="formData.privacyCheck"
-                required />
+    <div class="checkbox-field">
+        <input type="checkbox" name="privacyCheck" #privacyCheck="ngModel" #privacyCheckbox
+            [(ngModel)]="formData.privacyCheck" required />
+        <app-custom-checkbox [checked]="formData.privacyCheck" />
+        <label for="privacyCheckbox">
             I accept the<a routerLink="/legal/privacy" target="_blank" class="link-blue">privacy policy</a>
-            <app-form-error [errors]="[
-                    {condition: !privacyCheck.valid && signupForm.submitted, msg: 'You need to accept the privacy policy to sign up.'}
-                ]" />
-        </div>
-        <button type="submit" class="btn-primary" [disabled]="loading">Submit</button>
+        </label>
+        <app-form-error [errors]="[
+                {condition: !privacyCheck.valid && signupForm.submitted, msg: 'You need to accept the privacy policy to sign up.'}
+            ]" />
+    </div>
+    <div class="flex-center">
+        <button type="submit" class="btn-primary" [disabled]="loading">Get started</button>
         <app-form-error [errors]="[
                 errorService.getConditionalFieldErrResp('unknown', errorResp),
             ]" />
         <p *ngIf="emailSent == 'finally'" class="note">{{emailMsg}}</p>
     </div>
 </form>
-<div class="f-width auth-mode-link-container">
-    <a routerLink="/auth/login">
-        <h3 class="auth-mode-link-content"><span class="material-icons-sharp">keyboard_arrow_left</span>Log in</h3>
-    </a>
-</div>
 <app-toast-notification [show]="emailSent == true" [msg]="emailMsg" (then)="emailSent = 'finally'" />

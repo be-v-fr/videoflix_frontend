@@ -6,11 +6,21 @@ import { FormErrorComponent } from '../../../shared/components/form-error/form-e
 import { AuthService } from '../../../shared/services/auth.service';
 import { ErrorService } from '../../../shared/services/error.service';
 import { ToastNotificationComponent } from '../../../shared/components/toast-notification/toast-notification.component';
+import { CustomCheckboxComponent } from '../../../shared/components/custom-checkbox/custom-checkbox.component';
+import { DynamicPwIconComponent } from '../../../shared/components/dynamic-pw-icon/dynamic-pw-icon.component';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, FormsModule, FormErrorComponent, RouterLink, ToastNotificationComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    FormErrorComponent,
+    DynamicPwIconComponent,
+    CustomCheckboxComponent,
+    RouterLink,
+    ToastNotificationComponent
+  ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })

@@ -6,11 +6,12 @@ import { ErrorService } from '../../../../shared/services/error.service';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { ToastNotificationComponent } from '../../../../shared/components/toast-notification/toast-notification.component';
+import { DynamicPwIconComponent } from '../../../../shared/components/dynamic-pw-icon/dynamic-pw-icon.component';
 
 @Component({
   selector: 'app-perform-pw-reset',
   standalone: true,
-  imports: [CommonModule, FormsModule, FormErrorComponent, ToastNotificationComponent],
+  imports: [CommonModule, FormsModule, FormErrorComponent, DynamicPwIconComponent, ToastNotificationComponent],
   templateUrl: './perform-pw-reset.component.html',
   styleUrl: './perform-pw-reset.component.scss'
 })

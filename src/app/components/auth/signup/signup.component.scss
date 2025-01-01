@@ -4,23 +4,3 @@
 :host {
     @include auth-child-host();
 }
-
-.auth-mode-link-container {
-    justify-content: flex-start;
-    .auth-mode-link-content {
-        padding: 7px 11px 7px 3px;
-    }
-}
-
-.form-bottom {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    .privacy-field {
-        position: relative;
-        font-size: 16px;
-        display: flex;
-        gap: 4px;
-    }
-}
