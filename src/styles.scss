@@ -236,11 +236,6 @@ a {
     color: $purple;
 }
 
-.to-black {
-    @include transition-ease($dur: 75ms);
-    filter: brightness(0);
-}
-
 .link-blue {
     font-size: $fs-normal;
     font-weight: 600;
