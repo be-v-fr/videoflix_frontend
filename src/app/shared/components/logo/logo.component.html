@@ -1,3 +1,7 @@
 <a [routerLink]="''">
-    <img src="assets/img/logo.svg" alt="Logo">
+    @if(condensed) {
+        <img src="assets/img/logo_icon.svg" alt="Logo" class="condensed">
+    } @else {
+        <img src="assets/img/logo.svg" alt="Logo">
+    }
 </a>

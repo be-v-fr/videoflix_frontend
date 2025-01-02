@@ -33,9 +33,10 @@
     <video [vgMedia]="$any(media)" #media id="video" preload="auto" autoplay="true" crossorigin #vgHls="vgHls"
         [vgHls]="videoMeta.playlistUrl" (onGetBitrates)="initBitrates($event)">
     </video>
-    <button [routerLink]="''" class="back-btn" (click)="saveProgress()">
-        <span class="material-icons-outlined">arrow_back</span>
-    </button>
+    <nav>
+        <app-back-btn [routerLink]="''" (click)="saveProgress()" />
+        <app-logo [condensed]="true" (click)="saveProgress()" />
+    </nav>
 </vg-player>
 <app-toast-notification *ngIf="toastBitrateMsg" [show]="true" [status]="'neutral'"
     [msg]="toastBitrateMsg || 'Bitrate changed.'" (then)="toastBitrateMsg = undefined" />

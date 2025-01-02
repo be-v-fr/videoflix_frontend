@@ -10,11 +10,25 @@ import { RouterLink } from '@angular/router';
 import { ToastNotificationComponent } from '../../../shared/components/toast-notification/toast-notification.component';
 import { VideosService } from '../../../shared/services/videos.service';
 import { VideoCompletion } from '../../../shared/models/video-completion';
+import { BackBtnComponent } from '../../../shared/components/back-btn/back-btn.component';
+import { NavigationComponent } from '../../navigation/navigation.component';
+import { LogoComponent } from '../../../shared/components/logo/logo.component';
 
 @Component({
   selector: 'app-player',
   standalone: true,
-  imports: [CommonModule, VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule, VgStreamingModule, RouterLink, ToastNotificationComponent],
+  imports: [
+    CommonModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule,
+    VgStreamingModule,
+    RouterLink,
+    ToastNotificationComponent,
+    LogoComponent,
+    BackBtnComponent
+  ],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss'
 })

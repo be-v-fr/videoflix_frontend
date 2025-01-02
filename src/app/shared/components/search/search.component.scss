@@ -5,9 +5,19 @@
     width: 100%;
 }
 
-form {
+form.form-horizontal-white {
     width: 100%;
-    .close-btn {
-        color: inherit;
+    .field {
+        .search-icon {
+            right: unset;
+            left: 16px;
+        }
+        input {
+            padding-left: 48px;
+        }
+        .close-btn {
+            @extend .form-field-icon;
+            color: inherit;
+        }
     }
 }

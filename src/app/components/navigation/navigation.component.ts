@@ -8,16 +8,25 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { RequestPwResetComponent } from '../auth/pw-reset/request-pw-reset/request-pw-reset.component';
 import { ToastNotificationComponent } from '../../shared/components/toast-notification/toast-notification.component';
 import { Subscription } from 'rxjs';
+import { BackBtnComponent } from '../../shared/components/back-btn/back-btn.component';
 
 @Component({
   selector: 'app-navigation',
   standalone: true,
-  imports: [CommonModule, RouterLink, LogoComponent, SearchComponent, DialogComponent, ToastNotificationComponent],
+  imports: [
+    CommonModule,
+    RouterLink,
+    LogoComponent,
+    SearchComponent,
+    DialogComponent,
+    ToastNotificationComponent,
+    BackBtnComponent
+  ],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.scss'
 })
 export class NavigationComponent implements OnInit, OnDestroy {
-  @Input() mode?: 'login' | 'signup' | 'home' | 'back';
+  @Input() mode?: 'login' | 'home' | 'back' | 'video';
   requestPwResetComponent: Type<object> = RequestPwResetComponent;
   changePwDialogShowing: boolean = false;
   loggedOut: boolean = false;
@@ -39,6 +48,12 @@ export class NavigationComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.authSub.unsubscribe();
   }
+
+
+  isMode(modes: ('login' | 'home' | 'back' | 'video')[]): boolean {
+    return (this.mode && modes.includes(this.mode)) || false;
+  }
+
 
   subAuth(): Subscription {
     return this.authService.currentUser$.subscribe(user => {

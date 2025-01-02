@@ -14,23 +14,18 @@
     }
 }
 
-.back-btn {
-    color: white;
+nav {
     position: fixed;
     z-index: 201;
-    top: 24px;
-    left: 24px;
-    width: 36px;
-    height: 36px;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: $nav-height;
+    padding: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    border-radius: 50%;
-    @include transition-ease($dur: 75ms);
-    &:hover {
-        background: #eeeeee1e;
-        @include transition-ease($dur: 75ms);
-    }
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
 vg-controls {

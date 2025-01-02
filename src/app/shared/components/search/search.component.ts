@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
@@ -10,13 +10,15 @@ import { FormsModule, NgForm } from '@angular/forms';
   styleUrl: './search.component.scss'
 })
 export class SearchComponent {
+  @ViewChild('searchInputElement') searchInputRef!: ElementRef<HTMLInputElement>;
   searchFilter: string = '';
 
   focus() {
-    console.log('focus input!');
+    this.searchInputRef.nativeElement.focus();
   }
 
   clear(): void {
     this.searchFilter = '';
+    this.focus();
   }
 }

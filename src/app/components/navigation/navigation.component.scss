@@ -21,9 +21,10 @@
 
 app-search {
     width: 300px;
+    margin-right: 16px;
 }
 
-.current-user {
+.settings {
     position: relative;
     display: flex;
     align-items: center;
@@ -31,35 +32,49 @@ app-search {
     color: $plain-white;
     padding: 10px 0 10px 14px;
     @include transition-ease($dur: 75ms);
-    .username {
-        padding-left: 8px;
-        padding-right: 4px;
-        @include transition-ease($dur: 75ms);
+    .settings-icon {
+        font-size: 34px;
+        font-weight: 200;
+        transform: scale(0.8);
+        will-change: transform;
+        @include transition-ease($dur: 100ms);
+        transition-delay: 180ms;
     }
-    .dropdown-arrow {
-        transform: rotate(0deg);
-        @include transition-ease($dur: 225ms);
-    }
-    .user-dropdown {
+    .settings-dropdown {
         position: absolute;
-        top: calc(100% - 6px);
+        top: calc(100%);
         right: 0;
         max-height: 0;
+        min-width: 180px;
+        background: $purple-trans;
         box-sizing: border-box;
         overflow: hidden;
         @include transition-ease($dur: 250ms);
         transition-delay: 90ms;
+        border-radius: $b-radius-small;
+        ul li {
+            width: 100%;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: $b-radius-small;
+            @include transition-ease($dur: 150ms);
+            &:hover {
+                background: $purple;
+                @include transition-ease($dur: 75ms);
+            }
+            &:active {
+                background: $purple-bright;
+                @include transition-ease($dur: 75ms);
+            }
+        }
     }
     &:hover {
         @include transition-ease($dur: 75ms);
-        .username:hover {
-            @include transition-ease($dur: 150ms);
+        .settings-icon {
+            @include transition-ease($dur: 100ms);
+            transform: scale(1);
         }
-        .dropdown-arrow {
-            @include transition-ease($dur: 225ms);
-            transform: rotate(180deg);
-        }
-        .user-dropdown {
+        .settings-dropdown {
             @include transition-ease($dur: 250ms);
             max-height: 50dvh;
         }

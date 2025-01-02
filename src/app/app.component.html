@@ -1,5 +1,5 @@
 <div class="page-wrapper flex-center">
-  <app-navigation [mode]="navMode" />
+  <app-navigation [mode]="navMode" *ngIf="!isOnMainRoute(['video'])" />
   <div class="page-content flex-center">
     <router-outlet />
   </div>

@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent implements OnInit, OnDestroy {
   navigationEndSub: Subscription = new Subscription();
   title = 'videoflix_frontend';
-  navMode?: 'login' | 'signup' | 'home' | 'back';
+  navMode?: 'login' | 'home' | 'back' | 'video';
   toastErrorMsg: string = '';
 
   constructor(
@@ -48,7 +48,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (!this.authService.currentUser) {
       this.initAuth();
     }
-    this.setNavMode();
+    this.navMode = this.getNavMode();
   }
 
 
@@ -107,12 +107,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
 
-  setNavMode() {
+  // separate nav instance in video player 
+  getNavMode(): undefined | 'login' | 'home' | 'back' {
     switch(this.getFirstRouteSegment()) {
-      case 'auth': this.navMode = this.router.url.includes('login') ? 'signup' : 'login'; break;
-      case 'welcome': this.navMode = 'login'; break;
-      case 'legal': this.navMode = 'back'; break;
-      default: this.navMode = 'home';
+      case 'auth': return this.router.url.includes('login') ? undefined : 'login';
+      case 'welcome': return 'login';
+      case 'legal': return 'back';
+      default: return 'home';
     }
   }
 }

@@ -1,0 +1,26 @@
+@import '../../../../styles.scss';
+@import 'material-icons/iconfont/material-icons.scss';
+
+:host {
+    width: 48px;
+    height: 48px;
+    @extend .flex-center;
+}
+
+button {
+    width: 100%;
+    height: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    @include transition-ease($dur: 75ms);
+    &.material-icons-outlined {
+        font-size: 40px;
+    }
+    &:hover {
+        background: #eeeeee1e;
+        @include transition-ease($dur: 75ms);
+    }
+}

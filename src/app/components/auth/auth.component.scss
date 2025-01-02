@@ -18,7 +18,7 @@
         @extend .flex-center;
         .content {
             display: block;
-            width: 400px;
+            width: 520px;
             background-color: $plain-white;
             border-radius: $b-radius-large;
             padding: 24px;
@@ -52,7 +52,6 @@ h1 {
 }
 
 .btns-container {
-    margin-top: 16px;
     width: 100%;
     display: flex;
     justify-content: center;

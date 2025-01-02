@@ -1,36 +1,32 @@
-<div class="content">
+<div class="content" [ngSwitch]="mode">
     <section>
-        <app-logo />
+        <app-logo [condensed]="isMode(['home', 'video'])" />
     </section>
-    @if(mode) {
-    @if(mode === 'login') {
-    <section>
+    <section *ngSwitchCase="'login'">
         <a [routerLink]="['auth', 'login']" class="btn-primary">Log in</a>
     </section>
-    }
-    @else if(mode === 'signup') {
-        <section>
-            <a [routerLink]="['auth', 'signup']" class="btn-primary">Sign up</a>
-        </section>
-        }
-    @else if(mode === 'home') {
-    <section *ngIf="authService.currentUser && !(awaitingInit === true)"
-        [class.slide-down]="awaitingInit == 'complete'">
+    <section *ngSwitchCase="'back'">
+        <app-back-btn [routerLink]="''" />
+    </section>
+    @if(authService.currentUser && !(awaitingInit === true)) {
+    <section *ngSwitchCase="'home'" [class.slide-down]="awaitingInit === 'complete'">
         <app-search />
-        <div class="current-user">
-            <span class="material-icons-outlined">person</span>
-            <span class="username">{{authService.currentUser.getNameFromEmail()}}</span>
-            <span class="material-icons-outlined dropdown-arrow">arrow_drop_down</span>
-            <div class="user-dropdown">
+        <button [routerLink]="['auth', 'login']" class="btn-primary">
+            <span class="material-icons-outlined">logout</span>
+            Log out
+        </button>
+        <div class="settings">
+            <span class="material-icons-outlined settings-icon">settings</span>
+            <div class="settings-dropdown">
                 <ul>
                     <li (click)="showChangePwDialog()">Change password</li>
-                    <li (click)="logout()">Logout</li>
                 </ul>
             </div>
         </div>
     </section>
     }
-    }
 </div>
+@if(mode == 'home' && authService.currentUser) {
 <app-dialog [dialog]="requestPwResetComponent" [(showing)]="changePwDialogShowing" />
 <app-toast-notification [show]="loggedOut" [msg]="'You logged out.'" (then)="router.navigateByUrl('auth')" />
+}
