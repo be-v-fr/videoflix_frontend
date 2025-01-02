@@ -1,6 +1,6 @@
 <div class="content" [ngSwitch]="mode">
     <section>
-        <app-logo [condensed]="isMode(['home', 'video'])" />
+        <app-logo [condensed]="mode === 'home'" />
     </section>
     <section *ngSwitchCase="'login'">
         <a [routerLink]="['auth', 'login']" class="btn-primary">Log in</a>

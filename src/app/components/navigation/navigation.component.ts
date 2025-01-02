@@ -26,7 +26,7 @@ import { BackBtnComponent } from '../../shared/components/back-btn/back-btn.comp
   styleUrl: './navigation.component.scss'
 })
 export class NavigationComponent implements OnInit, OnDestroy {
-  @Input() mode?: 'login' | 'home' | 'back' | 'video';
+  @Input() mode?: 'login' | 'home' | 'back';
   requestPwResetComponent: Type<object> = RequestPwResetComponent;
   changePwDialogShowing: boolean = false;
   loggedOut: boolean = false;
@@ -47,11 +47,6 @@ export class NavigationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.authSub.unsubscribe();
-  }
-
-
-  isMode(modes: ('login' | 'home' | 'back' | 'video')[]): boolean {
-    return (this.mode && modes.includes(this.mode)) || false;
   }
 
 

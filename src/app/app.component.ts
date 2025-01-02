@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent implements OnInit, OnDestroy {
   navigationEndSub: Subscription = new Subscription();
   title = 'videoflix_frontend';
-  navMode?: 'login' | 'home' | 'back' | 'video';
+  navMode?: 'login' | 'home' | 'back';
   toastErrorMsg: string = '';
 
   constructor(
