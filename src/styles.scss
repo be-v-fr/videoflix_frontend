@@ -117,7 +117,7 @@ a {
         width: inherit;
         margin-bottom: 21px;
 
-        span {
+        .input-icon {
             @extend .form-field-icon;
             color: $purple;
         }

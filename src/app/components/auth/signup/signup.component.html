@@ -1,7 +1,7 @@
 <h1>Sign up</h1>
 <form class="form-std" (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm">
     <div class="field" [class.field-active]="formData.email.length > 0">
-        <span class="material-icons-outlined">mail</span>
+        <span class="material-icons-outlined input-icon">mail</span>
         <input type="email" placeholder="Email address" [(ngModel)]="formData.email" name="email" autocomplete="off"
             #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
             [class.input-invalid]="email.touched && !email.valid" />
