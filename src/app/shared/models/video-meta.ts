@@ -2,6 +2,7 @@ export class VideoMeta {
     id: number;
     title: string;
     description: string;
+    genre: string;
     durationInSeconds: number;
     playlistUrl: string;
     thumbUrl: string;
@@ -10,6 +11,7 @@ export class VideoMeta {
         this.id = obj.id ? obj.id : -1;
         this.title = obj.title ? obj.title : '';
         this.description = obj.description ? obj.description : '';
+        this.genre = obj.genre ? obj.genre : '';
         this.durationInSeconds = obj.duration_in_seconds ? obj.duration_in_seconds : -1;
         this.playlistUrl = obj.playlist_url ? obj.playlist_url : '';
         this.thumbUrl = obj.thumbnail ? obj.thumbnail : '';
@@ -20,6 +22,7 @@ export class VideoMeta {
             id: this.id,
             title: this.title,
             description: this.description,
+            genre: this.genre,
             duration_in_seconds: this.durationInSeconds,
             playlist_url: this.playlistUrl,
             thumbnail: this.thumbUrl,

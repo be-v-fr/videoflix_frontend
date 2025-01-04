@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { VideoCardComponent } from './video-card/video-card.component';
 import { LoadingCircleComponent } from '../../shared/components/loading-circle/loading-circle.component';
 import { VideosService } from '../../shared/services/videos.service';
 import { AuthService } from '../../shared/services/auth.service';
@@ -9,11 +8,13 @@ import { DialogContinueWatchingComponent } from '../../shared/components/dialog-
 import { DialogComponent } from '../dialog/dialog.component';
 import { VideoMeta } from '../../shared/models/video-meta';
 import { VideoCompletion } from '../../shared/models/video-completion';
+import { VideosCategoryComponent } from './videos-category/videos-category.component';
+import { VideoPreviewComponent } from '../video-preview/video-preview.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, VideoCardComponent, LoadingCircleComponent, DialogComponent],
+  imports: [CommonModule, VideoPreviewComponent, VideosCategoryComponent, LoadingCircleComponent, DialogComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

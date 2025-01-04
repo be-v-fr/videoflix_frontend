@@ -4,6 +4,7 @@ $thumb-height: 135px;
 
 :host {
     display: block;
+    position: relative;
     width: calc($thumb-height / 0.5625);
     height: $thumb-height;
     background-color: blue;
@@ -39,6 +40,7 @@ $thumb-height: 135px;
     }
     &:hover {
         @include transition-ease();
+        z-index: 100;
         transition-delay: 300ms;
         transform: scale(1.2) translateY(calc(-1 * $thumb-height / 2));
         border-bottom-left-radius: 0;

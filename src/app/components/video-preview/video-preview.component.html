@@ -1,0 +1,19 @@
+<vg-player (onPlayerReady)="onPlayerReady($event)">
+    <video [vgMedia]="$any(media)" #media id="video" preload="auto" autoplay="true" crossorigin #vgHls="vgHls"
+        [vgHls]="videoMeta.playlistUrl">
+    </video>
+    <div class="overlay">
+        <div class="overlay-content">
+            <h1>{{ videoMeta.title }}</h1>
+            <div class="description-container">
+                <p>{{ videoMeta.description }}</p>
+            </div>
+            <div class="play-btn-container">
+                <button class="btn-primary" [routerLink]="['video', this.videoMeta.id]">
+                    <span class="material-icons-sharp">play_arrow</span>
+                    Play
+                </button>
+            </div>
+        </div>
+    </div>
+</vg-player>

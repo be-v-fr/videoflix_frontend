@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { VideoMeta } from '../models/video-meta';
 import { environment } from '../../../environments/environment.development';
-import { lastValueFrom, Subject } from 'rxjs';
+import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { VideoCompletion } from '../models/video-completion';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class VideosService {
   public lastVideosMetaSynced: number = 0;
   private readonly videosMetaSyncSeconds: number = 600;
   public videoCompletionList: VideoCompletion[] = [];
-  public loadingState: Subject<null | 'meta' | 'completion' | 'complete'> = new Subject<null | 'meta' | 'completion' | 'complete'>();
+  public loadingState: BehaviorSubject<null | 'meta' | 'completion' | 'complete'> = new BehaviorSubject<null | 'meta' | 'completion' | 'complete'>(null);
 
 
   constructor(
@@ -45,7 +45,6 @@ export class VideosService {
     });
   }
 
-
   public async retrieveVideoMeta(id: number): Promise<Object> {
     return await lastValueFrom(this.http.get(this.VIDEOS_URL + 'main/' + id + '/'));
   }
@@ -58,6 +57,40 @@ export class VideosService {
 
   public getVideoMetaFromId(id: number): VideoMeta | undefined {
     return this.videosMeta.find(v => v.id === id);
+  }
+
+
+  public getVideosMetaByGenre(genre: string): VideoMeta[] {
+    return this.videosMeta.filter(v => v.genre === genre);
+  }
+
+
+  public getLatestVideosMeta(): VideoMeta[] {
+    return []; // add content
+  }
+
+
+  public getPreviouslyWatchedVideosMeta(): VideoMeta[] {
+    const sortedCompletions: VideoCompletion[] = this.videoCompletionList.sort((a, b) => a.updatedAt - b.updatedAt);
+    const sortedMetas: VideoMeta[] = [];
+    sortedCompletions.forEach(vc => {
+      const meta = this.getVideoMetaFromId(vc.videoId);
+      if (meta) {
+        sortedMetas.push(meta);
+      }
+    });
+    return sortedMetas;
+  }
+
+
+  public getGenres(): string[] {
+    const genres: string[] = [];
+    this.videosMeta.forEach(v => {
+      if (!genres.includes(v.genre)) {
+        genres.push(v.genre);
+      }
+    });
+    return genres.sort((a, b) => a.localeCompare(b));
   }
 
 

@@ -55,6 +55,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
       if (user) {
         this.awaitingInit = 'complete';
         this.authSub.unsubscribe();
+        setTimeout(() => this.awaitingInit = false, 1000);
       }
     });
   }

@@ -1,8 +1,9 @@
 @import '../styles.scss';
 
 .page-wrapper {
+    position: relative;
     width: 100vw;
-    height: 100dvh;
+    min-height: 100dvh;
     background: $plain-black;
     app-navigation {
         position: absolute;
@@ -12,8 +13,8 @@
         z-index: 100;
     }
     .page-content {
-        width: 100%;
-        height: 100%;
+        width: inherit;
+        min-height: inherit;
     }
     app-footer {
         position: absolute;

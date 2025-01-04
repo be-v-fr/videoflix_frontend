@@ -21,6 +21,7 @@ $fs-normal: 18px;
 $shine-white-shadow: 0px 1px 3px 3px #DDFFFF33;
 
 $bg-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.8) -27.44%, rgba(0, 0, 0, 0.44) 44.23%, rgba(0, 0, 0, 0.8) 100%);
+$bg-gradient-alt: linear-gradient(180deg, rgba(20, 20, 20, 0.6) 0%, rgba(20, 20, 20, 0) 50%, #141414 100%);
 $bg-gradient-dark: linear-gradient(180deg, #000000 -19.89%, rgba(0, 0, 0, 0.55) 40.46%, #000000 100%);
 
 $nav-height: 108px;
@@ -41,8 +42,14 @@ $page-top-padding: calc($nav-height - 30px);
     font-family: 'DM Sans', sans-serif;
 }
 
+html, body {
+    height: 100%;
+    background-color: $plain-black;
+}
+
 html {
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 body,

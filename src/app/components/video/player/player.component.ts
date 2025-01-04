@@ -11,7 +11,6 @@ import { ToastNotificationComponent } from '../../../shared/components/toast-not
 import { VideosService } from '../../../shared/services/videos.service';
 import { VideoCompletion } from '../../../shared/models/video-completion';
 import { BackBtnComponent } from '../../../shared/components/back-btn/back-btn.component';
-import { NavigationComponent } from '../../navigation/navigation.component';
 import { LogoComponent } from '../../../shared/components/logo/logo.component';
 
 @Component({

@@ -1,0 +1,2 @@
+<h4>{{ title }}</h4>
+<app-video-card *ngFor="let videoMeta of selection" [metaData]="videoMeta" (continue)="continue.emit($event)" />

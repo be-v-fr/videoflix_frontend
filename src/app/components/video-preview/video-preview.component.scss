@@ -1,0 +1,48 @@
+@import "../../../styles.scss";
+@import "material-icons/iconfont/material-icons.scss";
+
+$overlay-gap: 32px;
+
+vg-player {
+    width: 100vw;
+    max-height: 100dvh;
+    @extend .flex-center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100dvh;
+    color: $plain-white;
+    background: $bg-gradient-alt;
+    .overlay-content {
+        width: 90%;
+        height: inherit;
+        padding-left: 96px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: $overlay-gap;
+        h1 {
+            font-size: 88px;
+        }
+        .description-container {
+            width: 440px;
+            min-height: 60px;
+            display: flex;
+            align-items: flex-end;
+        }
+        .play-btn-container {
+            height: calc(50dvh - $overlay-gap);
+            .btn-primary {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                padding-left: 24px;
+                padding-right: 24px;
+            }
+        }
+    }
+}
