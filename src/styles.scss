@@ -297,3 +297,23 @@ app-form-error {
     -ms-user-select: none;
     user-select: none;
 }
+
+.text-page {
+    color: $plain-white;
+    font-size: $fs-small;
+    width: 100%;
+    min-height: inherit;
+    padding-top: $nav-height;
+    padding-left: 96px;
+    padding-right: 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    h2 {
+        margin-bottom: 10px;
+    }
+    h3 {
+        font-size: 32px;
+        margin: 2px 0;
+    }
+}
