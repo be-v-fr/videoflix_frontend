@@ -2,4 +2,10 @@
 
 :host {
     @extend .text-page;
+    a {
+        color: #a4aaaf;
+        &:hover {
+            color: $plain-white;
+        }
+    }
 }

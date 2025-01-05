@@ -5,6 +5,7 @@ $plain-black: #000000;
 $grey-light: #888888;
 $purple: #2E3EDF;
 $purple-bright: #3646f0;
+$purple-brighter: #4453f7;
 $purple-dark: #2937d0;
 $purple-trans: #2E3EDF80;
 $error-red: #FF002E;
@@ -308,12 +309,18 @@ app-form-error {
     padding-right: 96px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 4px;
     h2 {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
     h3 {
         font-size: 32px;
-        margin: 2px 0;
+        margin: 12px 0;
+    }
+    ul, ol {
+        padding-left: 24px;
+    }
+    .mgn-left {
+        margin-left: 4px;
     }
 }

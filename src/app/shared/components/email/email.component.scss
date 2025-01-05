@@ -1,0 +1,9 @@
+@import '../../../../styles.scss';
+
+:host {
+    font-size: inherit;
+    .link-blue {
+        font-size: inherit;
+        color: $purple-brighter;
+    }
+}
