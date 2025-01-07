@@ -1,4 +1,6 @@
 <h4>{{ title }}</h4>
-<div class="videos-container" (mouseover)="styleService.lastVideoCategoryHovered = categoryIndex" [class.z-top]="styleService.lastVideoCategoryHovered === categoryIndex">
-    <app-video-card *ngFor="let videoMeta of selection" [metaData]="videoMeta" (continue)="continue.emit($event)" />
+<div class="videos-container" #container (mouseover)="styleService.lastVideoCategoryHovered = categoryIndex"
+    [class.z-top]="styleService.lastVideoCategoryHovered === categoryIndex">
+    <app-video-card *ngFor="let videoMeta of selection" [metaData]="videoMeta" (continue)="continue.emit($event)"
+        [verticalPositionInViewport]="verticalPositionInViewport" />
 </div>

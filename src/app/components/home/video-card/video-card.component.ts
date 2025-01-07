@@ -17,6 +17,7 @@ import { WatchingProgressComponent } from '../../../shared/components/watching-p
 })
 export class VideoCardComponent implements OnInit, OnDestroy {
   @Input({ required: true }) metaData!: VideoMeta;
+  @Input() verticalPositionInViewport: 'center' | 'top' | 'bottom' = 'center';
   @Output() continue: EventEmitter<{ meta: VideoMeta, completion: VideoCompletion }> = new EventEmitter();
   completion?: VideoCompletion;
   completionSub: Subscription = new Subscription();

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnInit } from '@angular/core';
 import { VideoMeta } from '../../../shared/models/video-meta';
 import { VideoCompletion } from '../../../shared/models/video-completion';
 import { VideoCardComponent } from '../video-card/video-card.component';
@@ -12,13 +12,40 @@ import { StyleService } from '../../../shared/services/style.service';
   templateUrl: './videos-category.component.html',
   styleUrl: './videos-category.component.scss'
 })
-export class VideosCategoryComponent {
+export class VideosCategoryComponent implements OnInit {
   @Input({ required: true }) title!: string;
   @Input({ required: true }) selection!: VideoMeta[];
   @Input({ required: true }) categoryIndex!: number;
   @Output() continue = new EventEmitter<{ meta: VideoMeta, completion: VideoCompletion }>();
+  @ViewChild('container', { static: true }) containerRef!: ElementRef<HTMLDivElement>;
+  verticalPositionInViewport: 'center' | 'top' | 'bottom' = 'center';
 
   constructor(
     public styleService: StyleService
   ) { }
+
+
+  ngOnInit(): void {
+    this.checkViewport();
+  }
+
+
+  @HostListener('window:scroll', ['$event'])
+  @HostListener('window:resize', ['$event'])
+  checkViewport() {
+    const rect = this.containerRef.nativeElement.getBoundingClientRect();
+    this.verticalPositionInViewport= this.calculateVerticalPosition(rect);
+  }
+
+  
+  calculateVerticalPosition(rect: DOMRect): 'center' | 'top' | 'bottom' {
+    const elementHeight = rect.bottom - rect.top;
+    if(rect.top - elementHeight < 0) {
+      return 'top';
+    } else if(rect.bottom + elementHeight > window.innerHeight) {
+      return 'bottom';
+    } else {
+      return 'center';
+    }
+  } 
 }
