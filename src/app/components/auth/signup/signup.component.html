@@ -48,7 +48,7 @@
                 {condition: !privacyCheck.valid && signupForm.submitted, msg: 'You need to accept the privacy policy to sign up.'}
             ]" />
     </div>
-    <div class="flex-center">
+    <div class="flex-center btns-container">
         <button type="submit" class="btn-primary" [disabled]="loading">Get started</button>
         <app-form-error [errors]="[
                 errorService.getConditionalFieldErrResp('unknown', errorResp),
