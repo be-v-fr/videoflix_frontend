@@ -19,6 +19,9 @@ export class VideosCategoryComponent implements OnInit {
   @Output() continue = new EventEmitter<{ meta: VideoMeta, completion: VideoCompletion }>();
   @ViewChild('container', { static: true }) containerRef!: ElementRef<HTMLDivElement>;
   verticalPositionInViewport: 'center' | 'top' | 'bottom' = 'center';
+  private lastWindowEventHandling = 0;
+  private onWindowEventThrottleInterval = 50;
+
 
   constructor(
     public styleService: StyleService
@@ -32,9 +35,21 @@ export class VideosCategoryComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event'])
   @HostListener('window:resize', ['$event'])
+  onWindowEvent() {
+    const now = Date.now();
+    if (now - this.lastWindowEventHandling >= this.onWindowEventThrottleInterval) {
+      this.lastWindowEventHandling = now;
+      this.checkViewport();
+    }
+  }
+
+
   checkViewport() {
     const rect = this.containerRef.nativeElement.getBoundingClientRect();
-    this.verticalPositionInViewport= this.calculateVerticalPosition(rect);
+    this.verticalPositionInViewport = this.calculateVerticalPosition(rect);
+    if(this.categoryIndex == 3) {
+      console.log(this.verticalPositionInViewport);
+    }
   }
 
   
