@@ -3,6 +3,7 @@ import { VideoMeta } from '../../../shared/models/video-meta';
 import { VideoCompletion } from '../../../shared/models/video-completion';
 import { VideoCardComponent } from '../video-card/video-card.component';
 import { CommonModule } from '@angular/common';
+import { StyleService } from '../../../shared/services/style.service';
 
 @Component({
   selector: 'app-videos-category',
@@ -14,5 +15,10 @@ import { CommonModule } from '@angular/common';
 export class VideosCategoryComponent {
   @Input({ required: true }) title!: string;
   @Input({ required: true }) selection!: VideoMeta[];
+  @Input({ required: true }) categoryIndex!: number;
   @Output() continue = new EventEmitter<{ meta: VideoMeta, completion: VideoCompletion }>();
+
+  constructor(
+    public styleService: StyleService
+  ) { }
 }

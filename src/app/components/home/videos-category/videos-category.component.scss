@@ -3,3 +3,12 @@
 h4 {
     color: $plain-white;
 }
+
+.videos-container {
+    display: flex;
+    gap: 16px;
+    position: relative;
+    &.z-top {
+        z-index: 100;
+    }
+}

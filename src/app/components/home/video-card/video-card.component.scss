@@ -40,7 +40,7 @@ $thumb-height: 135px;
     }
     &:hover {
         @include transition-ease();
-        z-index: 100;
+        z-index: 1;
         transition-delay: 300ms;
         transform: scale(1.2) translateY(calc(-1 * $thumb-height / 2));
         border-bottom-left-radius: 0;

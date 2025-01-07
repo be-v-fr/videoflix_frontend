@@ -2,11 +2,14 @@
 <app-video-preview [videoMeta]="videosService.getVideosMeta()[0]" />
 <div class="videos-container">
     <app-videos-category *ngIf="videosService.loadingState.getValue() === 'complete'" [title]="'Continue watching'"
-        [selection]="videosService.getPreviouslyWatchedVideosMeta()" (continue)="continueVideo($event)" />
+        [selection]="videosService.getPreviouslyWatchedVideosMeta()" (continue)="continueVideo($event)"
+        [categoryIndex]="0" />
     <app-videos-category [title]="'New on Videoflix'" [selection]="videosService.getLatestVideosMeta()"
+        (continue)="continueVideo($event)" [categoryIndex]="1" />
+    @for (genre of videosService.getGenres(); track genre; let i = $index) {
+    <app-videos-category [title]="genre" [categoryIndex]="2 + i" [selection]="videosService.getVideosMetaByGenre(genre)"
         (continue)="continueVideo($event)" />
-    <app-videos-category *ngFor="let genre of videosService.getGenres()" [title]="genre"
-        [selection]="videosService.getVideosMetaByGenre(genre)" (continue)="continueVideo($event)" />
+    }
 </div>
 } @else {
 <div class="f-size flex-center">
