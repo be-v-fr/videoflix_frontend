@@ -1,7 +1,7 @@
-@if(videosService.getVideosMeta().length > 0) {
-<app-video-preview [videoMeta]="videosService.getVideosMeta()[0]" />
+@if(videosService.loadingState.getValue() === 'complete') {
+<app-video-preview *ngIf="videosService.getPreviewVideoMeta()" [videoMeta]="videosService.getPreviewVideoMeta()" />
 <div class="videos-container">
-    <app-videos-category *ngIf="videosService.loadingState.getValue() === 'complete'" [title]="'Continue watching'"
+    <app-videos-category *ngIf="videosService.videoCompletionList.length > 0" [title]="'Continue watching'"
         [selection]="videosService.getPreviouslyWatchedVideosMeta()" (continue)="continueVideo($event)"
         [categoryIndex]="0" />
     <app-videos-category [title]="'New on Videoflix'" [selection]="videosService.getLatestVideosMeta()"

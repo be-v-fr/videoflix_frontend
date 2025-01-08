@@ -47,9 +47,6 @@ export class VideosCategoryComponent implements OnInit {
   checkViewport() {
     const rect = this.containerRef.nativeElement.getBoundingClientRect();
     this.verticalPositionInViewport = this.calculateVerticalPosition(rect);
-    if(this.categoryIndex == 3) {
-      console.log(this.verticalPositionInViewport);
-    }
   }
 
   

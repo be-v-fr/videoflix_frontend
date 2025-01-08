@@ -15,6 +15,7 @@ export class VideosService {
   private readonly videosMetaSyncSeconds: number = 600;
   public videoCompletionList: VideoCompletion[] = [];
   public loadingState: BehaviorSubject<null | 'meta' | 'completion' | 'complete'> = new BehaviorSubject<null | 'meta' | 'completion' | 'complete'>(null);
+  private previewIndex: number = -1;
 
 
   constructor(
@@ -36,7 +37,7 @@ export class VideosService {
 
   private syncVideosMeta(): void {
     this.loadingState.next('meta');
-    lastValueFrom(this.http.get(this.VIDEOS_URL + 'main/')).then(resp => {
+    lastValueFrom(this.http.get(this.VIDEOS_URL + 'main/?ordering=-created_at')).then(resp => {
       this.lastVideosMetaSynced = Date.now();
       this.videosMeta = [];
       (resp as Array<any>).forEach(vData => {
@@ -44,6 +45,7 @@ export class VideosService {
       });
     });
   }
+
 
   public async retrieveVideoMeta(id: number): Promise<Object> {
     return await lastValueFrom(this.http.get(this.VIDEOS_URL + 'main/' + id + '/'));
@@ -66,20 +68,19 @@ export class VideosService {
 
 
   public getLatestVideosMeta(): VideoMeta[] {
-    return []; // add content
+    return this.videosMeta.slice(0, 5);
   }
 
 
   public getPreviouslyWatchedVideosMeta(): VideoMeta[] {
-    const sortedCompletions: VideoCompletion[] = this.videoCompletionList.sort((a, b) => a.updatedAt - b.updatedAt);
-    const sortedMetas: VideoMeta[] = [];
-    sortedCompletions.forEach(vc => {
-      const meta = this.getVideoMetaFromId(vc.videoId);
-      if (meta) {
-        sortedMetas.push(meta);
-      }
-    });
-    return sortedMetas;
+    const metasWatched: VideoMeta[] = [];
+    this.videoCompletionList.forEach(vc => {
+        const meta = this.getVideoMetaFromId(vc.videoId);
+        if (meta) {
+          metasWatched.push(meta);
+        }
+      });
+    return metasWatched;
   }
 
 
@@ -96,14 +97,22 @@ export class VideosService {
 
   public initVideoCompletionData(): void {
     this.loadingState.next('completion');
-    const url = this.VIDEOS_URL + 'completion/';
+    const url = this.VIDEOS_URL + 'completion/?ordering=-updated_at';
     lastValueFrom(this.http.get(url)).then(resp => {
       this.videoCompletionList = [];
       (resp as Array<any>).forEach(vcData => {
         this.videoCompletionList.push(new VideoCompletion(vcData));
       });
+      this.initVideoPreview();
       this.loadingState.next('complete');
     });
+  }
+
+
+  private initVideoPreview(): void {
+    const randomIndex: number =  Math.floor(Math.random() * this.videosMeta.length);
+    const alreadyWatched: boolean = this.getVideoCompletion(this.videosMeta[randomIndex].id) instanceof VideoCompletion;
+    alreadyWatched ? this.initVideoPreview() : this.previewIndex = randomIndex;
   }
 
 
@@ -112,14 +121,18 @@ export class VideosService {
   }
 
 
+  public getPreviewVideoMeta(): VideoMeta {
+    return this.videosMeta[this.previewIndex];
+  }
+
+
   public saveVideoCompletionInRuntime(updatedCompletion: VideoCompletion) {
     if (this.videoCompletionList) {
       const index = this.videoCompletionList.findIndex(vC => vC.videoId == updatedCompletion.videoId);
-      if (index == -1) {
-        this.videoCompletionList.push(updatedCompletion);
-      } else {
-        this.videoCompletionList[index] = updatedCompletion;
+      if (index >= 0) {
+        this.videoCompletionList.splice(index, 1);
       }
+      this.videoCompletionList.unshift(updatedCompletion);
     }
   }
 

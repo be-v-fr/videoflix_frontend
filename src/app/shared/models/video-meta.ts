@@ -6,7 +6,7 @@ export class VideoMeta {
     durationInSeconds: number;
     playlistUrl: string;
     thumbUrl: string;
-    createdAt: number;
+    createdAt: Date;
 
     constructor(obj: any) {
         this.id = obj.id ? obj.id : -1;
@@ -16,7 +16,7 @@ export class VideoMeta {
         this.durationInSeconds = obj.duration_in_seconds ? obj.duration_in_seconds : -1;
         this.playlistUrl = obj.playlist_url ? obj.playlist_url : '';
         this.thumbUrl = obj.thumbnail ? obj.thumbnail : '';
-        this.createdAt = obj.created_at ? obj.created_at : -1;
+        this.createdAt = new Date(obj.created_at ? obj.created_at : -1);
     }
 
     toJson(): {} {

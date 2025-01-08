@@ -164,7 +164,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   saveProgressInRuntime(videoElement: HTMLVideoElement) {
     this.videoCompletion.currentTime = videoElement.currentTime;
-    this.videoCompletion.updatedAt = Date.now();
+    this.videoCompletion.updatedAt = new Date();
     this.videosService.saveVideoCompletionInRuntime(this.videoCompletion);
   }
 };
