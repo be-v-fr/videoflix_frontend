@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, Inject, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, Inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { WatchingProgressComponent } from '../watching-progress/watching-progress.component';
@@ -11,7 +11,8 @@ import { VideoMeta } from '../../models/video-meta';
   standalone: true,
   imports: [CommonModule, WatchingProgressComponent],
   templateUrl: './dialog-continue-watching.component.html',
-  styleUrl: './dialog-continue-watching.component.scss'
+  styleUrl: './dialog-continue-watching.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogContinueWatchingComponent implements OnInit {
   @Input({ required: true }) metaData!: VideoMeta;

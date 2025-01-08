@@ -60,8 +60,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
   continueVideo(data: { meta: VideoMeta, completion: VideoCompletion }) {
-    this.continueWatchingData = data;
+    if (this.continueWatchingData !== data) {
+      this.continueWatchingData = data;
+    }
     this.showingContinueWatchingDialog = true;
-    console.log(this.continueWatchingData);
   }
 }
