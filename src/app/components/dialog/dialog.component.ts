@@ -10,9 +10,14 @@ import { Component, Type, Input, Output, EventEmitter, Injector, inject } from '
 })
 export class DialogComponent {
   @Input({alias: 'dialog', required: true}) dialogContent!: Type<object>;
-  @Input() dialogData?: any;
-  injector: Injector = inject(Injector);
-
+  private _dialogData?: any;
+  @Input()
+  set dialogData(value: any) {
+    if (this._dialogData !== value) {
+      this._dialogData = value;
+      this.updateDialogContentInjector();
+    }
+  }
   private _showing: boolean = false;
   @Output() showingChange = new EventEmitter<boolean>();
   @Input()
@@ -23,12 +28,16 @@ export class DialogComponent {
     this._showing = value;
     this.showingChange.emit(this._showing);
   }
+  injector: Injector = inject(Injector);
+  dialogContentInjector?: Injector;
   public slidingOut: boolean = false;
+
 
   open() {
     this.showing = true;
   }
 
+  
   // timeout length identical to "$slide-duration" in style file
   close() {
     this.slidingOut = true;
@@ -39,15 +48,14 @@ export class DialogComponent {
   }
 
 
-  get dialogContentInjector(): Injector | undefined {
-    if (!this.dialogData) {
-      return undefined;
+  private updateDialogContentInjector(): void {
+    if (this._dialogData) {
+      this.dialogContentInjector = Injector.create({
+        providers: [{ provide: 'DIALOG_DATA', useValue: this._dialogData }],
+        parent: this.injector,
+      });
+    } else {
+      this.dialogContentInjector = undefined;
     }
-    return Injector.create({
-      providers: [
-        { provide: 'DIALOG_DATA', useValue: this.dialogData }
-      ],
-      parent: this.injector
-    });
   }
 }
