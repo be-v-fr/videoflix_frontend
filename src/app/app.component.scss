@@ -5,6 +5,8 @@
     width: 100vw;
     min-height: 100dvh;
     background: $plain-black;
+    display: flex;
+    flex-direction: column;
     app-navigation {
         position: absolute;
         top: 0;
@@ -22,7 +24,11 @@
         left: 0;
         right: 0;
         &.footer-home {
-            left: unset;
+            position: initial;
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            background: $black-bright;
         }
     }
 }

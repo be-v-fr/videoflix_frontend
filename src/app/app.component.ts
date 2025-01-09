@@ -49,6 +49,9 @@ export class AppComponent implements OnInit, OnDestroy {
       this.initAuth();
     }
     this.navMode = this.getNavMode();
+    if(this.isOnMainRoute(['legal'])) {
+      window.scrollTo(0, 0);
+    }
   }
 
 
