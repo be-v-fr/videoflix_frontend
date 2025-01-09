@@ -4,13 +4,19 @@
         <img src="{{metaData.thumbUrl}}" alt="{{metaData.title}}" />
     </a>
     <div class="show-on-hover">
-        <p>{{metaData.title}}</p>
+        <div class="actions-container">
+            <button class="btn-primary material-icons-sharp btn-icon" (click)="playVideo()">play_arrow
+            </button>
+            <button class="btn-secondary btn-icon">i</button>
+        </div>
         @if(completion) {
         <app-watching-progress [completion]="completion" [metaData]="metaData" />
         } @else {
-        <p>{{metaData.showDuration()}}</p>
+        <p class="duration">
+            <span class="material-icons-outlined">timer</span>
+            {{metaData.showDuration()}}
+        </p>
         }
-        <p>{{metaData.description}}</p>
     </div>
 </div>
 } @else {
