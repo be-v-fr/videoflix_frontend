@@ -1,4 +1,7 @@
 <h3>Continue watching?</h3>
+<div class="thumb-container">
+    <img [src]="metaData.thumbUrl" [alt]="metaData.title">
+</div>
 <app-watching-progress *ngIf="metaData && completion" [metaData]="metaData" [completion]="completion" />
 <div class="btns-container">
     <button class="btn-secondary-alt-dark" (click)="playVideoFromStart()">

@@ -5,6 +5,14 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    .thumb-container {
+        width: 100%;
+        @extend .flex-center;
+        img {
+            width: 272px;
+            border-radius: $b-radius-small;
+        }
+    }
     .btns-container {
         display: flex;
         gap: 10px;

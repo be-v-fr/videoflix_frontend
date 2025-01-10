@@ -27,7 +27,8 @@ $overlay-bg: #00000066;
             border-radius: $b-radius-large;
             background: $plain-white;
             box-shadow: $shine-white-shadow;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             animation: slide-in $slide-duration ease-out forwards;
             .header {
                 width: 100%;
