@@ -3,6 +3,7 @@
 
 $tf-scale: 0.8;
 $thumb-height: calc(120px / $tf-scale);
+$transition-duration: 130ms;
 
 :host {
     display: block;
@@ -19,7 +20,7 @@ $thumb-height: calc(120px / $tf-scale);
         border-radius: inherit;
         font-size: $fs-small;
         cursor: pointer;
-        @include transition-ease();
+        @include transition-ease($dur: $transition-duration);
         .thumb {
             display: block;
             width: 100%;
@@ -45,7 +46,7 @@ $thumb-height: calc(120px / $tf-scale);
             border-bottom-left-radius: $b-radius-small;
             border-bottom-right-radius: $b-radius-small;
             cursor: default;
-            transition: 130ms ease-out;
+            @include transition-ease($dur: $transition-duration);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -64,7 +65,7 @@ $thumb-height: calc(120px / $tf-scale);
                 padding: 6px;
             }
             &.transform-top {
-                transform: scale(1) translateY(0);
+                transform: scale(1) translateY(calc(0.1 * $thumb-height));
             }
             &.transform-bottom {
                 transform: scale(1) translateY(calc(-0.7 * $thumb-height));
