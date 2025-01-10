@@ -1,0 +1,13 @@
+@import "../../../../styles.scss";
+@import "material-icons/iconfont/material-icons.scss";
+
+.content {
+    width: auto;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    .material-icons-outlined {
+        font-size: $fs-normal;
+        font-weight: 400;
+    }
+}

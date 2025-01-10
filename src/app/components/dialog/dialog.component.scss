@@ -2,42 +2,67 @@
 @import 'material-icons/iconfont/material-icons.scss';
 
 $slide-duration: 250ms;
+$overlay-bg: #00000066;
 
 :host {
     position: absolute;
     width: 0;
     height: 0;
-}
 
-.overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 400;
-    width: 100vw;
-    height: 100dvh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .content {
-        max-width: 40vw;
-        max-height: 80dvh;
-        padding: 24px;
-        border-radius: $b-radius-large;
-        background: $plain-white;
-        box-shadow: $shine-white-shadow;
-        animation: slide-in $slide-duration ease-out forwards;
-        .header {
-            width: 100%;
-            margin-top: -6px;
-            margin-bottom: 6px;
-            display: flex;
-            justify-content: flex-end;
+    .overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 400;
+        width: 100vw;
+        height: 100dvh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: $overlay-bg;
+        animation: fade-in 150ms ease-out forwards;
+        .content {
+            max-width: 40vw;
+            max-height: 80dvh;
+            padding: 24px;
+            border-radius: $b-radius-large;
+            background: $plain-white;
+            box-shadow: $shine-white-shadow;
+            overflow: hidden;
+            animation: slide-in $slide-duration ease-out forwards;
+            .header {
+                width: 100%;
+                margin-top: -6px;
+                margin-bottom: 6px;
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+        &.hidden {
+            display: none;
+        }
+    }
+    &.alt-dark .overlay .content {
+        background: $black-brighter;
+        color: $plain-white;
+        border-radius: $b-radius-small;
+        box-shadow: unset;
+        .header .close-btn {
+            color: $plain-white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            transform: unset;
+            @extend .flex-center;
+            &:hover {
+                background: $grey-trans;
+                background: $purple-trans;
+            }
         }
     }
 }
 
-.hidden {
-    display: none;
+.fade-bg-out {
+    animation: fade-bg-out $slide-duration ease-out forwards;
 }
 
 .overlay .content.sliding-out {
@@ -59,5 +84,14 @@ $slide-duration: 250ms;
     }
     to {
         transform: translateX(100vw);
+    }
+}
+
+@keyframes fade-bg-out {
+    from {
+        background: $overlay-bg;
+    }
+    to {
+        background: #00000000;
     }
 }

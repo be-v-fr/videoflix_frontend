@@ -26,6 +26,7 @@ export class DialogComponent {
   }
   set showing(value: boolean) {
     this._showing = value;
+    value ? document.body.classList.add('no-scroll') : document.body.classList.remove('no-scroll');
     this.showingChange.emit(this._showing);
   }
   injector: Injector = inject(Injector);

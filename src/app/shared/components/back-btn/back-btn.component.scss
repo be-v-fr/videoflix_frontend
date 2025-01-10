@@ -20,7 +20,7 @@ button {
         font-size: 40px;
     }
     &:hover {
-        background: #eeeeee1e;
+        background: $grey-trans;
         @include transition-ease($dur: 75ms);
     }
 }

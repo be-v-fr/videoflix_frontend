@@ -1,5 +1,7 @@
 @import '../../../../styles.scss';
 
+$video-height: 120px;
+
 h4 {
     color: $plain-white;
     margin-bottom: 16px;
@@ -7,9 +9,15 @@ h4 {
 
 .videos-container {
     display: flex;
+    flex-direction: row;
     gap: 16px;
     position: relative;
     &.z-top {
         z-index: 100;
+    }
+    .video-container {
+        width: calc($video-height / 0.5625);
+        height: $video-height;
+        overflow: visible;
     }
 }

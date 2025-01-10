@@ -5,23 +5,34 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    img {
+        width: calc(100% + 48px);
+        margin-left: -24px;
+        margin-top: -60px;
+    }
     .btns-container {
         display: flex;
+        justify-content: flex-end;
         gap: 10px;
         .btn-primary, .btn-secondary-alt-dark {
-            display: flex;
-            align-items: center;
+            @extend .flex-center;
             gap: 4px;
-            .resume-icon {
-                display: flex;
-                align-items: center;
+            &.resume-icon {
+                .material-icons-sharp {
+                    margin-right: -6px;
+                }
                 .resume-line {
                     width: 2px;
                     height: 14px;
-                    margin-right: -5px;
+                    margin-right: -9px;
                     background: $plain-white;
                 }
             }
         }
     }
+}
+
+app-duration {
+    width: 100%;
+    @extend .flex-center;
 }

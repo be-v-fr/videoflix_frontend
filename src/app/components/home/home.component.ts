@@ -10,6 +10,7 @@ import { VideoMeta } from '../../shared/models/video-meta';
 import { VideoCompletion } from '../../shared/models/video-completion';
 import { VideosCategoryComponent } from './videos-category/videos-category.component';
 import { VideoPreviewComponent } from '../video-preview/video-preview.component';
+import { DialogVideoDetailsComponent } from '../../shared/components/dialog-video-details/dialog-video-details.component';
 
 @Component({
   selector: 'app-home',
@@ -21,8 +22,11 @@ import { VideoPreviewComponent } from '../video-preview/video-preview.component'
 export class HomeComponent implements OnInit, OnDestroy {
   authSub: Subscription = new Subscription();
   continueWatchingComponent: Type<object> = DialogContinueWatchingComponent;
+  videoDetailsComponent: Type<object> = DialogVideoDetailsComponent;
   showingContinueWatchingDialog: boolean = false;
-  continueWatchingData?: {meta: VideoMeta, completion: VideoCompletion};
+  showingVideoDetailsDialog: boolean = false;
+  continueWatchingData?: { meta: VideoMeta, completion: VideoCompletion };
+  videoDetailsData?: { meta: VideoMeta, completion?: VideoCompletion };
 
 
   constructor(
@@ -64,5 +68,13 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.continueWatchingData = data;
     }
     this.showingContinueWatchingDialog = true;
+  }
+
+
+  showVideoDetails(data: { meta: VideoMeta, completion?: VideoCompletion }) {
+    if (this.continueWatchingData !== data) {
+      this.videoDetailsData = data;
+    }
+    this.showingVideoDetailsDialog = true;
   }
 }

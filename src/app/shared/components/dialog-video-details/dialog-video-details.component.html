@@ -1,0 +1,15 @@
+<img [src]="metaData.thumbUrl" [alt]="metaData.title">
+<h3>{{metaData.title}}</h3>
+@if(completion) {
+<app-watching-progress [completion]="completion" [metaData]="metaData" />
+} @else {
+<app-duration [metaData]="metaData" />
+}
+<p>{{metaData.description}}</p>
+<div class="btns-container">
+    <button *ngIf="completion" class="btn-secondary-alt-dark btn-icon resume-icon" (click)="playVideoFromStart()">
+            <div class="resume-line"></div>
+            <span class="material-icons-sharp">play_arrow</span>
+    </button>
+    <button class="btn-primary btn-icon material-icons-sharp" (click)="playVideo()">play_arrow</button>
+</div>

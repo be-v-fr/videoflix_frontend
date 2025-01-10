@@ -7,11 +7,12 @@ import { VideoCompletion } from '../../../shared/models/video-completion';
 import { VideosService } from '../../../shared/services/videos.service';
 import { Subscription } from 'rxjs';
 import { WatchingProgressComponent } from '../../../shared/components/watching-progress/watching-progress.component';
+import { DurationComponent } from '../../../shared/components/duration/duration.component';
 
 @Component({
   selector: 'app-video-card',
   standalone: true,
-  imports: [CommonModule, LoadingCircleComponent, WatchingProgressComponent],
+  imports: [CommonModule, LoadingCircleComponent, WatchingProgressComponent, DurationComponent],
   templateUrl: './video-card.component.html',
   styleUrl: './video-card.component.scss'
 })
@@ -19,6 +20,7 @@ export class VideoCardComponent implements OnInit, OnDestroy {
   @Input({ required: true }) metaData!: VideoMeta;
   @Input() verticalPositionInViewport: 'center' | 'top' | 'bottom' = 'center';
   @Output() continue: EventEmitter<{ meta: VideoMeta, completion: VideoCompletion }> = new EventEmitter();
+  @Output() details: EventEmitter<{ meta: VideoMeta, completion?: VideoCompletion }> = new EventEmitter();
   completion?: VideoCompletion;
   completionSub: Subscription = new Subscription();
 
@@ -60,5 +62,13 @@ export class VideoCardComponent implements OnInit, OnDestroy {
     } else {
       this.router.navigate(['video', this.metaData.id]);
     }
+  }
+
+
+  showDetails(): void {
+    this.details.emit({
+      meta: this.metaData,
+      completion: this.completion
+    });
   }
 }

@@ -16,7 +16,8 @@ export class VideosCategoryComponent implements OnInit {
   @Input({ required: true }) title!: string;
   @Input({ required: true }) selection!: VideoMeta[];
   @Input({ required: true }) categoryIndex!: number;
-  @Output() continue = new EventEmitter<{ meta: VideoMeta, completion: VideoCompletion }>();
+  @Output() continue: EventEmitter<{ meta: VideoMeta, completion: VideoCompletion }> = new EventEmitter();
+  @Output() details: EventEmitter<{ meta: VideoMeta, completion?: VideoCompletion }> = new EventEmitter();
   @ViewChild('container', { static: true }) containerRef!: ElementRef<HTMLDivElement>;
   verticalPositionInViewport: 'center' | 'top' | 'bottom' = 'center';
   private lastWindowEventHandling = 0;

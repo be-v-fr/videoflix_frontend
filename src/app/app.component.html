@@ -5,5 +5,5 @@
   </div>
   <app-footer *ngIf="!isOnMainRoute(['legal', 'video'])" [class.footer-home]="isOnEmptyRoute()"/>
 </div>
-<app-toast-notification [show]="toastErrorMsg.length > 0" [status]="'error'" [msg]="toastErrorMsg"
+<app-toast-notification *ngIf="toastErrorMsg.length > 0" [show]="toastErrorMsg.length > 0" [status]="'error'" [msg]="toastErrorMsg"
   (then)="redirectToLogin()" />

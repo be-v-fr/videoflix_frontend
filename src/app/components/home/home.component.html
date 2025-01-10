@@ -3,12 +3,12 @@
 <div class="videos-container">
     <app-videos-category *ngIf="videosService.videoCompletionList.length > 0" [title]="'Continue watching'"
         [selection]="videosService.getPreviouslyWatchedVideosMeta()" (continue)="continueVideo($event)"
-        [categoryIndex]="0" />
+        [categoryIndex]="0" (details)="showVideoDetails($event)" />
     <app-videos-category [title]="'New on Videoflix'" [selection]="videosService.getLatestVideosMeta()"
-        (continue)="continueVideo($event)" [categoryIndex]="1" />
+        (continue)="continueVideo($event)" [categoryIndex]="1" (details)="showVideoDetails($event)" />
     @for (genre of videosService.getGenres(); track genre; let i = $index) {
     <app-videos-category [title]="genre" [categoryIndex]="2 + i" [selection]="videosService.getVideosMetaByGenre(genre)"
-        (continue)="continueVideo($event)" />
+        (continue)="continueVideo($event)" (details)="showVideoDetails($event)" />
     }
 </div>
 } @else {
@@ -17,5 +17,8 @@
 </div>
 }
 <app-dialog *ngIf="continueWatchingData" [dialog]="continueWatchingComponent"
-    [(showing)]="showingContinueWatchingDialog"
+    [(showing)]="showingContinueWatchingDialog" class="alt-dark"
     [dialogData]="{ metaData: continueWatchingData.meta, completion: continueWatchingData.completion}" />
+<app-dialog *ngIf="videoDetailsData" [(showing)]="showingVideoDetailsDialog"
+    [dialog]="videoDetailsComponent" class="alt-dark"
+    [dialogData]="{ metaData: videoDetailsData.meta, completion: videoDetailsData.completion || undefined}" />

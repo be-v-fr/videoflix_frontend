@@ -1,11 +1,12 @@
 @import "../../../../styles.scss";
 @import "material-icons/iconfont/material-icons.scss";
 
-$thumb-height: 120px;
-$tf-scale: 1.2;
+$tf-scale: 0.8;
+$thumb-height: calc(120px / $tf-scale);
 
 :host {
     display: block;
+    flex: 0 0 auto;
     width: calc($thumb-height / 0.5625);
     height: $thumb-height;
     border-radius: $b-radius-small;
@@ -13,9 +14,10 @@ $tf-scale: 1.2;
         position: relative;
         width: 100%;
         height: 100%;
+        transform: scale($tf-scale) translateY(0);
         will-change: transform;
         border-radius: inherit;
-        font-size: $fs-tiny;
+        font-size: $fs-small;
         cursor: pointer;
         @include transition-ease();
         .thumb {
@@ -46,25 +48,26 @@ $tf-scale: 1.2;
             transition: 130ms ease-out;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             gap: 6px;
         }
         &:hover {
             @include transition-ease();
             z-index: 1;
             transition-delay: 300ms;
-            transform: scale($tf-scale) translateY(calc(-1 * $thumb-height / 2));
+            transform: scale(1) translateY(calc(-0.3 * $thumb-height));
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
             .show-on-hover {
                 transition-delay: inherit;
-                height: $thumb-height;
+                height: calc($thumb-height * 3 / 5);
                 padding: 6px;
             }
             &.transform-top {
-                transform: scale($tf-scale) translateY(0);
+                transform: scale(1) translateY(0);
             }
             &.transform-bottom {
-                transform: scale($tf-scale) translateY(calc(-1 * $thumb-height));
+                transform: scale(1) translateY(calc(-0.7 * $thumb-height));
             }
         }
     }
@@ -73,29 +76,9 @@ $tf-scale: 1.2;
 .actions-container {
     display: flex;
     justify-content: space-between;
-    .btn-icon {
-        width: 36px;
-        height: 36px;
-        font-size: $fs-small;
-        padding: unset;
-        @extend .flex-center;
-        &.material-icons-outlined,
-        &.material-icons-sharp {
-            font-size: $fs-normal;
-        }
-        &.btn-secondary:not(:hover):not(:active) {
-            background-color: unset;
-            color: $plain-white;
-        }
-    }
 }
 
-.duration {
+app-duration {
     width: 100%;
     @extend .flex-center;
-    gap: 3px;
-    .material-icons-outlined {
-        font-size: $fs-normal;
-        font-weight: 400;
-    }
 }

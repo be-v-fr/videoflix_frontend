@@ -7,15 +7,12 @@
         <div class="actions-container">
             <button class="btn-primary material-icons-sharp btn-icon" (click)="playVideo()">play_arrow
             </button>
-            <button class="btn-secondary btn-icon">i</button>
+            <button class="btn-secondary-alt-dark btn-icon" (click)="showDetails()">i</button>
         </div>
         @if(completion) {
         <app-watching-progress [completion]="completion" [metaData]="metaData" />
         } @else {
-        <p class="duration">
-            <span class="material-icons-outlined">timer</span>
-            {{metaData.showDuration()}}
-        </p>
+        <app-duration [metaData]="metaData" />
         }
     </div>
 </div>
