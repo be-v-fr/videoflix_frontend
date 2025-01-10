@@ -1,6 +1,6 @@
 <div class="page-wrapper flex-center">
   <app-navigation [mode]="navMode" *ngIf="!isOnMainRoute(['video'])" />
-  <div class="page-content flex-center">
+  <div class="page-content flex-center" [class.content-home]="isOnEmptyRoute()">
     <router-outlet />
   </div>
   <app-footer *ngIf="!isOnMainRoute(['legal', 'video'])" [class.footer-home]="isOnEmptyRoute()"/>

@@ -1,4 +1,5 @@
 @if(videosService.loadingState.getValue() === 'complete') {
+@if(videosService.searchFilter.length === 0) {
 <app-video-preview *ngIf="videosService.getPreviewVideoMeta()" [videoMeta]="videosService.getPreviewVideoMeta()" />
 <div class="videos-container">
     <app-videos-category *ngIf="videosService.videoCompletionList.length > 0" [title]="'Continue watching'"
@@ -12,13 +13,19 @@
     }
 </div>
 } @else {
-<div class="f-size flex-center bg-black">
+<div class="videos-container search-container">
+    <app-videos-category [title]="'Search Results'" [categoryIndex]="0" [selection]="videosService.search()"
+        (continue)="continueVideo($event)" (details)="showVideoDetails($event)" />
+</div>
+}
+} @else {
+<div class="loading-container">
     <app-loading-circle />
 </div>
 }
 <app-dialog *ngIf="continueWatchingData" [dialog]="continueWatchingComponent"
     [(showing)]="showingContinueWatchingDialog" class="alt-dark"
     [dialogData]="{ metaData: continueWatchingData.meta, completion: continueWatchingData.completion}" />
-<app-dialog *ngIf="videoDetailsData" [(showing)]="showingVideoDetailsDialog"
-    [dialog]="videoDetailsComponent" class="alt-dark"
+<app-dialog *ngIf="videoDetailsData" [(showing)]="showingVideoDetailsDialog" [dialog]="videoDetailsComponent"
+    class="alt-dark"
     [dialogData]="{ metaData: videoDetailsData.meta, completion: videoDetailsData.completion || undefined}" />

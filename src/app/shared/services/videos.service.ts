@@ -16,6 +16,7 @@ export class VideosService {
   public videoCompletionList: VideoCompletion[] = [];
   public loadingState: BehaviorSubject<null | 'meta' | 'completion' | 'complete'> = new BehaviorSubject<null | 'meta' | 'completion' | 'complete'>(null);
   private previewIndex: number = -1;
+  public searchFilter: string = '';
 
 
   constructor(
@@ -160,5 +161,14 @@ export class VideosService {
       current_time: updatedCompletion.currentTime
     };
     return lastValueFrom(this.http.post(url, data));
+  }
+
+
+  public search(): VideoMeta[] {
+    const filterLc = this.searchFilter.toLocaleLowerCase();
+    return this.videosMeta.filter(vm => {
+      return vm.title.toLocaleLowerCase().includes(filterLc) ||
+      vm.description.toLocaleLowerCase().includes(filterLc)
+    });
   }
 }

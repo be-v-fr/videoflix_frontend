@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { VideosService } from '../../services/videos.service';
 
 @Component({
   selector: 'app-search',
@@ -11,14 +12,17 @@ import { FormsModule, NgForm } from '@angular/forms';
 })
 export class SearchComponent {
   @ViewChild('searchInputElement') searchInputRef!: ElementRef<HTMLInputElement>;
-  searchFilter: string = '';
+
+  constructor(
+    public videosService: VideosService
+  ) { }
 
   focus() {
     this.searchInputRef.nativeElement.focus();
   }
 
   clear(): void {
-    this.searchFilter = '';
+    this.videosService.searchFilter = '';
     this.focus();
   }
 }

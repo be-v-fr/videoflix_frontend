@@ -17,6 +17,9 @@
     .page-content {
         width: inherit;
         min-height: inherit;
+        &.content-home {
+            min-height: unset;
+        }
     }
     app-footer {
         position: absolute;
@@ -26,8 +29,10 @@
         &.footer-home {
             position: initial;
             width: 100%;
+            flex: 1;
             display: flex;
             justify-content: flex-end;
+            align-items: flex-end;
         }
     }
 }

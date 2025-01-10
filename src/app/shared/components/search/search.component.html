@@ -1,8 +1,8 @@
 <form #searchForm="ngForm" (click)="focus()" class="form-horizontal-white">
     <div class="field">
         <span class="material-icons-outlined search-icon">search</span>
-        <input type="text" [(ngModel)]="searchFilter" name="searchInput" #searchInput="ngModel" #searchInputElement autocomplete="off" />
-        <button *ngIf="searchFilter.length > 0" class="material-icons-outlined close-btn"
+        <input type="text" [(ngModel)]="videosService.searchFilter" name="searchInput" #searchInput="ngModel" #searchInputElement autocomplete="off" />
+        <button *ngIf="videosService.searchFilter.length > 0" class="material-icons-outlined close-btn"
             (click)="clear()">close</button>
     </div>
 </form>
