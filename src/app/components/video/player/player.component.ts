@@ -6,7 +6,7 @@ import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
 import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 import { VgStreamingModule } from '@videogular/ngx-videogular/streaming';
 import { VideoMeta } from '../../../shared/models/video-meta';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ToastNotificationComponent } from '../../../shared/components/toast-notification/toast-notification.component';
 import { VideosService } from '../../../shared/services/videos.service';
 import { VideoCompletion } from '../../../shared/models/video-completion';
@@ -43,6 +43,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
 
   constructor(
+    private router: Router,
     private videosService: VideosService,
   ) { }
 
@@ -166,5 +167,31 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.videoCompletion.currentTime = videoElement.currentTime;
     this.videoCompletion.updatedAt = new Date();
     this.videosService.saveVideoCompletionInRuntime(this.videoCompletion);
+  }
+
+
+  @HostListener('document:keydown', ['$event'])
+  onKeydown(ev: KeyboardEvent) {
+    switch (ev.key) {
+      case 'Escape': this.exit(); break;
+      case ' ':
+      case 'k': this.togglePlayState(); break;
+      case 'ArrowLeft':
+      case ',': this.seek(-1); break;
+      case 'ArrowRight':
+      case '.': this.seek(+1); break;
+    }
+  }
+
+
+  exit(): void {
+    this.saveProgress();
+    this.router.navigateByUrl('');
+  }
+
+
+  togglePlayState(): void {
+    const videoElement: HTMLVideoElement = this.media.nativeElement;
+    videoElement.paused ? videoElement.play() : videoElement.pause();   
   }
 };
