@@ -1,10 +1,35 @@
 @import '../../../../styles.scss';
+@import "material-icons/iconfont/material-icons.scss";
 
 $video-height: 120px;
 
-h4 {
-    color: $plain-white;
+header {
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
     margin-bottom: 16px;
+    h4 {
+        color: $plain-white;
+    }
+    .expand-btn {
+        color: $plain-white;
+        color: $grey-light;
+        transform: scale(1) rotate(0);
+        @include transition-ease($dur: 75ms);
+        &:hover {
+            @include transition-ease($dur: 75ms);
+            transform: scale(1.2) rotate(0);
+        }
+        &.expanded {
+            @include transition-ease($dur: 75ms);
+            transform: scale(1) rotate(180deg);
+            &:hover {
+                @include transition-ease($dur: 75ms);
+                transform: scale(1.2) rotate(180deg);
+            }
+        }
+    }
 }
 
 .videos-container {
@@ -21,4 +46,8 @@ h4 {
         height: $video-height;
         overflow: visible;
     }
+}
+
+.hidden {
+    display: none;
 }

@@ -18,9 +18,15 @@ export class VideosCategoryComponent {
   @Input({ required: true }) categoryIndex!: number;
   @Output() continue: EventEmitter<{ meta: VideoMeta, completion: VideoCompletion }> = new EventEmitter();
   @Output() details: EventEmitter<{ meta: VideoMeta, completion?: VideoCompletion }> = new EventEmitter();
+  expanded: boolean = false;
 
 
   constructor(
     public styleService: StyleService
   ) { }
+
+
+  toggleExpansion(): void {
+    this.expanded = !this.expanded;
+  }
 }
