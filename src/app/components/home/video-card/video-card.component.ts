@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, Type } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoadingCircleComponent } from '../../../shared/components/loading-circle/loading-circle.component';
 import { VideoMeta } from '../../../shared/models/video-meta';
@@ -18,11 +18,11 @@ import { DurationComponent } from '../../../shared/components/duration/duration.
 })
 export class VideoCardComponent implements OnInit, OnDestroy {
   @Input({ required: true }) metaData!: VideoMeta;
-  @Input() verticalPositionInViewport: 'center' | 'top' | 'bottom' = 'center';
   @Output() continue: EventEmitter<{ meta: VideoMeta, completion: VideoCompletion }> = new EventEmitter();
   @Output() details: EventEmitter<{ meta: VideoMeta, completion?: VideoCompletion }> = new EventEmitter();
   completion?: VideoCompletion;
   completionSub: Subscription = new Subscription();
+  yPositionInViewport: 'neutral' | 'top' | 'bottom' = 'neutral';
 
 
   constructor(
@@ -70,5 +70,26 @@ export class VideoCardComponent implements OnInit, OnDestroy {
       meta: this.metaData,
       completion: this.completion
     });
+  }
+
+
+  updateYPosition(ev: MouseEvent): void {
+      const element = ev.target as HTMLElement;
+      const boundingRect = element.getBoundingClientRect();
+      const minDistance = 60;
+      const distanceFromTop = boundingRect.top;
+      const distanceFromBottom = window.innerHeight - boundingRect.bottom;
+      this.yPositionInViewport = this.getYPosition(minDistance, distanceFromTop, distanceFromBottom);
+  }
+
+
+  getYPosition(minDist: number, distFromTop: number, distFromBottom: number): 'neutral' | 'top' | 'bottom' {
+    if (distFromTop < minDist) {
+      return 'top';
+    } else if (distFromBottom < minDist) {
+      return 'bottom';
+    } else {
+      return 'neutral';
+    }
   }
 }

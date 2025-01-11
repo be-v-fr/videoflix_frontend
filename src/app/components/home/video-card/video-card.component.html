@@ -1,6 +1,6 @@
 @if(metaData) {
-<div class="content" [class.transform-top]="verticalPositionInViewport === 'top'"
-    [class.transform-bottom]="verticalPositionInViewport === 'bottom'">
+<div class="content" #content (mouseenter)="updateYPosition($event)" [class.transform-top]="yPositionInViewport === 'top'"
+    [class.transform-bottom]="yPositionInViewport === 'bottom'">
     <a class="thumb" (click)="playVideo()">
         <img src="{{metaData.thumbUrl}}" alt="{{metaData.title}}" />
     </a>
