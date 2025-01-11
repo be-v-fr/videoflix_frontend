@@ -3,13 +3,20 @@
 
 $overlay-gap: 32px;
 
-vg-player {
-    min-width: 100vw;
+:host {
+    width: 100vw;
     height: 100dvh;
-    @extend .flex-center;
-    video {
-        width: auto;
-        height: 100dvh;
+    overflow: hidden;
+    vg-player {
+        min-width: 100vw;
+        min-height: 100dvh;
+        @extend .flex-center;
+        video {
+            min-width: inherit;
+            min-height: inherit;
+            object-fit: cover;
+            object-position: center;
+        }
     }
 }
 
