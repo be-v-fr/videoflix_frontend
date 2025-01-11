@@ -52,7 +52,11 @@ export class VideosCategoryComponent implements AfterViewInit {
 
   checkRows(): void {
     const children = Array.from(this.containerRef.nativeElement.children) as HTMLElement[];
-    children.length === this.selection.length ? this.checkVerticalSize(children) : this.checkHorizontalSize(children);
+    if(children.length === this.selection.length) {
+      this.checkVerticalSize(children);
+    } else {
+      this.checkHorizontalSize(children);
+    }
   }
 
 
