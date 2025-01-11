@@ -23,10 +23,10 @@ header {
         }
         &.expanded {
             @include transition-ease($dur: 75ms);
-            transform: scale(1) rotate(180deg);
+            transform: scale(1) rotate(180deg) translateY(0.63px);
             &:hover {
                 @include transition-ease($dur: 75ms);
-                transform: scale(1.2) rotate(180deg);
+                transform: scale(1.2) rotate(180deg) translateY(0.63px);
             }
         }
     }

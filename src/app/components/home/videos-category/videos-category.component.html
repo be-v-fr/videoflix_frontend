@@ -1,11 +1,12 @@
 <header>
     <h4>{{ title }}</h4>
-    <button *ngIf="selection.length > 6" class="material-icons-outlined btn-icon expand-btn" [class.expanded]="expanded" (click)="toggleExpansion()">expand_circle_down</button>
+    <button *ngIf="moreThanOneRow && selection.length > 6" class="material-icons-outlined btn-icon expand-btn" [class.expanded]="expanded" (click)="toggleExpansion()">expand_circle_down</button>
 </header>
 <div class="videos-container" #container (mouseover)="styleService.lastVideoCategoryHovered = categoryIndex"
     [class.z-top]="styleService.lastVideoCategoryHovered === categoryIndex">
-    <div class="video-container flex-center" *ngFor="let videoMeta of selection; let i = index"
-        [class.hidden]="i > 5 && !expanded">
+    @for(videoMeta of selection; track videoMeta; let i = $index) {
+    <div class="video-container flex-center" *ngIf="!moreThanOneRow || i < 6 || expanded">
         <app-video-card [metaData]="videoMeta" (continue)="continue.emit($event)" (details)="details.emit($event)" />
     </div>
+}
 </div>
