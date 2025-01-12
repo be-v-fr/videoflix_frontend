@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom, Subject } from "rxjs";
 import { environment } from "../../../environments/environment.development";
-import { Router } from "@angular/router";
 import { User } from "../models/user";
 
 
@@ -19,18 +18,15 @@ export class AuthService {
     public currentUser: User | null = null;
     public resettingPw: boolean = false;
 
+
     constructor(
         private http: HttpClient,
-        private router: Router,
     ) { }
 
 
     /**
-     * Register user
-     * @param name user name
-     * @param email user email
-     * @param password user password
-     * @returns authentication result
+     * Registers a new user.
+     * @returns {Promise<Object>} A promise that resolves with the authentication result.
      */
     async register(email: string, password: string): Promise<Object> {
         const url = this.AUTH_URL + 'signup/';
@@ -43,10 +39,9 @@ export class AuthService {
 
 
     /**
-     * Complete password reset
-     * @param password new password
-     * @param token password reset token
-     * @returns authentication result
+     * Completes the account activation process using the provided token.
+     * @param {string} key The account activation token.
+     * @returns {Promise<Object>} A promise that resolves with the authentication result.
      */
     async activateAccount(key: string): Promise<Object> {
         const url = this.AUTH_URL + 'signup/activate/';
@@ -58,10 +53,9 @@ export class AuthService {
 
 
     /**
-     * Log in user (with password and email)
-     * @param email user email
-     * @param password user password
-     * @returns authentication result
+     * Logs in a user using their email and password.
+     * @returns {Promise<Object>} A promise that resolves with the authentication result.
+     * @throws {string} Timeout error if the request exceeds the specified time limit.
      */
     async login(email: string, password: string): Promise<Object> {
         const url = this.AUTH_URL + 'login/';
@@ -79,6 +73,10 @@ export class AuthService {
     }
 
 
+    /**
+     * Handles the response from a successful login and stores the session token.
+     * @param {any} loginResp The login response containing the token.
+     */
     onLogin(loginResp: any) {
         try {
             this.setLocalSessionToken(loginResp.token);
@@ -89,6 +87,11 @@ export class AuthService {
     }
 
 
+    /**
+     * Authenticates a user based on the provided token.
+     * @returns {Promise<Object>} A promise that resolves with the authentication result.
+     * @throws {string} Timeout error if the request exceeds the specified time limit.
+     */
     async authenticateToken(): Promise<Object> {
         const url = this.AUTH_URL + 'user/';
         const promise: Promise<Object> = lastValueFrom(this.http.get(url));
@@ -101,8 +104,12 @@ export class AuthService {
     }
 
 
+    /**
+     * Updates the current user's data and triggers the `currentUser$` subject.
+     * @param {any} userData The user data (either an instance of User or a plain object).
+     */
     triggerUser(userData: any) {
-        if(userData) {
+        if (userData) {
             this.currentUser = (userData instanceof User) ? userData : new User(userData);
         } else {
             this.currentUser = null;
@@ -111,15 +118,18 @@ export class AuthService {
     }
 
 
+    /**
+     * Returns a promise that resolves after a 3-second timeout, used for request timeouts.
+     */
     async requestTimeout(): Promise<string> {
         await new Promise((res) => setTimeout(res, 3000));
         return 'timeout';
     }
 
+
     /**
-     * Request password reset email
-     * @param email user email address
-     * @returns authentication result
+     * Sends a request to reset the user's password.
+     * @returns {Promise<Object>} A promise that resolves with the authentication result.
      */
     async requestPasswordReset(email: string): Promise<Object> {
         const url = this.AUTH_URL + 'reset-pw/request/';
@@ -131,10 +141,10 @@ export class AuthService {
 
 
     /**
-     * Complete password reset
-     * @param password new password
-     * @param token password reset token
-     * @returns authentication result
+     * Completes the password reset process using the provided new password and token.
+     * @param {string} newPassword The new password.
+     * @param {string} key The password reset token.
+     * @returns {Promise<Object>} A promise that resolves with the authentication result.
      */
     async performPasswordReset(newPassword: string, key: string): Promise<Object> {
         const url = this.AUTH_URL + 'reset-pw/perform/';
@@ -167,8 +177,7 @@ export class AuthService {
 
 
     /**
-     * Log out (both as guest and registered user)
-     * @returns log out result
+     * Logs out the user, both for guest and registered users.
      */
     logout(): void {
         this.deleteLocalSessionToken();
@@ -177,7 +186,7 @@ export class AuthService {
 
 
     /**
-     * Removes the session token from the local storage.
+     * Removes the session token from local storage.
      */
     deleteLocalSessionToken(): void {
         localStorage.removeItem('token');
@@ -185,14 +194,17 @@ export class AuthService {
 
 
     /**
-     * Sets the session token in the local storage.
-     * @param tokenValue Value of token
+     * Sets the session token in local storage.
+     * @param {string} tokenValue The value of the session token.
      */
     setLocalSessionToken(tokenValue: string): void {
         localStorage.setItem('token', tokenValue);
     }
 
 
+    /**
+     * Returns the timeout error message.
+     */
     getTimeoutErrorMsg(): string {
         return this.timeoutErrorMsg;
     }

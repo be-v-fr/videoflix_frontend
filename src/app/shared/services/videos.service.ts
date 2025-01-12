@@ -5,6 +5,11 @@ import { environment } from '../../../environments/environment.development';
 import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { VideoCompletion } from '../models/video-completion';
 
+
+/**
+ * Service for handling video-related data,
+ * including video metadata and user video completion data.
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -24,6 +29,9 @@ export class VideosService {
   ) { }
 
 
+  /**
+   * Sync video metadata if allowed based on the sync interval.
+   */
   public syncVideosMetaIfAllowed(): void {
     if (this.isVideosMetaSyncingAllowed()) {
       this.syncVideosMeta();
@@ -31,11 +39,17 @@ export class VideosService {
   }
 
 
+  /**
+   * Check if video metadata syncing is allowed based on the sync interval.
+   */
   private isVideosMetaSyncingAllowed(): boolean {
     return Date.now() - this.lastVideosMetaSynced > this.videosMetaSyncSeconds * 1000;
   }
 
 
+  /**
+   * Sync the video metadata by fetching it from the server.
+   */
   private syncVideosMeta(): void {
     this.loadingState.next('meta');
     lastValueFrom(this.http.get(this.VIDEOS_URL + 'main/?ordering=-created_at')).then(resp => {
@@ -48,31 +62,41 @@ export class VideosService {
   }
 
 
-  public async retrieveVideoMeta(id: number): Promise<Object> {
-    return await lastValueFrom(this.http.get(this.VIDEOS_URL + 'main/' + id + '/'));
-  }
-
-
+  /**
+   * Get the list of all video metadata.
+   */
   public getVideosMeta(): VideoMeta[] {
     return this.videosMeta;
   }
 
 
+  /**
+   * Get video metadata by its ID.
+   */
   public getVideoMetaFromId(id: number): VideoMeta | undefined {
     return this.videosMeta.find(v => v.id === id);
   }
 
 
+  /**
+   * Get video metadata filtered by genre.
+   */
   public getVideosMetaByGenre(genre: string): VideoMeta[] {
     return this.videosMeta.filter(v => v.genre === genre);
   }
 
 
+  /**
+   * Get the latest 5 videos from the metadata list.
+   */
   public getLatestVideosMeta(): VideoMeta[] {
     return this.videosMeta.slice(0, 5);
   }
 
 
+  /**
+   * Get the list of previously watched videos based on video completion data.
+   */
   public getPreviouslyWatchedVideosMeta(): VideoMeta[] {
     const metasWatched: VideoMeta[] = [];
     this.videoCompletionList.forEach(vc => {
@@ -85,6 +109,10 @@ export class VideosService {
   }
 
 
+  /**
+   * Get the list of all genres from the video metadata.
+   * @returns {string[]} An array of unique genres sorted alphabetically.
+   */
   public getGenres(): string[] {
     const genres: string[] = [];
     this.videosMeta.forEach(v => {
@@ -96,6 +124,9 @@ export class VideosService {
   }
 
 
+  /**
+   * Initialize user-related video completion data by fetching it from the server.
+   */
   public initVideoCompletionData(): void {
     this.loadingState.next('completion');
     const url = this.VIDEOS_URL + 'completion/?ordering=-updated_at';
@@ -110,10 +141,18 @@ export class VideosService {
   }
 
 
+  /**
+   * Initializes the preview video by selecting a random video that has not been watched.
+   */
   private initVideoPreview(): void {
-    const randomIndex: number =  Math.floor(Math.random() * this.videosMeta.length);
-    const alreadyWatched: boolean = this.getVideoCompletion(this.videosMeta[randomIndex].id) instanceof VideoCompletion;
-    alreadyWatched ? this.initVideoPreview() : this.previewIndex = randomIndex;
+    const unwatchedVideos: VideoMeta[] = this.videosMeta.filter(vm => !this.getVideoCompletion(vm.id));
+    if (unwatchedVideos.length > 0) {
+      const randomIndex = Math.floor(Math.random() * unwatchedVideos.length);
+      this.previewIndex = this.videosMeta.indexOf(unwatchedVideos[randomIndex]);
+    } else {
+      const randomIndex = Math.floor(Math.random() * this.videosMeta.length);
+      this.previewIndex = randomIndex;
+    }
   }
 
 
