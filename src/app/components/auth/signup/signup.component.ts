@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormErrorComponent } from '../../../shared/components/form-error/form-error.component';
 import { AuthService } from '../../../shared/services/auth.service';
 import { ErrorService } from '../../../shared/services/error.service';
@@ -9,6 +9,10 @@ import { ToastNotificationComponent } from '../../../shared/components/toast-not
 import { CustomCheckboxComponent } from '../../../shared/components/custom-checkbox/custom-checkbox.component';
 import { DynamicPwIconComponent } from '../../../shared/components/dynamic-pw-icon/dynamic-pw-icon.component';
 
+
+/**
+ * Displays a signup form to the user.
+ */
 @Component({
   selector: 'app-signup',
   standalone: true,
@@ -40,12 +44,14 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private authService: AuthService,
     public errorService: ErrorService,
   ) { }
 
 
+  /**
+   * Populates the email field from route parameters if provided.
+   */
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
       const email: string | null = paramMap.get('email');
@@ -57,6 +63,10 @@ export class SignupComponent implements OnInit {
   }
 
 
+  /**
+   * Validates the form and triggers the registration process.
+   * @param {NgForm} form - The signup form.
+   */
   onSubmit(form: NgForm) {
     if (form.submitted && this.isValid(form)) {
       this.errorResp = {};
@@ -69,9 +79,8 @@ export class SignupComponent implements OnInit {
 
 
   /**
-   * Check if the registration form is valid, including custom password confirmation validation.
-   * @param {NgForm} form - The registration form
-   * @returns {boolean} Validation check result
+   * Validates the signup form, including custom password confirmation checks.
+   * @param {NgForm} form - The signup form.
    */
   isValid(form: NgForm): boolean {
     return form.form.valid && this.checkPasswordConfirmation() && this.formData.privacyCheck;
@@ -79,17 +88,25 @@ export class SignupComponent implements OnInit {
 
 
   /**
-   * Check if both passwords match each other.
-   * @returns {boolean} Password confirmation check result
+   * Checks if both passwords match each other.
    */
   checkPasswordConfirmation(): boolean {
     return this.formData.password == this.formData.passwordConfirmation;
   }
 
+
+  /**
+   * Handles successful signup.
+   */
   onSignup() {
     this.emailSent = true;
   }
 
+
+  /**
+   * Extracts and stores error messages and resets the loading state.
+   * @param {any} err - The error response returned by the authentication service.
+   */
   onError(err: any) {
     this.errorResp = this.errorService.generateErrRecord(err);
     this.loading = false;

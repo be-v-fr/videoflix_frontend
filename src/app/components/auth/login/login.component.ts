@@ -9,6 +9,10 @@ import { ErrorService } from '../../../shared/services/error.service';
 import { DynamicPwIconComponent } from '../../../shared/components/dynamic-pw-icon/dynamic-pw-icon.component';
 import { CustomCheckboxComponent } from '../../../shared/components/custom-checkbox/custom-checkbox.component';
 
+
+/**
+ * Displays a login form to the user.
+ */
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -34,6 +38,7 @@ export class LoginComponent implements OnInit {
   errorResp: Record<string, string[]> = {};
   loginComplete: boolean = false;
 
+
   constructor(
     public router: Router,
     private authService: AuthService,
@@ -41,12 +46,19 @@ export class LoginComponent implements OnInit {
   ) { }
 
 
+  /**
+   * Loads the "remember me" preference from local storage.
+   */
   ngOnInit(): void {
     const rememberMe = localStorage.getItem('rememberMe');
     this.formData.rememberMe = (rememberMe === 'true');
   }
 
 
+  /**
+   * Validates the form and triggers the login process.
+   * @param {NgForm} form - The login form.
+   */
   onSubmit(form: NgForm) {
     if (form.submitted && form.form.valid) {
       this.loading = true;
@@ -58,12 +70,20 @@ export class LoginComponent implements OnInit {
   }
 
 
+  /**
+   * Handles successful login.
+   * @param {any} resp - The response object returned by the authentication service.
+   */
   onLogin(resp: any) {
     this.authService.onLogin(resp);
     this.loginComplete = true;
   }
 
 
+  /**
+   * Extracts and stores error messages and resets the loading state.
+   * @param {any} err - The error response returned by the authentication service.
+   */
   onError(err: any) {
     this.errorResp = this.errorService.generateErrRecord(err);
     this.loading = false;

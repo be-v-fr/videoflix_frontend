@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 
+
+/**
+ * Base component serving as a container for every component related to user authentication.
+ */
 @Component({
   selector: 'app-auth',
   standalone: true,
@@ -9,6 +13,7 @@ import { Router, RouterOutlet } from '@angular/router';
   styleUrl: './auth.component.scss'
 })
 export class AuthComponent {
+
 
   constructor(
     public router: Router

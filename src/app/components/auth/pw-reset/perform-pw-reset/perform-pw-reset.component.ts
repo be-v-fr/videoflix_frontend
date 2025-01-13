@@ -8,6 +8,10 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastNotificationComponent } from '../../../../shared/components/toast-notification/toast-notification.component';
 import { DynamicPwIconComponent } from '../../../../shared/components/dynamic-pw-icon/dynamic-pw-icon.component';
 
+
+/**
+ * Component to perform a password reset using a token retrieved from the URL.
+ */
 @Component({
   selector: 'app-perform-pw-reset',
   standalone: true,
@@ -33,17 +37,27 @@ export class PerformPwResetComponent implements OnInit, OnDestroy {
   ) { }
 
 
+  /**
+   * Extracts the reset token from the route parameters.
+   */
   ngOnInit(): void {
     this.authService.resettingPw = true;
     this.route.paramMap.subscribe(paramMap => this.token = paramMap.get('token'));
   }
 
 
+  /**
+   * Resets the "resettingPw" state in the authentication service.
+   */
   ngOnDestroy(): void {
     this.authService.resettingPw = false;    
   }
 
 
+  /**
+   * Validates the form and triggers the password reset process.
+   * @param {NgForm} form - The password reset form.
+   */
   onSubmit(form: NgForm) {
     if (form.submitted && this.isValid(form) && this.token) {
       this.errorResp = {};
@@ -55,9 +69,8 @@ export class PerformPwResetComponent implements OnInit, OnDestroy {
 
 
   /**
-   * Check if the registration form is valid, including custom password confirmation validation.
-   * @param {NgForm} form - The registration form
-   * @returns {boolean} Validation check result
+   * Validates the password reset form, including custom password confirmation logic.
+   * @param {NgForm} form - The password reset form.
    */
   isValid(form: NgForm): boolean {
     return form.form.valid && this.checkPasswordConfirmation();
@@ -65,14 +78,16 @@ export class PerformPwResetComponent implements OnInit, OnDestroy {
 
 
   /**
-   * Check if both passwords match each other.
-   * @returns {boolean} Password confirmation check result
+   * Checks if the password and password confirmation match.
    */
   checkPasswordConfirmation(): boolean {
     return this.formData.password == this.formData.passwordConfirmation;
   }
 
 
+  /**
+   * Marks the reset process as complete and clears the local session token.
+   */
   onReset() {
     this.resetComplete = true;
     this.authService.deleteLocalSessionToken();
@@ -80,6 +95,10 @@ export class PerformPwResetComponent implements OnInit, OnDestroy {
   }
 
 
+  /**
+   * Extracts and stores error messages for display.
+   * @param {any} err - The error response returned by the authentication service.
+   */
   onError(err: any) {
     this.errorResp = this.errorService.generateErrRecord(err);;
   }

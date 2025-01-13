@@ -7,6 +7,11 @@ import { AuthService } from '../../../../shared/services/auth.service';
 import { ToastNotificationComponent } from '../../../../shared/components/toast-notification/toast-notification.component';
 import { ErrorService } from '../../../../shared/services/error.service';
 
+
+/**
+ * Component for requesting a password reset email.
+ * It provides functionality to input an email address and trigger a password reset request.
+ */
 @Component({
   selector: 'app-request-pw-reset',
   standalone: true,
@@ -23,6 +28,7 @@ export class RequestPwResetComponent implements OnInit {
   emailMsg: string = 'A password reset email was sent to your email address.';
   emailSent: boolean | 'finally' = false;
   @HostBinding('class.no-shadow') inDialog: boolean = false;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -46,6 +52,11 @@ export class RequestPwResetComponent implements OnInit {
     });
   }
 
+
+  /**
+   * Validates the form and triggers the password reset request process.
+   * @param {NgForm} form - The reset request form.
+   */
   onSubmit(form: NgForm) {
     if (form.submitted && form.form.valid) {
       this.loading = true;
@@ -56,11 +67,20 @@ export class RequestPwResetComponent implements OnInit {
     }
   }
 
+
+  /**
+   * Updates the state to reflect that the email has been sent.
+   */
   onRequest() {
     this.emailSent = true;
     this.loading = false;
   }
 
+
+  /**
+   * Extracts and stores error messages for display.
+   * @param {any} err - The error response returned by the authentication service.
+   */
   onError(err: any) {
     this.errorResp = this.errorService.generateErrRecord(err);
     this.loading = false;
