@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostBinding, OnInit, Output } from '@angular/core';
 import { FormErrorComponent } from '../../../../shared/components/form-error/form-error.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -28,6 +28,8 @@ export class RequestPwResetComponent implements OnInit {
   emailMsg: string = 'A password reset email was sent to your email address.';
   emailSent: boolean | 'finally' = false;
   @HostBinding('class.no-shadow') inDialog: boolean = false;
+  @Output() close = new EventEmitter<void>();
+
 
 
   constructor(
@@ -84,5 +86,10 @@ export class RequestPwResetComponent implements OnInit {
   onError(err: any) {
     this.errorResp = this.errorService.generateErrRecord(err);
     this.loading = false;
+  }
+
+  closeDialog() {
+    console.log('close dialog inner!');
+    this.close.emit();
   }
 }

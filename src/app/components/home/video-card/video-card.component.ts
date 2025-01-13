@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoadingCircleComponent } from '../../../shared/components/loading-circle/loading-circle.component';
 import { VideoMeta } from '../../../shared/models/video-meta';

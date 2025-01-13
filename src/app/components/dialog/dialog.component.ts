@@ -57,6 +57,7 @@ export class DialogComponent {
    * Closes the dialog with a sliding-out animation.
    */
   close() {
+    console.log('close!');
     this.slidingOut = true;
     setTimeout(() => {
       this.showing = false;
