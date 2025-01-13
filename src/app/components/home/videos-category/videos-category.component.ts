@@ -5,6 +5,11 @@ import { VideoCardComponent } from '../video-card/video-card.component';
 import { CommonModule } from '@angular/common';
 import { StyleService } from '../../../shared/services/style.service';
 
+
+/**
+ * Component for displaying a category of videos in a grid format.
+ * Allows expansion and adapts its layout based on screen size.
+ */
 @Component({
   selector: 'app-videos-category',
   standalone: true,
@@ -30,16 +35,25 @@ export class VideosCategoryComponent implements AfterViewInit {
   ) { }
 
 
+  /**
+   * Checks whether the video cards span multiple rows.
+   */
   ngAfterViewInit(): void {
     this.checkRows();
   }
 
 
+  /**
+   * Toggles the expansion state of the component instance.
+   */
   toggleExpansion(): void {
     this.expanded = !this.expanded;
   }
 
 
+  /**
+   * Handles window resize events and rechecks the layout if the event throttling condition is met.
+   */
   @HostListener('window:resize')
   onResize() {
     const now = Date.now();
@@ -50,6 +64,9 @@ export class VideosCategoryComponent implements AfterViewInit {
   }
 
 
+  /**
+   * Checks whether the video cards span multiple rows based on their layout.
+   */
   checkRows(): void {
     const children = Array.from(this.containerRef.nativeElement.children) as HTMLElement[];
     if(children.length === this.selection.length) {
@@ -60,6 +77,10 @@ export class VideosCategoryComponent implements AfterViewInit {
   }
 
 
+  /**
+   * Checks the vertical size of the video cards to determine if they span multiple rows.
+   * @param {HTMLElement[]} children Array of child elements (video cards) in the container.
+   */
   checkVerticalSize(children: HTMLElement[]): void {
     const containerHeight: number = this.containerRef.nativeElement.offsetHeight;
     const videoHeight: number = children[0].offsetHeight;
@@ -67,6 +88,10 @@ export class VideosCategoryComponent implements AfterViewInit {
   }
 
 
+  /**
+   * Checks the horizontal size of the video cards to determine if they span multiple rows.
+   * @param {HTMLElement[]} children Array of child elements (video cards) in the container.
+   */
   checkHorizontalSize(children: HTMLElement[]): void {
     const containerWidth: number = this.containerRef.nativeElement.offsetWidth;
     const videoWidth: number = children[0].offsetWidth;

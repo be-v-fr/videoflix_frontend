@@ -10,6 +10,10 @@ import { ToastNotificationComponent } from '../../shared/components/toast-notifi
 import { Subscription } from 'rxjs';
 import { BackBtnComponent } from '../../shared/components/back-btn/back-btn.component';
 
+
+/**
+ * Navigation bar operating with different modes to dynamically react to different app features.
+ */
 @Component({
   selector: 'app-navigation',
   standalone: true,
@@ -33,11 +37,16 @@ export class NavigationComponent implements OnInit, OnDestroy {
   awaitingInit: boolean | 'complete' = false;
   authSub: Subscription = new Subscription();
 
+
   constructor(
     public router: Router,
     public authService: AuthService
   ) { }
 
+
+  /**
+   * Subscribes to authentication state if no user is currently logged in.
+   */
   ngOnInit(): void {
     if (!this.authService.currentUser) {
       this.awaitingInit = true;
@@ -45,11 +54,19 @@ export class NavigationComponent implements OnInit, OnDestroy {
     }
   }
 
+
+  /**
+   * Unsubscribes from the authentication subscription to avoid memory leaks.
+   */
   ngOnDestroy(): void {
     this.authSub.unsubscribe();
   }
 
 
+  /**
+   * Subscribes to authentication state changes.
+   * If a user logs in, updates the initialization state and unsubscribes from further changes.
+   */
   subAuth(): Subscription {
     return this.authService.currentUser$.subscribe(user => {
       if (user) {
@@ -60,10 +77,18 @@ export class NavigationComponent implements OnInit, OnDestroy {
     });
   }
 
+
+  /**
+   * Displays the dialog for requesting a password reset.
+   */
   showChangePwDialog(): void {
     this.changePwDialogShowing = true;
   }
 
+
+  /**
+   * Logs out the current user and updates the component state.
+   */
   logout(): void {
     this.authService.logout();
     this.loggedOut = true;

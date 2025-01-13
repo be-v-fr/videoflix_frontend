@@ -12,6 +12,13 @@ import { VideosCategoryComponent } from './videos-category/videos-category.compo
 import { VideoPreviewComponent } from '../video-preview/video-preview.component';
 import { DialogVideoDetailsComponent } from '../../shared/components/dialog-video-details/dialog-video-details.component';
 
+
+/**
+ * Dashboard including
+ * - a viewport-sized video preview
+ * - video cards sorted by categories, including genres
+ * - interactive dialogs regarding video details and playback states.
+ */
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -35,6 +42,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) { }
 
 
+  /**
+   * Initializes the component by syncing video metadata and initializing user-related data.
+   * */
   ngOnInit(): void {
     if (this.authService.currentUser) {
       this.initAppContent();
@@ -43,17 +53,28 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
 
+  /**
+   * Cleans up resources when the component is destroyed.
+   */
   ngOnDestroy(): void {
     this.authSub.unsubscribe();
   }
 
 
+  /**
+   * Initializes the application content by syncing video metadata
+   * and initializing video completion data.
+   * @returns {Promise<void>} Resolves when initialization is complete.
+   */
   async initAppContent(): Promise<void> {
     await this.videosService.syncVideosMetaIfAllowed();
     this.videosService.initVideoCompletionData();
   }
 
 
+  /**
+   * Subscribes to authentication state changes and re-initializes app content when the user logs in.
+   */
   subAuth(): Subscription {
     return this.authService.currentUser$.subscribe(user => {
       if (user) {
@@ -63,7 +84,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
 
-  continueVideo(data: { meta: VideoMeta, completion: VideoCompletion }) {
+  /**
+   * Displays the continue watching dialog with the provided video metadata and completion data.
+   */
+  continueVideo(data: { meta: VideoMeta, completion: VideoCompletion }): void {
     if (this.continueWatchingData !== data) {
       this.continueWatchingData = data;
     }
@@ -71,7 +95,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
 
-  showVideoDetails(data: { meta: VideoMeta, completion?: VideoCompletion }) {
+  /**
+   * Displays the video details dialog with the provided video metadata and optional completion data.
+   */
+  showVideoDetails(data: { meta: VideoMeta, completion?: VideoCompletion }): void {
     if (this.continueWatchingData !== data) {
       this.videoDetailsData = data;
     }

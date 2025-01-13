@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, Type, Input, Output, EventEmitter, Injector, inject } from '@angular/core';
 
+
+/**
+ * A reusable animated dialog container component for displaying dynamic content.
+ * Provides functionality for managing dialog state and passing data to the dialog content.
+ */
 @Component({
   selector: 'app-dialog',
   standalone: true,
@@ -9,6 +14,12 @@ import { Component, Type, Input, Output, EventEmitter, Injector, inject } from '
   styleUrl: './dialog.component.scss'
 })
 export class DialogComponent {
+
+  
+  /**
+   * The dialog content component to be displayed inside the dialog container.
+   * This must be a dynamically loaded Angular component.
+   */
   @Input({alias: 'dialog', required: true}) dialogContent!: Type<object>;
   private _dialogData?: any;
   @Input()
@@ -34,12 +45,17 @@ export class DialogComponent {
   public slidingOut: boolean = false;
 
 
+  /**
+   * Opens the dialog.
+   */
   open() {
     this.showing = true;
   }
 
   
-  // timeout length identical to "$slide-duration" in style file
+  /**
+   * Closes the dialog with a sliding-out animation.
+   */
   close() {
     this.slidingOut = true;
     setTimeout(() => {
@@ -49,6 +65,10 @@ export class DialogComponent {
   }
 
 
+  /**
+   * Updates the "dialogContentInjector" with the latest "dialogData".
+   * Creates a new injector with the "DIALOG_DATA" token if data is provided.
+   */
   private updateDialogContentInjector(): void {
     if (this._dialogData) {
       this.dialogContentInjector = Injector.create({

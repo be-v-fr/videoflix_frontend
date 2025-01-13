@@ -13,6 +13,10 @@ import { VideoCompletion } from '../../../shared/models/video-completion';
 import { BackBtnComponent } from '../../../shared/components/back-btn/back-btn.component';
 import { LogoComponent } from '../../../shared/components/logo/logo.component';
 
+
+/**
+ * Videogular video player component, playing HLS videos.
+ */
 @Component({
   selector: 'app-player',
   standalone: true,
@@ -48,13 +52,19 @@ export class PlayerComponent implements OnInit, OnDestroy {
   ) { }
 
 
+  /**
+   * Initializes the component.
+   */
   ngOnInit(): void {
     this.initVideoCompletion();
     this.setInactivityTimer();
     this.startProgressTracking();
   }
 
-
+  
+  /** 
+   * Cleans up resources when the component is destroyed.
+   */
   ngOnDestroy() {
     if (this.inactivityTimer) {
       clearTimeout(this.inactivityTimer);
@@ -62,17 +72,28 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
 
+  /**
+   * Completes the Videogular API setup.
+   */
   onPlayerReady(source: VgApiService) {
     this.api = source;
   }
 
 
+  /**
+   * Initializes available bitrates with user-friendly labels.
+   */
   initBitrates(bitrates: BitrateOptions[]) {
     bitrates.forEach(b => b.label = this.generateBitrateLabel(b.bitrate));
     this.hlsBitrates = bitrates;
   }
 
 
+  /**
+   * Generates a human-readable label for a given bitrate.
+   * @param {number} bitrate The bitrate value in bits per second.
+   * @returns {string} The formatted bitrate label.
+   */
   generateBitrateLabel(bitrate: number): string {
     switch (bitrate) {
       case 0: return 'auto';
@@ -85,21 +106,31 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
 
+  /**
+   * Updates the bitrate selection and displays a message.
+   * @param {BitrateOptions} bitrate The selected bitrate.
+   */
   onBitrateChange(bitrate: BitrateOptions): void {
     this.toastBitrateMsg = bitrate.label;
   }
 
 
+  /**
+   * Handles mouse movement and click events.
+   */
   @HostListener('document:mousemove', ['$event'])
   @HostListener('document:mousedown', ['$event'])
   @HostListener('document:mouseup', ['$event'])
-  handleMouseActivity() {
+  handleMouseActivity(): void {
     this.resetInactivityTimer();
     this.showingPlayer = true;
   }
 
 
-  private setInactivityTimer() {
+  /**
+   * Sets a timer to detect user inactivity.
+   */
+  private setInactivityTimer(): void {
     const videoElement: HTMLVideoElement = this.media.nativeElement;
     this.inactivityTimer = setTimeout(() => {
       if (!videoElement.paused) {
@@ -109,7 +140,10 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
 
-  private resetInactivityTimer() {
+  /** 
+   * Resets the inactivity timer.
+   */
+  private resetInactivityTimer(): void {
     if (this.inactivityTimer) {
       clearTimeout(this.inactivityTimer);
     }
@@ -117,6 +151,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
 
+  /**
+   * Seeks the video forward or backward by a specified number of seconds.
+   */
   seek(seconds: number): void {
     const videoElement: HTMLVideoElement = this.media.nativeElement;
     let newTime = videoElement.currentTime + seconds;
@@ -129,6 +166,9 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
 
+  /** 
+   * Initializes the video playback position from saved progress, if available.
+   */
   initVideoCompletion(): void {
     const completion: VideoCompletion | undefined = this.videosService.getVideoCompletion(this.videoMeta.id);
     this.videoCompletion.videoId = this.videoMeta.id;
@@ -142,14 +182,20 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
 
-  startProgressTracking() {
+  /**
+   * Starts tracking video playback progress using the specified update interval.
+   */
+  startProgressTracking(): void {
     setInterval(() => {
       this.saveProgress();
     }, 1000);
   }
 
 
-  saveProgress() {
+  /**
+   * Saves playback progress to the server and runtime storage.
+   */
+  saveProgress(): void {
     const videoElement: HTMLVideoElement = this.media.nativeElement;
     if (!videoElement.paused) {
       this.saveProgressInRuntime(videoElement);
@@ -163,15 +209,21 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
 
-  saveProgressInRuntime(videoElement: HTMLVideoElement) {
+  /**
+   * Saves playback progress to runtime storage.
+   */
+  saveProgressInRuntime(videoElement: HTMLVideoElement): void {
     this.videoCompletion.currentTime = videoElement.currentTime;
     this.videoCompletion.updatedAt = new Date();
     this.videosService.saveVideoCompletionInRuntime(this.videoCompletion);
   }
 
 
+  /**
+   * Handles keyboard shortcuts for playback control.
+   */
   @HostListener('document:keydown', ['$event'])
-  onKeydown(ev: KeyboardEvent) {
+  onKeydown(ev: KeyboardEvent): void {
     switch (ev.key) {
       case 'Escape': this.exit(); break;
       case ' ':
@@ -184,12 +236,18 @@ export class PlayerComponent implements OnInit, OnDestroy {
   }
 
 
+  /**
+   * Exits the video player by saving the progress and navigating to the home page.
+   */
   exit(): void {
     this.saveProgress();
     this.router.navigateByUrl('');
   }
 
 
+  /**
+   * Toggles the play/pause state of the video.
+   */
   togglePlayState(): void {
     const videoElement: HTMLVideoElement = this.media.nativeElement;
     videoElement.paused ? videoElement.play() : videoElement.pause();   

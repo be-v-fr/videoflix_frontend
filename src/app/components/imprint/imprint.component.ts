@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 
+
+/**
+ * Simple imprint component.
+ */
 @Component({
   selector: 'app-imprint',
   standalone: true,

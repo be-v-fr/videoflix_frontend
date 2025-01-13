@@ -71,6 +71,14 @@ export class VideosService {
 
 
   /**
+   * Retrieve a single video metadata object from the server.
+   */
+  public async retrieveVideoMeta(id: number): Promise<Object> {
+    return await lastValueFrom(this.http.get(this.VIDEOS_URL + 'main/' + id + '/'));
+  }
+
+
+  /**
    * Get video metadata by its ID.
    */
   public getVideoMetaFromId(id: number): VideoMeta | undefined {

@@ -10,6 +10,11 @@ import { AuthService } from '../../shared/services/auth.service';
 import { ErrorService } from '../../shared/services/error.service';
 import { ToastNotificationComponent } from '../../shared/components/toast-notification/toast-notification.component';
 
+
+/**
+ * Component for displaying a video player with metadata and handling related
+ * logic such as user authentication, metadata synchronization, and error handling.
+ */
 @Component({
   selector: 'app-video',
   standalone: true,
@@ -32,6 +37,9 @@ export class VideoComponent implements OnInit, OnDestroy {
   ) { }
 
 
+  /**
+   * Initializes the component and sets up authentication and video metadata.
+   */
   ngOnInit(): void {
     if(this.authService.currentUser) {
       this.initVideo();
@@ -40,11 +48,17 @@ export class VideoComponent implements OnInit, OnDestroy {
   }
 
 
+  /**
+   * Cleans up resources when the component is destroyed.
+   */
   ngOnDestroy(): void {
     this.authSub.unsubscribe();
   }
 
 
+  /**
+   * Subscribes to authentication state changes.
+   */
   subAuth(): Subscription {
     return this.authService.currentUser$.subscribe(user => {
       if(user) {
@@ -54,6 +68,10 @@ export class VideoComponent implements OnInit, OnDestroy {
   }
 
 
+  /**
+   * Initializes video metadata by retrieving the video ID from the route
+   * and fetching metadata from the service if necessary.
+   */
   initVideo() {
     this.route.paramMap.subscribe(paramMap => {
       const videoId = paramMap.get('id');
@@ -67,6 +85,10 @@ export class VideoComponent implements OnInit, OnDestroy {
   }
 
 
+  /**
+   * Synchronizes video metadata by retrieving it from the server.
+   * @param {number} id The ID of the video.
+   */
   syncVideoMeta(id: number) {
     this.videosService.retrieveVideoMeta(id)
       .then(resp => this.metaData = new VideoMeta(resp))
@@ -74,6 +96,10 @@ export class VideoComponent implements OnInit, OnDestroy {
   }
 
 
+  /**
+   * Handles errors by formatting the error message and updating the toast notification.
+   * @param {any} err The error response to handle.
+   */
   onError(err: any) {
     const resp: Record<string, string[]> = this.errorService.generateErrRecord(err);
     this.toastErrorMsg = ('detail' in resp) ? resp['detail'][0] : resp['unknown'][0];

@@ -3,6 +3,10 @@ import { EmailComponent } from '../../shared/components/email/email.component';
 import { environment } from "../../../environments/environment.development";
 import { AutoscrollService } from '../../shared/services/autoscroll.service';
 
+
+/**
+ * Simple privacy policy component.
+ */
 @Component({
   selector: 'app-privacy',
   standalone: true,
