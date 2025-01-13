@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 
+
+/**
+ * Simple animated loading circle.
+ */
 @Component({
   selector: 'app-loading-circle',
   standalone: true,

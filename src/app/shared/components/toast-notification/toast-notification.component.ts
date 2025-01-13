@@ -11,11 +11,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class ToastNotificationComponent {
   @Input() status: 'ok' | 'error' | 'neutral' = 'ok';
   @Input({ required: true }) msg!: string;
-
-  /** Event triggered after toast notification has expired */
   @Output() then = new EventEmitter<void>;
-
-  /** Toast notification display state, synced in real time with input variable */
   private _showing: boolean = false;
   @Input({ alias: 'show' })
   set showing(value: boolean) {
@@ -30,7 +26,8 @@ export class ToastNotificationComponent {
 
 
   /**
-   * Triggered after the "showing" property has been set to true. 
+   * Triggered after the "showing" property has been set to true.
+   * Sets timeout to close the notification later on.
    */
   onShow() {
     const timeoutLength = (this.status == 'error') ? 5000 : 2000;
@@ -38,6 +35,10 @@ export class ToastNotificationComponent {
   }
 
 
+  /**
+   * Closes the notification, triggering the "then" event to apply
+   * subsequent logic in the parent component.
+   */
   close() {
     if (this._showing) {
       this._showing = false;

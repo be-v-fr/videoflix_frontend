@@ -6,6 +6,11 @@ import { VideosService } from '../../services/videos.service';
 import { VideoCompletion } from '../../models/video-completion';
 import { VideoMeta } from '../../models/video-meta';
 
+
+/**
+ * Dialog that asks the user if he wants to continue or resume a selected video,
+ * including the video thumbnail and watching progress.
+ */
 @Component({
   selector: 'app-dialog-continue-watching',
   standalone: true,
@@ -26,6 +31,10 @@ export class DialogContinueWatchingComponent implements OnInit {
   ) { }
 
 
+  /**
+   * Initializes necessary data and automatically starts the video or cancels the
+   * dialog if data is missing.
+   */
   ngOnInit(): void {
     if (!(this.metaData && this.completion)) {
       this.injectData();
@@ -36,21 +45,31 @@ export class DialogContinueWatchingComponent implements OnInit {
   }
 
 
+  /**
+   * Closes the dialog by emitting the close event.
+   */
   closeDialog() {
     this.close.emit();
   }
 
 
+  /**
+   * Injects data into the component if available and validates it.
+   */
   private injectData(): void {
-    if (!this.validateInjection(this.data)) {
+    if (this.validateInjection(this.data)) {
+      this.metaData = this.data.metaData;
+      this.completion = this.data.completion;
+    } else {
       console.error('Invalid data.');
-      return;
     }
-    this.metaData = this.data.metaData;
-    this.completion = this.data.completion;
   }
 
 
+  /**
+   * Validates the injected data structure.
+   * @param {any} data - The data to validate.
+   */
   private validateInjection(data: any): data is { metaData: VideoMeta; completion: VideoCompletion } {
     return data &&
       typeof data === 'object' &&
@@ -59,11 +78,17 @@ export class DialogContinueWatchingComponent implements OnInit {
   }
 
 
+  /**
+   * Navigates to the video playback page for the current video.
+   */
   playVideo() {
     this.router.navigate(['video', this.metaData.id]);
   }
 
 
+  /**
+   * Resets the video progress to the start and navigates to the video playback page.
+   */
   playVideoFromStart() {
     this.completion.currentTime = 0;
     this.videosService.saveVideoCompletionInRuntime(this.completion);

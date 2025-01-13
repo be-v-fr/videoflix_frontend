@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common';
 import { VideoCompletion } from '../../models/video-completion';
 import { VideoMeta } from '../../models/video-meta';
 
+
+/**
+ * Video watching progress bar, including a graphical display and the
+ * exact playback state in numbers. 
+ */
 @Component({
   selector: 'app-watching-progress',
   standalone: true,
@@ -23,12 +28,18 @@ export class WatchingProgressComponent implements OnInit {
   }
 
 
+  /**
+   * Returns relative video progress in percent.
+   */
   calcProgressWidth(): string {
     const relativeProgress: number = this.completion.currentTime / this.metaData.durationInSeconds;
     return relativeProgress * 100 + '%';
   }
 
 
+  /**
+   * Returns the text information on video progress displayed to the user.
+   */
   generateProgressText(): string {
     const durScnds: number = Math.round(this.metaData.durationInSeconds);
     if (this.completion.currentTime == -1 || this.metaData.durationInSeconds == -1) {
@@ -39,11 +50,17 @@ export class WatchingProgressComponent implements OnInit {
   }
 
 
+  /**
+   * Returns the progress in seconds.
+   */
   generateProgInSeconds(): string {
     return `${Math.floor(this.completion.currentTime)} of ${Math.round(this.metaData.durationInSeconds)} s`;
   }
 
 
+  /**
+   * Returns the progress in minutes.
+   */
   generateProgInMinutes(): string {
     let progressMinutes: number = Math.floor(this.completion.currentTime / 60);
     let durationMinutes: number = Math.round(this.metaData.durationInSeconds / 60);

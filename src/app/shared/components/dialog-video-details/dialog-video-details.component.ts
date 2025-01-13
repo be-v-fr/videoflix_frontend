@@ -7,6 +7,10 @@ import { VideoMeta } from '../../models/video-meta';
 import { WatchingProgressComponent } from '../watching-progress/watching-progress.component';
 import { DurationComponent } from '../duration/duration.component';
 
+
+/**
+ * Dialog that shows video details to the user, including a play button and a resume button if applicable.
+ */
 @Component({
   selector: 'app-dialog-video-details',
   standalone: true,
@@ -27,6 +31,9 @@ export class DialogVideoDetailsComponent {
   ) { }
 
 
+  /**
+   * Initializes necessary data.
+   */
   ngOnInit(): void {
     if (!(this.metaData && this.completion)) {
       this.injectData();
@@ -34,23 +41,33 @@ export class DialogVideoDetailsComponent {
   }
 
 
+  /**
+   * Closes the dialog by emitting the close event.
+   */
   closeDialog() {
     this.close.emit();
   }
 
 
+  /**
+   * Injects data into the component if available and validates it.
+   */
   private injectData(): void {
-    if (!this.validateInjection(this.data)) {
+    if (this.validateInjection(this.data)) {
+      this.metaData = this.data.metaData;
+      if (this.data.completion) {
+        this.completion = this.data.completion;
+      }
+    } else {
       console.error('Invalid data.');
-      return;
-    }
-    this.metaData = this.data.metaData;
-    if (this.data.completion) {
-      this.completion = this.data.completion;
     }
   }
 
 
+  /**
+   * Validates the injected data structure.
+   * @param {any} data - The data to validate.
+   */
   private validateInjection(data: any): data is { metaData: VideoMeta; completion?: VideoCompletion } {
     return data &&
       typeof data === 'object' &&
@@ -59,11 +76,17 @@ export class DialogVideoDetailsComponent {
   }
 
 
+  /**
+   * Navigates to the video playback page for the current video.
+   */
   playVideo() {
     this.router.navigate(['video', this.metaData.id]);
   }
 
 
+  /**
+   * Resets the video progress to the start and navigates to the video playback page.
+   */
   playVideoFromStart() {
     if (this.completion) {
       this.completion.currentTime = 0;

@@ -2,6 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ConditionalErrorMsg } from '../../interfaces/conditional-error-msg';
 
+
+/**
+ * Dynamic form error component.
+ * 
+ * Receives an array of conditional error messages as inputs. Displays the first error message
+ * from that array whose condition is fulfilled. 
+ */
 @Component({
   selector: 'app-form-error',
   standalone: true,

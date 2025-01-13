@@ -1,5 +1,9 @@
 import { Component, Input } from '@angular/core';
 
+
+/**
+ * Simple email anchor element.
+ */
 @Component({
   selector: 'app-email',
   standalone: true,

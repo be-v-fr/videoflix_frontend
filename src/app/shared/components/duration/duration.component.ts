@@ -1,6 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { VideoMeta } from '../../models/video-meta';
 
+
+/**
+ * Total duration of a video, shown together with a stopwatch symbol.
+ */
 @Component({
   selector: 'app-duration',
   standalone: true,
