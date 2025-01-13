@@ -28,7 +28,7 @@
     </div>
     <div class="btns-container">
         <button type="submit" class="btn-primary" [disabled]="loading">Log in</button>
-        <button type="button" class="btn-secondary">Demo</button>
+        <button type="button" class="btn-secondary" (click)="logInAsGuest()">Demo</button>
         <app-form-error [errors]="[
                 errorService.getConditionalFieldErrResp('unknown', errorResp),
             ]" />

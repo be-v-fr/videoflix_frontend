@@ -1,6 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
+
+/**
+ * Displays a toast notification with different options, including an optional button.
+ */
 @Component({
   selector: 'app-toast-notification',
   standalone: true,

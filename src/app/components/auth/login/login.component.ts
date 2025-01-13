@@ -61,12 +61,28 @@ export class LoginComponent implements OnInit {
    */
   onSubmit(form: NgForm) {
     if (form.submitted && form.form.valid) {
-      this.loading = true;
-      localStorage.setItem('rememberMe', this.formData.rememberMe);
-      this.authService.login(this.formData.email, this.formData.password)
-        .then((resp) => this.onLogin(resp))
-        .catch((err) => this.onError(err));
+      this.login(this.formData.email, this.formData.password);
     }
+  }
+
+
+  /**
+   * Logs in as guest using data corresponding to the backend guest account.
+   */
+  logInAsGuest() {
+    this.login('guest@videoflix.com', 'gu3stl0g1n');
+  }
+
+
+  /**
+   * Logs in user and handles server response.
+   */
+  login(email: string, password: string) {
+    this.loading = true;
+    localStorage.setItem('rememberMe', this.formData.rememberMe);
+    this.authService.login(email, password)
+      .then((resp) => this.onLogin(resp))
+      .catch((err) => this.onError(err));
   }
 
 
