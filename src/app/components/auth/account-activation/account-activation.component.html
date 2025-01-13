@@ -3,6 +3,6 @@
 @if(error) {
 <app-toast-notification [show]="true" [status]="'error'" [msg]="error" (then)="router.navigateByUrl('auth/signup')" />
 } @else {
-<app-toast-notification [show]="true" [msg]="'Your account has been activated.'"
-    (then)="router.navigateByUrl('auth/login')" />
+<app-toast-notification [show]="true" [msg]="'Your account has been activated.'" [btn]="'Log in'"
+    (btnClick)="router.navigateByUrl('auth/login')" />
 }

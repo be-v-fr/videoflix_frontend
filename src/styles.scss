@@ -264,6 +264,16 @@ a {
     }
 }
 
+.btn-white {
+    @extend .btn-sizing;
+    background-color: $plain-white;
+    color: $purple;
+    &:hover, &:active {
+        background-color: $plain-white;
+        color: $purple-bright;
+    }
+}
+
 .btn-icon {
     width: 40px;
     height: 40px;

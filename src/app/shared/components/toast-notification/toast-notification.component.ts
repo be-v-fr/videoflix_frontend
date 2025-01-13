@@ -11,7 +11,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class ToastNotificationComponent {
   @Input() status: 'ok' | 'error' | 'neutral' = 'ok';
   @Input({ required: true }) msg!: string;
+  @Input() btn?: string;
   @Output() then = new EventEmitter<void>;
+  @Output() btnClick = new EventEmitter<void>;
   private _showing: boolean = false;
   @Input({ alias: 'show' })
   set showing(value: boolean) {
@@ -31,7 +33,11 @@ export class ToastNotificationComponent {
    */
   onShow() {
     const timeoutLength = (this.status == 'error') ? 5000 : 2000;
-    setTimeout(() => this.close(), timeoutLength);
+    setTimeout(() => {
+      if (!this.btn) {
+        this.close();
+      }
+    }, timeoutLength);
   }
 
 

@@ -8,5 +8,6 @@
         <p>{{msg}}</p>
         <button *ngIf="status == 'error'" class="material-icons-outlined close-toast-btn"
             (click)="close()">close_small</button>
+        <button *ngIf="btn" class="btn-white" (click)="btnClick.emit()">{{btn}}</button>
     </div>
 </div>

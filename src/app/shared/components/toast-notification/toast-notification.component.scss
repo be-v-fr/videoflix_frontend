@@ -34,16 +34,19 @@
             max-width: 360px;
             padding: 10px;
         }
-        .close-toast-btn {
+        .abstract-btn {
             cursor: pointer;
+            border-left: 1px solid $plain-white;
+            margin-left: 4px;
+            padding-left: 14px;
+            margin-right: 16px;        
+        }
+        .close-toast-btn {
+            @extend .abstract-btn;
             font-size: inherit;
             color: inherit;
             width: 40px;
             height: 32px;
-            border-left: 1px solid $plain-white;
-            margin-left: 4px;
-            padding-left: 14px;
-            margin-right: 16px;
             display: flex;
             align-items: center;
             @include transition-ease($dur: 75ms);
@@ -51,6 +54,9 @@
                 @include transition-ease($dur: 75ms);
                 text-shadow: 2px 1px 2px #00000066;
             }
+        }
+        .btn-white {
+            @extend .abstract-btn;
         }
     }
 
