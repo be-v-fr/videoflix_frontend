@@ -5,6 +5,7 @@ import { WatchingProgressComponent } from '../watching-progress/watching-progres
 import { VideosService } from '../../services/videos.service';
 import { VideoCompletion } from '../../models/video-completion';
 import { VideoMeta } from '../../models/video-meta';
+import { DialogService } from '../../services/dialog.service';
 
 
 /**
@@ -27,7 +28,8 @@ export class DialogContinueWatchingComponent implements OnInit {
   constructor(
     @Inject('DIALOG_DATA') public data: any,
     private router: Router,
-    private videosService: VideosService
+    private videosService: VideosService,
+    private dialogService: DialogService,
   ) { }
 
 
@@ -46,10 +48,10 @@ export class DialogContinueWatchingComponent implements OnInit {
 
 
   /**
-   * Closes the dialog by emitting the close event.
+   * Closes opened dialogs of this type.
    */
   closeDialog() {
-    this.close.emit();
+    this.dialogService.close(DialogContinueWatchingComponent);
   }
 
 

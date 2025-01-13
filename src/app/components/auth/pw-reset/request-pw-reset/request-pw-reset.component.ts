@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../shared/services/auth.service';
 import { ToastNotificationComponent } from '../../../../shared/components/toast-notification/toast-notification.component';
 import { ErrorService } from '../../../../shared/services/error.service';
+import { DialogService } from '../../../../shared/services/dialog.service';
 
 
 /**
@@ -28,8 +29,6 @@ export class RequestPwResetComponent implements OnInit {
   emailMsg: string = 'A password reset email was sent to your email address.';
   emailSent: boolean | 'finally' = false;
   @HostBinding('class.no-shadow') inDialog: boolean = false;
-  @Output() close = new EventEmitter<void>();
-
 
 
   constructor(
@@ -37,6 +36,7 @@ export class RequestPwResetComponent implements OnInit {
     public router: Router,
     private authService: AuthService,
     public errorService: ErrorService,
+    private dialogService: DialogService,
   ) {
     this.inDialog = !this.router.url.includes('auth');
   }
@@ -88,8 +88,11 @@ export class RequestPwResetComponent implements OnInit {
     this.loading = false;
   }
 
+  
+  /**
+   * Closes opened dialogs of this type.
+   */
   closeDialog() {
-    console.log('close dialog inner!');
-    this.close.emit();
+    this.dialogService.close(RequestPwResetComponent);
   }
 }

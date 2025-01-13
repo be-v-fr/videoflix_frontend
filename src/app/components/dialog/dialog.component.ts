@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, Type, Input, Output, EventEmitter, Injector, inject } from '@angular/core';
+import { Component, Type, Input, Output, EventEmitter, Injector, inject, ComponentRef, OnInit, OnDestroy } from '@angular/core';
+import { DialogService } from '../../shared/services/dialog.service';
 
 
 /**
@@ -13,7 +14,7 @@ import { Component, Type, Input, Output, EventEmitter, Injector, inject } from '
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.scss'
 })
-export class DialogComponent {
+export class DialogComponent implements OnInit, OnDestroy {
 
   
   /**
@@ -45,6 +46,31 @@ export class DialogComponent {
   public slidingOut: boolean = false;
 
 
+  constructor(
+    private dialogService: DialogService,
+  ) { }
+
+
+  /**
+   * Subscribes to dialog service to listen to the close event.
+   */
+  ngOnInit() {
+    this.dialogService.closeEvent.subscribe(({ component }) => {
+      if (component === this.dialogContent) {
+        this.close();
+      }
+    });
+  }
+
+
+  /**
+   * Unsubscribes from dialog service.
+   */
+  ngOnDestroy() {
+    this.dialogService.closeEvent.unsubscribe();
+  }
+
+
   /**
    * Opens the dialog.
    */
@@ -57,7 +83,6 @@ export class DialogComponent {
    * Closes the dialog with a sliding-out animation.
    */
   close() {
-    console.log('close!');
     this.slidingOut = true;
     setTimeout(() => {
       this.showing = false;
