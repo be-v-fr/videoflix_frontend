@@ -156,16 +156,28 @@ export class VideosService {
   }
 
 
+  /**
+   * Retrieves video completion data by video ID.
+   */
   public getVideoCompletion(videoId: number): VideoCompletion | undefined {
     return this.videoCompletionList.find(vc => vc.videoId == videoId);
   }
 
 
+  /**
+   * Retrieves the metadata of the preview video.
+   * @returns {VideoMeta} The metadata of the preview video.
+   */
   public getPreviewVideoMeta(): VideoMeta {
     return this.videosMeta[this.previewIndex];
   }
 
 
+  /**
+   * Updates video completion list in runtime memory by putting the updated object first,
+   * keeping the ordering.
+   * @param {VideoCompletion} updatedCompletion - The updated video completion data.
+   */
   public saveVideoCompletionInRuntime(updatedCompletion: VideoCompletion) {
     if (this.videoCompletionList) {
       const index = this.videoCompletionList.findIndex(vC => vC.videoId == updatedCompletion.videoId);
@@ -177,6 +189,11 @@ export class VideosService {
   }
 
 
+  /**
+   * Saves video completion data to the server. Creates or updates based on the existence of a valid ID.
+   * @param {VideoCompletion} updatedCompletion - The video completion data to save.
+   * @returns {Promise<Object>} A promise resolving with the server response.
+   */
   public saveVideoCompletionOnServer(updatedCompletion: VideoCompletion): Promise<Object> {
     if (updatedCompletion.id >= 1) {
       return this.updateVideoCompletionOnServer(updatedCompletion);
@@ -186,6 +203,10 @@ export class VideosService {
   }
 
 
+
+  /**
+   * Updates video completion data on the server.
+   */
   private updateVideoCompletionOnServer(updatedCompletion: VideoCompletion): Promise<Object> {
     const url = this.VIDEOS_URL + 'completion/' + updatedCompletion.id + '/';
     const data = { current_time: updatedCompletion.currentTime };
@@ -193,6 +214,9 @@ export class VideosService {
   }
 
 
+  /**
+   * Posts new video completion data on the server.
+   */
   private createVideoCompletionOnServer(updatedCompletion: VideoCompletion): Promise<Object> {
     const url = this.VIDEOS_URL + 'completion/';
     const data = {
@@ -203,6 +227,10 @@ export class VideosService {
   }
 
 
+  /**
+   * Searches video metadata based on the current search filter.
+   * @returns {VideoMeta[]} Array of video metadata matching the search filter.
+   */
   public search(): VideoMeta[] {
     const filterLc = this.searchFilter.toLocaleLowerCase();
     return this.videosMeta.filter(vm => {

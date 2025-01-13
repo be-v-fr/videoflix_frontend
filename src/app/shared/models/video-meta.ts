@@ -1,3 +1,7 @@
+/**
+ * Represents the metadata for a video, inluding the video playlist
+ * and thumbnail URLs to access the actual content.
+ */
 export class VideoMeta {
     id: number;
     title: string;
@@ -7,6 +11,7 @@ export class VideoMeta {
     playlistUrl: string;
     thumbUrl: string;
     createdAt: Date;
+
 
     constructor(obj: any) {
         this.id = obj.id ? obj.id : -1;
@@ -19,19 +24,10 @@ export class VideoMeta {
         this.createdAt = new Date(obj.created_at ? obj.created_at : -1);
     }
 
-    toJson(): {} {
-        return {
-            id: this.id,
-            title: this.title,
-            description: this.description,
-            genre: this.genre,
-            duration_in_seconds: this.durationInSeconds,
-            playlist_url: this.playlistUrl,
-            thumbnail: this.thumbUrl,
-            created_at: this.createdAt,
-        }
-    }
-
+    
+    /**
+     * Returns duration formatted to string including adequate time units.
+     */
     showDuration(): string {
         const seconds: number = Math.round(this.durationInSeconds);
         if(seconds == -1) {
@@ -39,14 +35,22 @@ export class VideoMeta {
         } else if (seconds < 60) {
             return Math.round(seconds) + ' s';
         } else {
-            const hours: number = Math.floor(seconds / 3600);
-            const minutes: number = Math.floor((seconds / 60) % 60);
-            let value: string = (hours > 0) ? hours + ' h' : '';
-            switch(minutes) {
-                case 0: return value;
-                case 1: return value + ' ' + minutes + ' min.';
-                default: return value + ' ' + minutes + ' mins.';
-            }
+            return this.formatToHoursAndMinutes(seconds);
         }
+    }
+
+
+    /**
+     * Formats duration in seconds to hours and minutes.
+     */
+    private formatToHoursAndMinutes(seconds: number): string {
+        const hours: number = Math.floor(seconds / 3600);
+        const minutes: number = Math.floor((seconds / 60) % 60);
+        let value: string = (hours > 0) ? hours + ' h' : '';
+        switch(minutes) {
+            case 0: return value;
+            case 1: return value + ' ' + minutes + ' min.';
+            default: return value + ' ' + minutes + ' mins.';
+        }        
     }
 }

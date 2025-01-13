@@ -1,3 +1,6 @@
+/**
+ * Represents the playback state of a video, related to the current user,
+ */
 export class VideoCompletion {
     id: number;
     videoId: number;
@@ -10,14 +13,5 @@ export class VideoCompletion {
         this.videoId = obj.video_id ? obj.video_id : -1;
         this.currentTime = obj.current_time ? obj.current_time : -1;
         this.updatedAt = new Date(obj.updated_at ? obj.updated_at : -1);
-    }
-
-
-    toJson(): {} {
-        return {
-            video_id: this.videoId,
-            current_time: this.currentTime,
-            updated_at: this.updatedAt,
-        }
     }
 }
