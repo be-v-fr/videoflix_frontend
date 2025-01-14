@@ -8,7 +8,7 @@
     align-items: center;
     .content {
         width: inherit;
-        padding: 10px 96px;
+        padding: 10px var(--page-side-padding);
         display: flex;
         justify-content: space-between;
         color: $plain-white;
@@ -17,11 +17,6 @@
             align-items: center;
         }
     }
-}
-
-app-search {
-    width: 300px;
-    margin-right: 16px;
 }
 
 .settings {

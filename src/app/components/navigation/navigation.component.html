@@ -10,7 +10,7 @@
     </section>
     @if(authService.currentUser && !(awaitingInit === true)) {
     <section *ngSwitchCase="'home'" [class.slide-down]="awaitingInit === 'complete'">
-        <app-search />
+        <app-nav-search />
         <button [routerLink]="['auth', 'login']" class="btn-primary">
             <span class="material-icons-outlined">logout</span>
             Log out

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { LogoComponent } from '../../shared/components/logo/logo.component';
 import { AuthService } from '../../shared/services/auth.service';
-import { SearchComponent } from '../../shared/components/search/search.component';
+import { NavSearchComponent } from './nav-search/nav-search.component';
 import { DialogComponent } from '../dialog/dialog.component';
 import { RequestPwResetComponent } from '../auth/pw-reset/request-pw-reset/request-pw-reset.component';
 import { ToastNotificationComponent } from '../../shared/components/toast-notification/toast-notification.component';
@@ -21,7 +21,7 @@ import { BackBtnComponent } from '../../shared/components/back-btn/back-btn.comp
     CommonModule,
     RouterLink,
     LogoComponent,
-    SearchComponent,
+    NavSearchComponent,
     DialogComponent,
     ToastNotificationComponent,
     BackBtnComponent

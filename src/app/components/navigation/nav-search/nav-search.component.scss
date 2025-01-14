@@ -1,0 +1,57 @@
+@import '../../../../styles.scss';
+@import 'material-icons/iconfont/material-icons.scss';
+
+:host {
+    width: 300px;
+    margin-right: 16px;
+    @extend .flex-center;
+}
+
+.search-desktop {
+    width: 100%;
+}
+.search-mobile-btn {
+    display: none;
+    color: $plain-white;
+    font-size: 28px;
+    border-radius: 50%;
+    @extend .flex-center;
+    width: 40px;
+    height: 40px;
+    @include transition-ease($dur: 75ms);
+    &:hover, &:active {
+        @include transition-ease($dur: 75ms);
+        background: $grey-trans;
+    }
+}
+.search-mobile-overlay {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    inset: 0;
+    background: #0000008d;
+    justify-content: center;
+    align-items: center;
+    animation: fade-in 100ms ease-out;
+    .field {
+        width: 60vw;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    :host {
+        width: auto;
+    }
+    .search-desktop {
+        display: none;
+    }
+    .search-mobile-btn{
+        display: initial;
+    }
+    .search-mobile-overlay {
+        display: flex;
+        app-search {
+            width: 75vw;
+        }
+    }
+}

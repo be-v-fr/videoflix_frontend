@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, Output, EventEmitter, Input, OnInit, AfterContentInit, AfterViewInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { VideosService } from '../../services/videos.service';
 
@@ -14,8 +14,11 @@ import { VideosService } from '../../services/videos.service';
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
-export class SearchComponent {
+export class SearchComponent implements AfterViewInit {
   @ViewChild('searchInputElement') searchInputRef!: ElementRef<HTMLInputElement>;
+  @Input() autofocus: boolean = false;
+  @Input() addClosingToClearBtn: boolean = false;
+  @Output() close: EventEmitter<void> = new EventEmitter<void>();
 
 
   constructor(
@@ -24,10 +27,33 @@ export class SearchComponent {
 
 
   /**
+   * Executes autofocus.
+   */
+  ngAfterViewInit(): void {
+    if(this.autofocus) {
+      this.focus();
+    }
+  }
+
+
+  /**
    * Focuses input field.
    */
   focus() {
     this.searchInputRef.nativeElement.focus();
+  }
+
+
+  /**
+   * Resets input field.
+   */
+  handleClearBtn(): void {
+    if(this.videosService.searchFilter.length > 0) {
+      this.videosService.searchFilter = '';
+      this.focus();
+    } else if(this.addClosingToClearBtn) {
+      this.close.emit();
+    }
   }
 
 
