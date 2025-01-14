@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Type, Input, Output, EventEmitter, Injector, inject, ComponentRef, OnInit, OnDestroy } from '@angular/core';
+import { Component, Type, Input, Output, EventEmitter, Injector, inject, OnInit, OnDestroy } from '@angular/core';
 import { DialogService } from '../../shared/services/dialog.service';
+import { Subscription } from 'rxjs';
 
 
 /**
@@ -16,12 +17,12 @@ import { DialogService } from '../../shared/services/dialog.service';
 })
 export class DialogComponent implements OnInit, OnDestroy {
 
-  
+
   /**
    * The dialog content component to be displayed inside the dialog container.
    * This must be a dynamically loaded Angular component.
    */
-  @Input({alias: 'dialog', required: true}) dialogContent!: Type<object>;
+  @Input({ alias: 'dialog', required: true }) dialogContent!: Type<object>;
   private _dialogData?: any;
   @Input()
   set dialogData(value: any) {
@@ -44,6 +45,7 @@ export class DialogComponent implements OnInit, OnDestroy {
   injector: Injector = inject(Injector);
   dialogContentInjector?: Injector;
   public slidingOut: boolean = false;
+  dialogSub: Subscription = new Subscription();
 
 
   constructor(
@@ -52,14 +54,10 @@ export class DialogComponent implements OnInit, OnDestroy {
 
 
   /**
-   * Subscribes to dialog service to listen to the close event.
+   * Subscribes to dialog service.
    */
   ngOnInit() {
-    this.dialogService.closeEvent.subscribe(({ component }) => {
-      if (component === this.dialogContent) {
-        this.close();
-      }
-    });
+    this.dialogSub = this.subDialog();
   }
 
 
@@ -67,7 +65,19 @@ export class DialogComponent implements OnInit, OnDestroy {
    * Unsubscribes from dialog service.
    */
   ngOnDestroy() {
-    this.dialogService.closeEvent.unsubscribe();
+    this.dialogSub.unsubscribe();
+  }
+
+
+  /**
+   * Returns dialog subscription to listen to the close event.
+   */
+  subDialog(): Subscription {
+    return this.dialogService.closeEvent.subscribe(({ component }) => {
+      if (component === this.dialogContent) {
+        this.close();
+      }
+    });
   }
 
 
@@ -78,7 +88,7 @@ export class DialogComponent implements OnInit, OnDestroy {
     this.showing = true;
   }
 
-  
+
   /**
    * Closes the dialog with a sliding-out animation.
    */
