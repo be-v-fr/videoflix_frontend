@@ -11,8 +11,19 @@
             height: 32px;
             &.condensed {
                 height: 48px;
-                @media screen and (max-width: 800px) {
+            }
+            &.show-mobile {
+                display: none;
+            }
+            @media screen and (max-width: 800px) {
+                &.condensed {
                     height: 32px;
+                }
+                &.show-mobile {
+                    display: initial;
+                }
+                &.hide-mobile {
+                    display: none;
                 }
             }
         }
