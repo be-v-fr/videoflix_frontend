@@ -41,6 +41,7 @@
 @media screen and (max-width: 800px) {
     :host {
         width: auto;
+        margin-right: 0;
     }
     .search-desktop {
         display: none;

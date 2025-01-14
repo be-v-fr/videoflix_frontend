@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { lastValueFrom, Subject } from "rxjs";
 import { environment } from "../../../environments/environment.development";
 import { User } from "../models/user";
+import { Router } from "@angular/router";
 
 
 /**
@@ -20,6 +21,7 @@ export class AuthService {
 
 
     constructor(
+        private router: Router,
         private http: HttpClient,
     ) { }
 
@@ -153,26 +155,6 @@ export class AuthService {
             new_password: newPassword,
         };
         return lastValueFrom(this.http.post(url, body));
-    }
-
-
-    /**
-     * Log in as guest.
-     */
-    async logInAsGuest(): Promise<Object> {
-        const url = environment.BASE_URL + 'login/guest/';
-        const body = {
-            username: localStorage.getItem('token') || '',
-            email: localStorage.getItem('token') + '@token.key' || '',
-            password: 'guestlogin',
-        };
-        const promise: Promise<Object> = lastValueFrom(this.http.post(url, body));
-        const timeout: Promise<string> = this.requestTimeout();
-        const result: Object | string = await Promise.race([promise, timeout]);
-        if (result == 'timeout') {
-            throw (this.timeoutErrorMsg);
-        }
-        return promise;
     }
 
 

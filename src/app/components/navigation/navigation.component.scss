@@ -1,5 +1,5 @@
-@import '../../../styles.scss';
-@import 'material-icons/iconfont/material-icons.scss';
+@import "../../../styles.scss";
+@import "material-icons/iconfont/material-icons.scss";
 
 :host {
     width: 100%;
@@ -49,9 +49,12 @@
         border-radius: $b-radius-small;
         ul li {
             width: 100%;
+            height: 36px;
             cursor: pointer;
             padding: 4px;
             border-radius: $b-radius-small;
+            display: flex;
+            align-items: center;
             @include transition-ease($dur: 150ms);
             &:hover {
                 background: $purple;
@@ -60,6 +63,30 @@
             &:active {
                 background: $purple-bright;
                 @include transition-ease($dur: 75ms);
+            }
+            &.logout-li {
+                display: none;
+            }
+        }
+        @media screen and (max-width: 800px) {
+            background: $purple;
+            width: 40vw;
+            ul {
+                width: 100%;
+                li { 
+                    height: 56px;
+                    padding-left: 6px;
+                    &:hover {
+                        background: $purple-bright;
+                    }
+                    &:active {
+                        background: $purple-brighter;
+                    }
+                    &.logout-li {
+                        display: flex;
+                        gap: 6px;
+                    }
+                }
             }
         }
     }
@@ -81,36 +108,17 @@
     transform: translateY(-240px);
 }
 
-.user-dropdown ul {
-    list-style: none;
-    color: $plain-white;
-    background: $plain-black;
-    border-radius: 6px;
-    li {
-        padding: 4px 8px;
-        background: inherit;
-        border-radius: inherit;
-        white-space: nowrap;
-        width: 100%;
-        cursor: pointer;
-        @include transition-ease($dur: 75ms);
-        &:hover {
-            @include transition-ease($dur: 75ms);
-            color: $purple;
-            filter: brightness(1.2);
-        }
-        &:active {
-            @include transition-ease($dur: 75ms);
-            color: $purple-bright;
-        }
-    }
-}
-
 @keyframes slide-down {
     from {
         transform: translateY(-240px);
     }
     to {
         transform: translateY(0);
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .logout-btn {
+        display: none;
     }
 }

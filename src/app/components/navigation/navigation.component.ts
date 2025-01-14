@@ -93,4 +93,13 @@ export class NavigationComponent implements OnInit, OnDestroy {
     this.authService.logout();
     this.loggedOut = true;
   }
+
+
+  /**
+   * Redirects the user and resets logged out state.
+   */
+  onLogout(): void {
+    this.router.navigateByUrl('auth');
+    this.loggedOut = false;
+  }
 }

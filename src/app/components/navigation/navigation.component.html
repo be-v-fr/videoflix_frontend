@@ -11,7 +11,7 @@
     @if(authService.currentUser && !(awaitingInit === true)) {
     <section *ngSwitchCase="'home'" [class.slide-down]="awaitingInit === 'complete'">
         <app-nav-search />
-        <button [routerLink]="['auth', 'login']" class="btn-primary">
+        <button class="btn-primary logout-btn" (click)="logout()">
             <span class="material-icons-outlined">logout</span>
             Log out
         </button>
@@ -20,6 +20,10 @@
             <div class="settings-dropdown">
                 <ul>
                     <li (click)="showChangePwDialog()">Change password</li>
+                    <li class="logout-li" (click)="showChangePwDialog()">
+                        <span class="material-icons-outlined">logout</span>
+                        Log out
+                    </li>
                 </ul>
             </div>
         </div>
@@ -28,5 +32,5 @@
 </div>
 @if(mode == 'home' && authService.currentUser) {
 <app-dialog [dialog]="requestPwResetComponent" [(showing)]="changePwDialogShowing" />
-<app-toast-notification [show]="loggedOut" [msg]="'You logged out.'" (then)="router.navigateByUrl('auth')" />
+<app-toast-notification [show]="loggedOut" [msg]="'You logged out.'" (then)="onLogout()" />
 }
