@@ -26,18 +26,21 @@ nav {
     justify-content: space-between;
     align-items: center;
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
+    color: $plain-white;
+    font-size: $fs-normal;
 }
 
 vg-controls {
     align-items: center;
-    color: white;
+    color: $plain-white;
     * {
         color: inherit;
     }
     .skip-forward-btn {
         position: relative;
-        height: 84%;
+        height: 42px;
         padding: 6px;
+        @extend .flex-center;
         img {
             height: 100%;
             object-fit: cover;
@@ -51,6 +54,11 @@ vg-controls {
             justify-content: center;
             align-items: center
         }
+        @media screen and (max-width: 800px) {
+            position: fixed;
+            top: calc(50dvh - 21px);
+            right: 28vw;
+        }
     }
     .skip-back-btn {
         @extend .skip-forward-btn;
@@ -62,9 +70,19 @@ vg-controls {
             filter: FlipH;
             -ms-filter: "FlipH";
         }
+        @media screen and (max-width: 800px) {
+            right: unset;
+            left: 28vw;
+        }
     }
     .time-of-total {
         font-size: 22px;
         font-weight: 600;
     }
+}
+
+app-toast-notification.resolution-toast {
+    width: 40px;
+    height: 60px;
+    @extend .flex-center;
 }

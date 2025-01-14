@@ -16,6 +16,7 @@ export class ToastNotificationComponent {
   @Input() status: 'ok' | 'error' | 'neutral' = 'ok';
   @Input({ required: true }) msg!: string;
   @Input() btn?: string;
+  @Input() small: boolean = false;
   @Output() then = new EventEmitter<void>;
   @Output() btnClick = new EventEmitter<void>;
   private _showing: boolean = false;

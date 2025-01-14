@@ -1,5 +1,5 @@
 <div *ngIf="showing" class="overlay flex-center">
-    <div class="notification">
+    <div class="notification" [class.small]="small">
         <div class="status-mark" [class.error]="status == 'error'" [class.ok]="status == 'ok'"></div>
         <span *ngIf="status != 'neutral'" class="material-icons-outlined status-icon">
             @if(status == 'ok') {check_circle}

@@ -35,8 +35,9 @@
     </video>
     <nav>
         <app-back-btn [routerLink]="''" (click)="saveProgress()" />
+        <span>{{videoMeta.title}}</span>
         <app-logo [condensed]="true" (click)="saveProgress()" />
     </nav>
 </vg-player>
-<app-toast-notification *ngIf="toastBitrateMsg" [show]="true" [status]="'neutral'"
+<app-toast-notification [small]="true" *ngIf="toastBitrateMsg" [show]="true" [status]="'neutral'"
     [msg]="toastBitrateMsg || 'Bitrate changed.'" (then)="toastBitrateMsg = undefined" />

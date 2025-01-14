@@ -97,8 +97,8 @@ export class PlayerComponent implements OnInit, OnDestroy {
   generateBitrateLabel(bitrate: number): string {
     switch (bitrate) {
       case 0: return 'auto';
-      case 350000: return '120p';
       case 1000000: return '360p';
+      case 1500000: return '480p';
       case 3000000: return '720p';
       case 5000000: return '1080p';
       default: return bitrate / 1000000 + ' mbit/s';

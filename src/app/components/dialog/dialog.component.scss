@@ -55,6 +55,9 @@ $overlay-bg: #00000066;
             @media screen and (max-width: 640px) {
                 max-width: 96vw;
             }
+            @media screen and (max-height: 800px) {
+                max-height: 96dvh;
+            }
         }
         &.hidden {
             display: none;

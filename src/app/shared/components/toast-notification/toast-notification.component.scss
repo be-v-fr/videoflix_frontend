@@ -58,6 +58,14 @@
         .btn-white {
             @extend .abstract-btn;
         }
+        &.small {
+            width: auto;
+            height: auto;
+            padding: 2px 8px;
+            .status-mark {
+                display: none;
+            }
+        }
     }
 
 }
