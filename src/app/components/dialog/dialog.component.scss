@@ -37,6 +37,24 @@ $overlay-bg: #00000066;
                 display: flex;
                 justify-content: flex-end;
             }
+            @media screen and (max-width: 1440px) {
+                max-width: 50vw;
+                padding: 20px;
+                border-radius: $b-radius-medium;
+            }
+            @media screen and (max-width: 1280px) {
+                max-width: 60vw;
+            }
+            @media screen and (max-width: 1024px) {
+                max-width: 70vw;
+            }
+            @media screen and (max-width: 800px) {
+                max-width: 80vw;
+                padding: 10px;
+            }
+            @media screen and (max-width: 640px) {
+                max-width: 96vw;
+            }
         }
         &.hidden {
             display: none;

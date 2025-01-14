@@ -1,7 +1,7 @@
 @import '../../../../styles.scss';
 @import "material-icons/iconfont/material-icons.scss";
 
-$video-height: 120px;
+$video-height: var(--video-card-height);
 
 header {
     width: 100%;

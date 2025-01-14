@@ -44,12 +44,21 @@ $overlay-gap: 32px;
         gap: $overlay-gap;
         h1 {
             font-size: 88px;
+            @include text-line-clamp($number-of-lines: 2);
         }
         .description-container {
             width: 440px;
             min-height: 60px;
             display: flex;
             align-items: flex-end;
+            @include text-line-clamp($number-of-lines: 5);
+            @media screen and (max-width: 800px) {
+                width: auto;
+                @media screen and (max-height: 800px) {
+                    line-clamp: 3;
+                    -webkit-line-clamp: 3;
+                }
+            }
         }
         .play-btn-container {
             height: calc(50dvh - $overlay-gap);

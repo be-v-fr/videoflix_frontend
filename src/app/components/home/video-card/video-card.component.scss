@@ -2,7 +2,7 @@
 @import "material-icons/iconfont/material-icons.scss";
 
 $tf-scale: 0.8;
-$thumb-height: calc(120px / $tf-scale);
+$thumb-height: calc(var(--video-card-height) / $tf-scale);
 $transition-duration: 130ms;
 
 :host {
@@ -82,4 +82,13 @@ $transition-duration: 130ms;
 app-duration {
     width: 100%;
     @extend .flex-center;
+}
+
+:host {
+    @media screen and (max-width: 800px) {
+        border-radius: 5px;
+        .content .show-on-hover {
+            border-radius: 5px;           
+        }
+    }
 }
