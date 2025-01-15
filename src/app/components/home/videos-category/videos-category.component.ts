@@ -28,6 +28,7 @@ export class VideosCategoryComponent implements AfterViewInit {
   moreThanOneRow: boolean = true;
   private lastWindowEventHandling = 0;
   private onWindowEventThrottleInterval = 100;
+  rowLayout: boolean = false;
 
 
   constructor(
@@ -59,8 +60,17 @@ export class VideosCategoryComponent implements AfterViewInit {
     const now = Date.now();
     if (now - this.lastWindowEventHandling >= this.onWindowEventThrottleInterval) {
       this.lastWindowEventHandling = now;
+      this.checkLayout();
       this.checkRows();
     }
+  }
+
+
+  /**
+   * Adjusts layout to the current viewport dimensions.
+   */
+  checkLayout(): void {
+    this.rowLayout = window.innerWidth <= 800;
   }
 
 
@@ -68,11 +78,13 @@ export class VideosCategoryComponent implements AfterViewInit {
    * Checks whether the video cards span multiple rows based on their layout.
    */
   checkRows(): void {
-    const children = Array.from(this.containerRef.nativeElement.children) as HTMLElement[];
-    if(children.length === this.selection.length) {
-      this.checkVerticalSize(children);
-    } else {
-      this.checkHorizontalSize(children);
+    if (!this.rowLayout) {
+      const children = Array.from(this.containerRef.nativeElement.children) as HTMLElement[];
+      if (children.length === this.selection.length) {
+        this.checkVerticalSize(children);
+      } else {
+        this.checkHorizontalSize(children);
+      }
     }
   }
 

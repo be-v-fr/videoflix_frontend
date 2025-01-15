@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { lastValueFrom, Subject } from "rxjs";
 import { environment } from "../../../environments/environment.development";
 import { User } from "../models/user";
-import { Router } from "@angular/router";
 
 
 /**
@@ -21,7 +20,6 @@ export class AuthService {
 
 
     constructor(
-        private router: Router,
         private http: HttpClient,
     ) { }
 
@@ -124,7 +122,7 @@ export class AuthService {
      * Returns a promise that resolves after a 3-second timeout, used for request timeouts.
      */
     async requestTimeout(): Promise<string> {
-        await new Promise((res) => setTimeout(res, 3000));
+        await new Promise((res) => setTimeout(res, 8000));
         return 'timeout';
     }
 

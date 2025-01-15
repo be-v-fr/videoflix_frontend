@@ -46,6 +46,15 @@ header {
         height: $video-height;
         overflow: visible;
     }
+    @media screen and (max-width: 800px) {
+        height: calc($video-height / 0.8);
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: visible;
+        app-video-card {
+            height: $video-height;
+        }
+    }
 }
 
 .hidden {

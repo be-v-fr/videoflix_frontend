@@ -13,7 +13,7 @@ $transition-duration: 130ms;
     border-radius: $b-radius-small;
     .content {
         position: relative;
-        width: 100%;
+        width: calc($thumb-height / 0.5625);
         height: 100%;
         transform: scale($tf-scale) translateY(0);
         will-change: transform;
@@ -84,11 +84,22 @@ app-duration {
     @extend .flex-center;
 }
 
-:host {
-    @media screen and (max-width: 800px) {
+@media screen and (max-width: 800px) {
+    :host {
+        transform: scale($tf-scale) translateY(0);
         border-radius: 5px;
-        .content .show-on-hover {
-            border-radius: 5px;           
+        .content {
+            transform: none;
+            .show-on-hover {
+                display: none;
+            }
+            &:hover {
+                transform: none;
+                &.transform-top,
+                &.transform-bottom {
+                    transform: none;
+                }
+            }
         }
     }
 }

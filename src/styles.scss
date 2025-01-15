@@ -264,6 +264,7 @@ a {
 
     &:disabled {
         background-color: $purple-trans;
+        color: $plain-white;
         border-color: #00000000;
     }
 }

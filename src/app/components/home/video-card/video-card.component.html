@@ -1,8 +1,8 @@
 @if(metaData) {
 <div class="content" #content (mouseenter)="updateYPosition($event)" [class.transform-top]="yPositionInViewport === 'top'"
     [class.transform-bottom]="yPositionInViewport === 'bottom'">
-    <a class="thumb" (click)="playVideo()">
-        <img src="{{metaData.thumbUrl}}" alt="{{metaData.title}}" />
+    <a class="thumb prevent-select" (click)="showDetails()">
+        <img class="prevent-select" src="{{metaData.thumbUrl}}" alt="{{metaData.title}}" />
     </a>
     <div class="show-on-hover">
         <div class="actions-container">

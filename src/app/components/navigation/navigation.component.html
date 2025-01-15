@@ -11,7 +11,7 @@
     @if(authService.currentUser && !(awaitingInit === true)) {
     <section *ngSwitchCase="'home'" [class.slide-down]="awaitingInit === 'complete'">
         <app-nav-search />
-        <button class="btn-primary logout-btn" (click)="logout()">
+        <button class="btn-primary logout-btn" (click)="logout()" [disabled]="loggedOut">
             <span class="material-icons-outlined">logout</span>
             Log out
         </button>
