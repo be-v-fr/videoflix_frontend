@@ -1,5 +1,5 @@
-@import '../../../../styles.scss';
-@import 'material-icons/iconfont/material-icons.scss';
+@import "../../../../styles.scss";
+@import "material-icons/iconfont/material-icons.scss";
 
 .overlay {
     position: fixed;
@@ -26,33 +26,37 @@
                 background: $error-red;
             }
         }
-        .status-icon {
-            margin-left: 6px;
-            font-size: 36px;
-        }
-        p {
-            max-width: 360px;
-            padding: 10px;
-        }
         .abstract-btn {
             cursor: pointer;
             border-left: 1px solid $plain-white;
             margin-left: 4px;
             padding-left: 14px;
-            margin-right: 16px;        
+            margin-right: 16px;
         }
-        .close-toast-btn {
-            @extend .abstract-btn;
-            font-size: inherit;
-            color: inherit;
-            width: 40px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            @include transition-ease($dur: 75ms);
-            &:hover {
+        .notification-content {
+            flex: 1;
+            @extend .flex-center;
+            .status-icon {
+                margin-left: 6px;
+                font-size: 36px;
+            }
+            p {
+                max-width: 360px;
+                padding: 10px;
+            }
+            .close-toast-btn {
+                @extend .abstract-btn;
+                font-size: inherit;
+                color: inherit;
+                width: 40px;
+                height: 32px;
+                display: flex;
+                align-items: center;
                 @include transition-ease($dur: 75ms);
-                text-shadow: 2px 1px 2px #00000066;
+                &:hover {
+                    @include transition-ease($dur: 75ms);
+                    text-shadow: 2px 1px 2px #00000066;
+                }
             }
         }
         .btn-white {
@@ -67,7 +71,6 @@
             }
         }
     }
-
 }
 
 @keyframes slide-bottom-center {
@@ -76,5 +79,25 @@
     }
     to {
         transform: translateY(0);
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .overlay {
+        display: flex;
+        align-items: flex-end;
+        .notification {
+            border-radius: 0;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            width: 100vw;
+            height: auto;
+            min-height: 120px;
+            flex-direction: column;
+            .status-mark {
+                width: 100%;
+                height: 20px;
+            }
+        }
     }
 }
