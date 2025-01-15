@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, Type } from '@angular/core';
+import { Component, HostListener, Input, OnDestroy, OnInit, Type } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { LogoComponent } from '../../shared/components/logo/logo.component';
@@ -36,6 +36,7 @@ export class NavigationComponent implements OnInit, OnDestroy {
   loggedOut: boolean = false;
   awaitingInit: boolean | 'complete' = false;
   authSub: Subscription = new Subscription();
+  accountSubmenuShowingResponsive: boolean = false;
 
 
   constructor(
@@ -101,5 +102,18 @@ export class NavigationComponent implements OnInit, OnDestroy {
   onLogout(): void {
     this.router.navigateByUrl('auth');
     this.loggedOut = false;
+  }
+
+
+  showAccountSubmenuResponsive(): void {
+    if(window.innerWidth <= 480) {
+      this.accountSubmenuShowingResponsive = true;
+    }
+  }
+
+
+  @HostListener('window:resize')
+  closeAccountSubmenuResponsive(): void {
+    this.accountSubmenuShowingResponsive = false;
   }
 }

@@ -48,6 +48,8 @@
         transition-delay: 90ms;
         border-radius: $b-radius-small;
         ul li {
+            transition: opacity 50ms 200ms ease;
+            opacity: 0;
             width: 100%;
             height: 36px;
             cursor: pointer;
@@ -67,13 +69,54 @@
             &.logout-li {
                 display: none;
             }
+            &.submenu-title {
+                position: relative;
+                .settings-dropdown-submenu {
+                    @extend .settings-dropdown;
+                    top: 0;
+                    right: 100%;
+                    width: 100%;
+                    max-height: unset;
+                    height: auto;
+                    display: none;
+                    ul {
+                        width: 100%;
+                    }
+                    &.show-submenu-responsive {
+                        position: fixed;
+                        inset: 0;
+                        width: 100vw;
+                        height: 100dvh;
+                        border-radius: 0;
+                        transition: none;
+                        z-index: 300;
+                        background: #00000088;
+                        ul {
+                            background: $purple;
+                            width: 75vw;
+                            border-radius: $b-radius-small;
+                            li {
+                                @extend .flex-center;
+                            }                   
+                        }
+                    }
+                }
+                &:hover .settings-dropdown-submenu {
+                    @extend .flex-center;
+                    @media screen and (max-width: 480px) {
+                        &:not(.show-submenu-responsive) {
+                            display: none;
+                        }
+                    }
+                }
+            }
         }
         @media screen and (max-width: 800px) {
             background: $purple;
             width: 40vw;
             ul {
                 width: 100%;
-                li { 
+                li {
                     height: 56px;
                     padding-left: 6px;
                     &:hover {
@@ -98,7 +141,14 @@
         }
         .settings-dropdown {
             @include transition-ease($dur: 250ms);
-            max-height: 50dvh;
+            &:not(.show-submenu-responsive) {
+                max-height: 50dvh;
+            }
+            overflow: visible;
+            ul li {
+                transition: opacity 50ms 100ms ease;
+                opacity: 1;
+            }
         }
     }
 }

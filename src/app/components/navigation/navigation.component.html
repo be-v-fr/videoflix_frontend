@@ -19,7 +19,17 @@
             <span class="material-icons-outlined settings-icon">settings</span>
             <div class="settings-dropdown">
                 <ul>
-                    <li (click)="showChangePwDialog()">Change password</li>
+                    <li class="submenu-title" (click)="showAccountSubmenuResponsive()">
+                        <span class="material-icons-outlined">arrow_left</span>
+                        My Account
+                        <div class="settings-dropdown-submenu"
+                            [class.show-submenu-responsive]="accountSubmenuShowingResponsive"
+                            (click)="closeAccountSubmenuResponsive(); $event.stopPropagation()">
+                            <ul>
+                                <li (click)="showChangePwDialog()">Change password</li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="logout-li" (click)="showChangePwDialog()">
                         <span class="material-icons-outlined">logout</span>
                         Log out
