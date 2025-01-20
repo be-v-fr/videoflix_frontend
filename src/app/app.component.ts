@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -7,6 +7,7 @@ import { AuthService } from './shared/services/auth.service';
 import { ToastNotificationComponent } from './shared/components/toast-notification/toast-notification.component';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { GlobalService } from './shared/services/global.service';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
+    private globalService: GlobalService,
   ) { }
 
 
@@ -160,6 +162,17 @@ export class AppComponent implements OnInit, OnDestroy {
       case 'welcome': return 'login';
       case 'legal': return 'back';
       default: return 'home';
+    }
+  }
+
+
+  /**
+   * Registers the first click during app visit.
+   */
+  @HostListener('document:mousedown')
+  registerFirstClick(): void {
+    if(!this.globalService.userClickedDuringVisit) {
+      this.globalService.userClickedDuringVisit = true;
     }
   }
 }

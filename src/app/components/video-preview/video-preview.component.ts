@@ -3,6 +3,7 @@ import { VgApiService, VgCoreModule } from '@videogular/ngx-videogular/core';
 import { VgStreamingModule } from '@videogular/ngx-videogular/streaming';
 import { VideoMeta } from '../../shared/models/video-meta';
 import { RouterLink } from '@angular/router';
+import { GlobalService } from '../../shared/services/global.service';
 
 
 /**
@@ -20,6 +21,11 @@ export class VideoPreviewComponent {
   @ViewChild('media', { static: true }) media!: ElementRef<HTMLVideoElement>;
   @Input({ required: true }) videoMeta!: VideoMeta;
   api: VgApiService = new VgApiService;
+
+
+  constructor(
+    private globalService: GlobalService,
+  ) { }
 
 
   /**
@@ -44,8 +50,15 @@ export class VideoPreviewComponent {
    * Automatically pauses or plays the video depending on the scrolling position.
    */
   @HostListener('window:scroll')
+  @HostListener('document:mousedown')
   handleScrolling(): void {
     const videoElement: HTMLVideoElement = this.media.nativeElement;
-    window.scrollY > 0.3 * window.innerHeight ? videoElement.pause() : videoElement.play();
+    if (this.globalService.userClickedDuringVisit) {
+      if (window.scrollY > 0.3 * window.innerHeight && !videoElement.paused) {
+        videoElement.pause();
+      } else if (videoElement.paused) {
+        videoElement.play();
+      }
+    }
   }
 }
