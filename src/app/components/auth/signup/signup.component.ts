@@ -39,7 +39,7 @@ export class SignupComponent implements OnInit {
   };
   errorResp: Record<string, string[]> = {};
   emailMsg: string = 'A confirmation email was sent to your email address.';
-  emailSent: boolean | 'finally' = false;
+  emailSent: boolean = false;
 
 
   constructor(

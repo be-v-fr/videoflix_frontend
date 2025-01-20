@@ -17,6 +17,7 @@ export class ToastNotificationComponent {
   @Input({ required: true }) msg!: string;
   @Input() btn?: string;
   @Input() small: boolean = false;
+  @Input() disableTimeout: boolean = false;
   @Output() then = new EventEmitter<void>;
   @Output() btnClick = new EventEmitter<void>;
   private _showing: boolean = false;
@@ -39,7 +40,7 @@ export class ToastNotificationComponent {
   onShow() {
     const timeoutLength = (this.status == 'error') ? 5000 : 2000;
     setTimeout(() => {
-      if (!this.btn) {
+      if (!this.btn || this.disableTimeout) {
         this.close();
       }
     }, timeoutLength);

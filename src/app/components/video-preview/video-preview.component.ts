@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { VgApiService, VgCoreModule } from '@videogular/ngx-videogular/core';
 import { VgStreamingModule } from '@videogular/ngx-videogular/streaming';
 import { VideoMeta } from '../../shared/models/video-meta';
@@ -25,7 +25,7 @@ export class VideoPreviewComponent {
   /**
    * Completes Videogular player initialization.
    */
-  onPlayerReady(source: VgApiService) {
+  onPlayerReady(source: VgApiService): void {
     this.api = source;
   }
 
@@ -33,8 +33,19 @@ export class VideoPreviewComponent {
   /**
    * Locally - i.e. only in this compoenent instance - sets playback state to 20 %.
    */
-  setLocalProgress() {
+  setLocalProgress(): void {
     const videoElement: HTMLVideoElement = this.media.nativeElement;
     videoElement.currentTime = videoElement.duration * 0.2;
+  }
+
+
+  /**
+   * Handles scrolling events.
+   * Automatically pauses or plays the video depending on the scrolling position.
+   */
+  @HostListener('window:scroll')
+  handleScrolling(): void {
+    const videoElement: HTMLVideoElement = this.media.nativeElement;
+    window.scrollY > 0.3 * window.innerHeight ? videoElement.pause() : videoElement.play();
   }
 }

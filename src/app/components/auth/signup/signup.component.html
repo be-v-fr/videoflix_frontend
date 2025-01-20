@@ -53,7 +53,6 @@
         <app-form-error [errors]="[
                 errorService.getConditionalFieldErrResp('unknown', errorResp),
             ]" />
-        <p *ngIf="emailSent == 'finally'" class="note">{{emailMsg}}</p>
     </div>
 </form>
-<app-toast-notification [show]="emailSent == true" [msg]="emailMsg" (then)="emailSent = 'finally'" />
+<app-toast-notification [show]="emailSent == true" [msg]="emailMsg" [disableTimeout]="true" />
