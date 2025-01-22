@@ -78,7 +78,7 @@ export class VideosCategoryComponent implements AfterViewInit {
    * Checks whether the video cards span multiple rows based on their layout.
    */
   checkRows(): void {
-    if (!this.rowLayout) {
+    if (this.selection.length > 0 && !this.rowLayout) {
       const children = Array.from(this.containerRef.nativeElement.children) as HTMLElement[];
       if (children.length === this.selection.length) {
         this.checkVerticalSize(children);
