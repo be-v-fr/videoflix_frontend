@@ -41,7 +41,7 @@
         right: 0;
         max-height: 0;
         min-width: 180px;
-        background: $purple-trans;
+        background: $purple;
         box-sizing: border-box;
         overflow: hidden;
         @include transition-ease($dur: 250ms);
@@ -59,11 +59,11 @@
             align-items: center;
             @include transition-ease($dur: 150ms);
             &:hover {
-                background: $purple;
+                background: $purple-bright;
                 @include transition-ease($dur: 75ms);
             }
             &:active {
-                background: $purple-bright;
+                background: $purple-brighter;
                 @include transition-ease($dur: 75ms);
             }
             &.logout-li {
@@ -119,12 +119,6 @@
                 li {
                     height: 56px;
                     padding-left: 6px;
-                    &:hover {
-                        background: $purple-bright;
-                    }
-                    &:active {
-                        background: $purple-brighter;
-                    }
                     &.logout-li {
                         display: flex;
                         gap: 6px;

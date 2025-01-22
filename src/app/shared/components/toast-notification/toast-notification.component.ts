@@ -40,7 +40,7 @@ export class ToastNotificationComponent {
   onShow() {
     const timeoutLength = (this.status == 'error') ? 5000 : 2000;
     setTimeout(() => {
-      if (!this.btn || this.disableTimeout) {
+      if (!this.btn && !this.disableTimeout) {
         this.close();
       }
     }, timeoutLength);

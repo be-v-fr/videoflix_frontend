@@ -4,6 +4,7 @@
 .overlay {
     position: fixed;
     inset: 0;
+    z-index: 400;
     .notification {
         @include simple-shadow($alpha: 0.16);
         animation: slide-bottom-center 0.4s ease-out;
