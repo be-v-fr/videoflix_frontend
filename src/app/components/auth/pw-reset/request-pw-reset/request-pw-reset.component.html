@@ -17,7 +17,7 @@
         </button>
         <button type="submit" class="btn-primary" [disabled]="loading">Submit</button>
         <app-form-error [errors]="[
-                errorService.getConditionalFieldErrResp('unknown', errorResp),
+                errorService.getConditionalUnknownErrResp(errorResp),
             ]" />
         <p *ngIf="emailSent == 'finally'" class="note">{{emailMsg}}</p>
     </div>

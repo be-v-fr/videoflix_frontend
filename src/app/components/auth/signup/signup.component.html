@@ -1,6 +1,6 @@
 <h1>Sign up</h1>
 <form class="form-std" (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm">
-    <div class="field" [class.field-active]="formData.email.length > 0">
+    <div class="field" [class.field-active]="formData.email && formData.email.length > 0">
         <span class="material-icons-outlined input-icon">mail</span>
         <input type="email" placeholder="Email address" [(ngModel)]="formData.email" name="email" autocomplete="off"
             #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
@@ -23,16 +23,18 @@
     <div class="field">
         <app-dynamic-pw-icon [inputElement]="passwordConfirmationInput" />
         <input type="password" placeholder="Confirm password" [(ngModel)]="formData.passwordConfirmation"
-            name="passwordConfirmation" autocomplete="new-password" #passwordConfirmation="ngModel" required #passwordConfirmationInput
+            name="passwordConfirmation" autocomplete="new-password" #passwordConfirmation="ngModel" required
+            #passwordConfirmationInput
             [class.input-invalid]="passwordConfirmation.touched && formData.password != formData.passwordConfirmation" />
         <app-form-error [errors]="[
                 {
-                    condition: formData.passwordConfirmation.length == 0 &&
+                    condition: formData.passwordConfirmation && formData.password &&
+                        formData.passwordConfirmation.length == 0 &&
                         ((passwordConfirmation.touched && formData.password.length > 0) || signupForm.submitted),
                     msg: 'Please confirm your password'
                 },
                 {
-                    condition: passwordConfirmation.touched && formData.password != formData.passwordConfirmation,
+                    condition: passwordConfirmation.touched && formData.password !== formData.passwordConfirmation,
                     msg: 'Passwords do not match.'
                 }  
             ]" />
@@ -51,8 +53,8 @@
     <div class="flex-center btns-container">
         <button type="submit" class="btn-primary" [disabled]="loading">Get started</button>
         <app-form-error [errors]="[
-                errorService.getConditionalFieldErrResp('unknown', errorResp),
+                errorService.getConditionalUnknownErrResp(errorResp),
             ]" />
     </div>
 </form>
-<app-toast-notification [show]="emailSent == true" [msg]="emailMsg" [disableTimeout]="true" />
+<app-toast-notification [show]="emailSent" [msg]="emailMsg" (then)="signupForm.resetForm()" />

@@ -108,11 +108,11 @@ export class VideosService {
   public getPreviouslyWatchedVideosMeta(): VideoMeta[] {
     const metasWatched: VideoMeta[] = [];
     this.videoCompletionList.forEach(vc => {
-        const meta = this.getVideoMetaFromId(vc.videoId);
-        if (meta) {
-          metasWatched.push(meta);
-        }
-      });
+      const meta = this.getVideoMetaFromId(vc.videoId);
+      if (meta) {
+        metasWatched.push(meta);
+      }
+    });
     return metasWatched;
   }
 
@@ -145,6 +145,9 @@ export class VideosService {
       });
       this.initVideoPreview();
       this.loadingState.next('complete');
+      if(this.videosMeta.length < 2) {
+        this.syncVideosMeta();
+      }
     });
   }
 
@@ -243,7 +246,7 @@ export class VideosService {
     const filterLc = this.searchFilter.toLocaleLowerCase();
     return this.videosMeta.filter(vm => {
       return vm.title.toLocaleLowerCase().includes(filterLc) ||
-      vm.description.toLocaleLowerCase().includes(filterLc)
+        vm.description.toLocaleLowerCase().includes(filterLc)
     });
   }
 }

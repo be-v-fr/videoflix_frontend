@@ -2,8 +2,8 @@
 <form class="form-std" (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
     <div class="field" [class.field-active]="formData.email.length > 0">
         <span class="material-icons-outlined input-icon">mail</span>
-        <input type="email" placeholder="Email address" [(ngModel)]="formData.email" name="email"
-            autocomplete="off" #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+        <input type="email" placeholder="Email address" [(ngModel)]="formData.email" name="email" autocomplete="off"
+            #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
             [class.input-invalid]="email.touched && !email.valid" />
         <app-form-error [errors]="[
                 {condition: (email.touched || loginForm.submitted) && !email.valid, msg: 'Please enter a valid email address.'},
@@ -12,8 +12,9 @@
     </div>
     <div class="field">
         <app-dynamic-pw-icon [inputElement]="passwordInput" />
-        <input type="password" placeholder="Password" [(ngModel)]="formData.password" name="password" autocomplete="current-password"
-            #password="ngModel" required #passwordInput [class.input-invalid]="password.touched && !password.valid" />
+        <input type="password" placeholder="Password" [(ngModel)]="formData.password" name="password"
+            autocomplete="current-password" #password="ngModel" required #passwordInput
+            [class.input-invalid]="password.touched && !password.valid" />
         <app-form-error [errors]="[
                 {condition: (password.touched || loginForm.submitted) && !password.valid, msg: 'Please enter a password.'},
                 errorService.getConditionalFieldErrResp('password', errorResp),
@@ -30,7 +31,7 @@
         <button type="submit" class="btn-primary" [disabled]="loading">Log in</button>
         <button type="button" class="btn-secondary" [disabled]="loading" (click)="logInAsGuest()">Demo</button>
         <app-form-error [errors]="[
-                errorService.getConditionalFieldErrResp('unknown', errorResp),
+                errorService.getConditionalUnknownErrResp(errorResp),
             ]" />
     </div>
     <div class="f-width flex-center additional-links">
@@ -45,4 +46,5 @@
         </p>
     </div>
 </form>
-<app-toast-notification [show]="loginComplete == true" [msg]="'You logged in successfully'" (then)="router.navigateByUrl('')" />
+<app-toast-notification [show]="loginComplete == true" [msg]="'You logged in successfully'"
+    (then)="router.navigateByUrl('')" />

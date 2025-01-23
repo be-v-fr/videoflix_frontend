@@ -27,7 +27,7 @@
     <div class="btns-container">
         <button type="submit" class="btn-primary">Submit</button>
         <app-form-error [errors]="[
-                errorService.getConditionalFieldErrResp('unknown', errorResp),
+                errorService.getConditionalUnknownErrResp(errorResp),
             ]" />
         <p *ngIf="resetComplete == 'finally'" class="note">{{resetMsg}}</p>
     </div>

@@ -47,6 +47,24 @@ export class ErrorService {
 
 
   /**
+   * Returns a conditional error message based on the error key and response specifically for an "unknown" error.
+   * Only sets condition to true if no other error condition in the record is fulfilled.
+   */
+  getConditionalUnknownErrResp(errorResp: Record<string, string[]>): ConditionalErrorMsg {
+    const conditionalErrorMsg: ConditionalErrorMsg = this.getConditionalFieldErrResp('unknown', errorResp);
+    if (conditionalErrorMsg.condition) {
+      for (const key in errorResp) {
+        if (key !== 'unknown' && this.validateFieldError(key, errorResp)) {
+          conditionalErrorMsg.condition = false;
+          break;
+        }
+      }
+    }
+    return conditionalErrorMsg;
+  }
+
+
+  /**
    * Generates an error record from the provided error response object.
    * @param {any} err The error object containing error details.
    * @returns {Record<string, string[]>} A record of errors, mapping error keys to string arrays.

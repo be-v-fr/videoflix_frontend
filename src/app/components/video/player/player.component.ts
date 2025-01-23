@@ -12,6 +12,8 @@ import { VideosService } from '../../../shared/services/videos.service';
 import { VideoCompletion } from '../../../shared/models/video-completion';
 import { BackBtnComponent } from '../../../shared/components/back-btn/back-btn.component';
 import { LogoComponent } from '../../../shared/components/logo/logo.component';
+import { Subscription } from 'rxjs';
+import { GlobalService } from '../../../shared/services/global.service';
 
 
 /**
@@ -44,11 +46,13 @@ export class PlayerComponent implements OnInit, OnDestroy {
   showingPlayer: boolean = true;
   private inactivityTimer?: ReturnType<typeof setTimeout>;
   toastBitrateMsg?: string;
+  private requestedCompletion: boolean = false;
 
 
   constructor(
     private router: Router,
     private videosService: VideosService,
+    private globalService: GlobalService,
   ) { }
 
 
@@ -61,7 +65,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.startProgressTracking();
   }
 
-  
+
   /** 
    * Cleans up resources when the component is destroyed.
    */
@@ -168,16 +172,60 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   /** 
    * Initializes the video playback position from saved progress, if available.
+   * Tries loading video completion from the server, if not.
    */
   initVideoCompletion(): void {
     const completion: VideoCompletion | undefined = this.videosService.getVideoCompletion(this.videoMeta.id);
     this.videoCompletion.videoId = this.videoMeta.id;
     if (completion) {
-      this.videoCompletion = completion;
-      if (completion.currentTime > 0) {
-        const videoElement: HTMLVideoElement = this.media.nativeElement;
-        videoElement.currentTime = completion.currentTime;
+      this.handleVideoCompletion(completion);
+    } else if (!this.requestedCompletion) {
+      this.handleVideoCompletionLoading();
+      this.requestedCompletion = true;
+    }
+  }
+
+
+  /**
+   * Applies video completion data to the player, setting the playback state.
+   */
+  handleVideoCompletion(completion: VideoCompletion): void {
+    this.videoCompletion = completion;
+    if (completion.currentTime > 0) {
+      const videoElement: HTMLVideoElement = this.media.nativeElement;
+      videoElement.currentTime = completion.currentTime;
+      if (this.globalService.userClickedDuringVisit) {
+        videoElement.play();
       }
+    }
+  }
+
+
+  /**
+   * Handles the current video completion data loading state to retrieve completion data, if available.
+   */
+  handleVideoCompletionLoading(): void {
+    if (this.videosService.loadingState.getValue() !== 'complete') {
+      this.initVideoCompletionLoadingIfNecessary();
+      const loadingSub: Subscription = this.videosService.loadingState.subscribe(ls => {
+        if (ls === 'complete') {
+          const videoCompletion: VideoCompletion | undefined = this.videosService.getVideoCompletion(this.videoMeta.id);
+          if (videoCompletion) {
+            this.handleVideoCompletion(videoCompletion);
+          }
+          loadingSub.unsubscribe();
+        }
+      })
+    }
+  }
+
+
+  /**
+   * If video completion is not currently loading, initializes loading.
+   */
+  initVideoCompletionLoadingIfNecessary(): void {
+    if (this.videosService.loadingState.getValue() !== 'completion') {
+      this.videosService.initVideoCompletionData();
     }
   }
 
@@ -250,6 +298,6 @@ export class PlayerComponent implements OnInit, OnDestroy {
    */
   togglePlayState(): void {
     const videoElement: HTMLVideoElement = this.media.nativeElement;
-    videoElement.paused ? videoElement.play() : videoElement.pause();   
+    videoElement.paused ? videoElement.play() : videoElement.pause();
   }
 };
