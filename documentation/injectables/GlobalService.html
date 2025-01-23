@@ -79,7 +79,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content miscellaneous-variables">
+               <div class="content injectable">
                    <div class="content-data">
 
 
@@ -89,191 +89,144 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Miscellaneous</li>
-  <li class="breadcrumb-item">Variables</li>
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >GlobalService</li>
 </ol>
 
-<section data-compodoc="block-index">
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/shared/services/global.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>This injectable contains properties with global relevance, i.e. relevance across the whole application.</p>
+
+            </p>
+
+
+
+            <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <ul class="index-list">
-                        <li>
-                            <a href="#appConfig" title="src/app/app.config.ts" ><b>appConfig</b>&nbsp;&nbsp;&nbsp;(src/.../app.config.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#AUTH_TOKEN_INTERCEPTOR" title="src/app/shared/misc/auth-token.interceptor.ts" ><b>AUTH_TOKEN_INTERCEPTOR</b>&nbsp;&nbsp;&nbsp;(src/.../auth-token.interceptor.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#environment" title="src/environments/environment.development.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.development.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#environment" title="src/environments/environment.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
-
-    <h3>src/app/app.config.ts</h3>
-    <section data-compodoc="block-properties">
-    <h3></h3>    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="appConfig"></a>
-                    <span class="name">
-                        <span ><b>appConfig</b></span>
-                        <a href="#appConfig"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>ApplicationConfig</code>
-
+                        <h6><b>Properties</b></h6>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>{
-  providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
-    provideHttpClient(
-      withFetch(),
-      withInterceptors([AUTH_TOKEN_INTERCEPTOR]),
-    ),
-  ]
-}</code>
+                        <ul class="index-list">
+                            <li>
+                                <a href="#userClickedDuringVisit" >userClickedDuringVisit</a>
+                            </li>
+                        </ul>
                     </td>
                 </tr>
+
+
+
+
 
 
         </tbody>
     </table>
 </section>
-    <h3>src/app/shared/misc/auth-token.interceptor.ts</h3>
-    <section data-compodoc="block-properties">
-    <h3></h3>    <table class="table table-sm table-bordered">
+
+
+
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="AUTH_TOKEN_INTERCEPTOR"></a>
+                    <a name="userClickedDuringVisit"></a>
                     <span class="name">
-                        <span ><b>AUTH_TOKEN_INTERCEPTOR</b></span>
-                        <a href="#AUTH_TOKEN_INTERCEPTOR"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>userClickedDuringVisit</b></span>
+                        <a href="#userClickedDuringVisit"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>HttpInterceptorFn</code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>(request, next) &#x3D;&gt; {
-  const token &#x3D; localStorage.getItem(&#x27;token&#x27;);
-  if (token) {
-    request &#x3D; request.clone({
-      setHeaders: { Authorization: &#x60;Token ${token}&#x60; }
-    });
-  }
-  return next(request);
-}</code>
+                        <i>Default value : </i><code>false</code>
                     </td>
                 </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/shared/services/global.service.ts:11</a></div>
+                        </td>
+                    </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Intercepts HTTP requests by setting auth token headers.</p>
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+
+
+/**
+ * This injectable contains properties with global relevance, i.e. relevance across the whole application.
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class GlobalService {
+  userClickedDuringVisit: boolean &#x3D; false;
+}
+</code></pre>
+    </div>
+
 </div>
-                </td>
-            </tr>
-
-        </tbody>
-    </table>
-</section>
-    <h3>src/environments/environment.development.ts</h3>
-    <section data-compodoc="block-properties">
-    <h3></h3>    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="environment"></a>
-                    <span class="name">
-                        <span ><b>environment</b></span>
-                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>{
-    BASE_URL: &#x27;https://api.videoflix.bengt-fruechtenicht.de/api/&#x27;,
-    PROVIDER_EMAIL: &#x27;kontakt@bengt-fruechtenicht.de&#x27;,
-}</code>
-                    </td>
-                </tr>
 
 
-        </tbody>
-    </table>
-</section>
-    <h3>src/environments/environment.ts</h3>
-    <section data-compodoc="block-properties">
-    <h3></h3>    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="environment"></a>
-                    <span class="name">
-                        <span ><b>environment</b></span>
-                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>{
-    BASE_URL: &#x27;https://api.videoflix.bengt-fruechtenicht.de/api/&#x27;,
-    PROVIDER_EMAIL: &#x27;kontakt@bengt-fruechtenicht.de&#x27;,
-}</code>
-                    </td>
-                </tr>
 
 
-        </tbody>
-    </table>
-</section>
+
+
+
+
+
+
 
 
 
@@ -302,8 +255,8 @@
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
-            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'GlobalService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

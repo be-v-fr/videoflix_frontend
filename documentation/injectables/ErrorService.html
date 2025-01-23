@@ -168,6 +168,9 @@
                                 <a href="#getConditionalFieldErrResp" >getConditionalFieldErrResp</a>
                             </li>
                             <li>
+                                <a href="#getConditionalUnknownErrResp" >getConditionalUnknownErrResp</a>
+                            </li>
+                            <li>
                                 <a href="#getUnknownErrRecord" >getUnknownErrRecord</a>
                             </li>
                             <li>
@@ -225,8 +228,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="73"
-                                    class="link-to-prism">src/app/shared/services/error.service.ts:73</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/app/shared/services/error.service.ts:91</a></div>
                         </td>
                     </tr>
 
@@ -316,8 +319,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="54"
-                                    class="link-to-prism">src/app/shared/services/error.service.ts:54</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/shared/services/error.service.ts:72</a></div>
                         </td>
                     </tr>
 
@@ -426,6 +429,76 @@
 
 
                                         </tr>
+                                        <tr>
+                                                <td>errorResp</td>
+                                            <td>
+                                                        <code>Record&lt;string | string[]&gt;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ConditionalErrorMsg.html" target="_self" >ConditionalErrorMsg</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getConditionalUnknownErrResp"></a>
+                    <span class="name">
+                        <span ><b>getConditionalUnknownErrResp</b></span>
+                        <a href="#getConditionalUnknownErrResp"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getConditionalUnknownErrResp(errorResp: Record<string | string[]>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">src/app/shared/services/error.service.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Returns a conditional error message based on the error key and response specifically for an &quot;unknown&quot; error.
+Only sets condition to true if no other error condition in the record is fulfilled.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                         <tr>
                                                 <td>errorResp</td>
                                             <td>
@@ -690,6 +763,24 @@ export class ErrorService {
     return {
       &#x27;unknown&#x27;: [this._unknownErrorMsg]
     }
+  }
+
+
+  /**
+   * Returns a conditional error message based on the error key and response specifically for an &quot;unknown&quot; error.
+   * Only sets condition to true if no other error condition in the record is fulfilled.
+   */
+  getConditionalUnknownErrResp(errorResp: Record&lt;string, string[]&gt;): ConditionalErrorMsg {
+    const conditionalErrorMsg: ConditionalErrorMsg &#x3D; this.getConditionalFieldErrResp(&#x27;unknown&#x27;, errorResp);
+    if (conditionalErrorMsg.condition) {
+      for (const key in errorResp) {
+        if (key !&#x3D;&#x3D; &#x27;unknown&#x27; &amp;&amp; this.validateFieldError(key, errorResp)) {
+          conditionalErrorMsg.condition &#x3D; false;
+          break;
+        }
+      }
+    }
+    return conditionalErrorMsg;
   }
 
 

@@ -353,8 +353,8 @@ including video metadata and user video completion data.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="228"
-                                    class="link-to-prism">src/app/shared/services/videos.service.ts:228</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="231"
+                                    class="link-to-prism">src/app/shared/services/videos.service.ts:231</a></div>
                         </td>
                     </tr>
 
@@ -510,8 +510,8 @@ including video metadata and user video completion data.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="179"
-                                    class="link-to-prism">src/app/shared/services/videos.service.ts:179</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="182"
+                                    class="link-to-prism">src/app/shared/services/videos.service.ts:182</a></div>
                         </td>
                     </tr>
 
@@ -596,8 +596,8 @@ including video metadata and user video completion data.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="170"
-                                    class="link-to-prism">src/app/shared/services/videos.service.ts:170</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="173"
+                                    class="link-to-prism">src/app/shared/services/videos.service.ts:173</a></div>
                         </td>
                     </tr>
 
@@ -891,8 +891,8 @@ including video metadata and user video completion data.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="155"
-                                    class="link-to-prism">src/app/shared/services/videos.service.ts:155</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="158"
+                                    class="link-to-prism">src/app/shared/services/videos.service.ts:158</a></div>
                         </td>
                     </tr>
 
@@ -1045,8 +1045,8 @@ including video metadata and user video completion data.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="189"
-                                    class="link-to-prism">src/app/shared/services/videos.service.ts:189</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="192"
+                                    class="link-to-prism">src/app/shared/services/videos.service.ts:192</a></div>
                         </td>
                     </tr>
 
@@ -1124,8 +1124,8 @@ keeping the ordering.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="205"
-                                    class="link-to-prism">src/app/shared/services/videos.service.ts:205</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="208"
+                                    class="link-to-prism">src/app/shared/services/videos.service.ts:208</a></div>
                         </td>
                     </tr>
 
@@ -1203,8 +1203,8 @@ keeping the ordering.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="242"
-                                    class="link-to-prism">src/app/shared/services/videos.service.ts:242</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="245"
+                                    class="link-to-prism">src/app/shared/services/videos.service.ts:245</a></div>
                         </td>
                     </tr>
 
@@ -1330,8 +1330,8 @@ keeping the ordering.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="218"
-                                    class="link-to-prism">src/app/shared/services/videos.service.ts:218</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="221"
+                                    class="link-to-prism">src/app/shared/services/videos.service.ts:221</a></div>
                         </td>
                     </tr>
 
@@ -1759,11 +1759,11 @@ export class VideosService {
   public getPreviouslyWatchedVideosMeta(): VideoMeta[] {
     const metasWatched: VideoMeta[] &#x3D; [];
     this.videoCompletionList.forEach(vc &#x3D;&gt; {
-        const meta &#x3D; this.getVideoMetaFromId(vc.videoId);
-        if (meta) {
-          metasWatched.push(meta);
-        }
-      });
+      const meta &#x3D; this.getVideoMetaFromId(vc.videoId);
+      if (meta) {
+        metasWatched.push(meta);
+      }
+    });
     return metasWatched;
   }
 
@@ -1796,6 +1796,9 @@ export class VideosService {
       });
       this.initVideoPreview();
       this.loadingState.next(&#x27;complete&#x27;);
+      if(this.videosMeta.length &lt; 2) {
+        this.syncVideosMeta();
+      }
     });
   }
 
@@ -1894,7 +1897,7 @@ export class VideosService {
     const filterLc &#x3D; this.searchFilter.toLocaleLowerCase();
     return this.videosMeta.filter(vm &#x3D;&gt; {
       return vm.title.toLocaleLowerCase().includes(filterLc) ||
-      vm.description.toLocaleLowerCase().includes(filterLc)
+        vm.description.toLocaleLowerCase().includes(filterLc)
     });
   }
 }

@@ -753,7 +753,7 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>boolean | &quot;finally&quot;</code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                     </td>
                 </tr>
@@ -979,7 +979,7 @@ export class SignupComponent implements OnInit {
   };
   errorResp: Record&lt;string, string[]&gt; &#x3D; {};
   emailMsg: string &#x3D; &#x27;A confirmation email was sent to your email address.&#x27;;
-  emailSent: boolean | &#x27;finally&#x27; &#x3D; false;
+  emailSent: boolean &#x3D; false;
 
 
   constructor(
@@ -1057,7 +1057,7 @@ export class SignupComponent implements OnInit {
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;h1&gt;Sign up&lt;/h1&gt;
 &lt;form class&#x3D;&quot;form-std&quot; (ngSubmit)&#x3D;&quot;onSubmit(signupForm)&quot; #signupForm&#x3D;&quot;ngForm&quot;&gt;
-    &lt;div class&#x3D;&quot;field&quot; [class.field-active]&#x3D;&quot;formData.email.length &gt; 0&quot;&gt;
+    &lt;div class&#x3D;&quot;field&quot; [class.field-active]&#x3D;&quot;formData.email &amp;&amp; formData.email.length &gt; 0&quot;&gt;
         &lt;span class&#x3D;&quot;material-icons-outlined input-icon&quot;&gt;mail&lt;/span&gt;
         &lt;input type&#x3D;&quot;email&quot; placeholder&#x3D;&quot;Email address&quot; [(ngModel)]&#x3D;&quot;formData.email&quot; name&#x3D;&quot;email&quot; autocomplete&#x3D;&quot;off&quot;
             #email&#x3D;&quot;ngModel&quot; required pattern&#x3D;&quot;[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}&quot;
@@ -1080,16 +1080,18 @@ export class SignupComponent implements OnInit {
     &lt;div class&#x3D;&quot;field&quot;&gt;
         &lt;app-dynamic-pw-icon [inputElement]&#x3D;&quot;passwordConfirmationInput&quot; /&gt;
         &lt;input type&#x3D;&quot;password&quot; placeholder&#x3D;&quot;Confirm password&quot; [(ngModel)]&#x3D;&quot;formData.passwordConfirmation&quot;
-            name&#x3D;&quot;passwordConfirmation&quot; autocomplete&#x3D;&quot;new-password&quot; #passwordConfirmation&#x3D;&quot;ngModel&quot; required #passwordConfirmationInput
+            name&#x3D;&quot;passwordConfirmation&quot; autocomplete&#x3D;&quot;new-password&quot; #passwordConfirmation&#x3D;&quot;ngModel&quot; required
+            #passwordConfirmationInput
             [class.input-invalid]&#x3D;&quot;passwordConfirmation.touched &amp;&amp; formData.password !&#x3D; formData.passwordConfirmation&quot; /&gt;
         &lt;app-form-error [errors]&#x3D;&quot;[
                 {
-                    condition: formData.passwordConfirmation.length &#x3D;&#x3D; 0 &amp;&amp;
+                    condition: formData.passwordConfirmation &amp;&amp; formData.password &amp;&amp;
+                        formData.passwordConfirmation.length &#x3D;&#x3D; 0 &amp;&amp;
                         ((passwordConfirmation.touched &amp;&amp; formData.password.length &gt; 0) || signupForm.submitted),
                     msg: &#x27;Please confirm your password&#x27;
                 },
                 {
-                    condition: passwordConfirmation.touched &amp;&amp; formData.password !&#x3D; formData.passwordConfirmation,
+                    condition: passwordConfirmation.touched &amp;&amp; formData.password !&#x3D;&#x3D; formData.passwordConfirmation,
                     msg: &#x27;Passwords do not match.&#x27;
                 }  
             ]&quot; /&gt;
@@ -1108,12 +1110,11 @@ export class SignupComponent implements OnInit {
     &lt;div class&#x3D;&quot;flex-center btns-container&quot;&gt;
         &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn-primary&quot; [disabled]&#x3D;&quot;loading&quot;&gt;Get started&lt;/button&gt;
         &lt;app-form-error [errors]&#x3D;&quot;[
-                errorService.getConditionalFieldErrResp(&#x27;unknown&#x27;, errorResp),
+                errorService.getConditionalUnknownErrResp(errorResp),
             ]&quot; /&gt;
-        &lt;p *ngIf&#x3D;&quot;emailSent &#x3D;&#x3D; &#x27;finally&#x27;&quot; class&#x3D;&quot;note&quot;&gt;{{emailMsg}}&lt;/p&gt;
     &lt;/div&gt;
 &lt;/form&gt;
-&lt;app-toast-notification [show]&#x3D;&quot;emailSent &#x3D;&#x3D; true&quot; [msg]&#x3D;&quot;emailMsg&quot; (then)&#x3D;&quot;emailSent &#x3D; &#x27;finally&#x27;&quot; /&gt;</code></pre>
+&lt;app-toast-notification [show]&#x3D;&quot;emailSent&quot; [msg]&#x3D;&quot;emailMsg&quot; (then)&#x3D;&quot;signupForm.resetForm()&quot; /&gt;</code></pre>
     </div>
 
 
@@ -1142,7 +1143,7 @@ export class SignupComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><h1>Sign up</h1><form class="form-std" (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm">    <div class="field" [class.field-active]="formData.email.length > 0">        <span class="material-icons-outlined input-icon">mail</span>        <input type="email" placeholder="Email address" [(ngModel)]="formData.email" name="email" autocomplete="off"            #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"            [class.input-invalid]="email.touched && !email.valid" />        <app-form-error [errors]="[                {condition: (email.touched || signupForm.submitted) && !email.valid, msg: \'Please enter a valid email address.\'},                errorService.getConditionalFieldErrResp(\'email\', errorResp),            ]" />    </div>    <div class="field">        <app-dynamic-pw-icon [inputElement]="passwordInput" />        <input type="password" placeholder="Password" [(ngModel)]="formData.password" name="password"            autocomplete="new-password" #password="ngModel" required #passwordInput            [class.input-invalid]="password.touched && !password.valid" />        <app-form-error [errors]="[                {condition: (password.touched || signupForm.submitted) && !password.valid, msg: \'Please enter a password.\'},                errorService.getConditionalFieldErrResp(\'password\', errorResp),            ]" />    </div>    <div class="field">        <app-dynamic-pw-icon [inputElement]="passwordConfirmationInput" />        <input type="password" placeholder="Confirm password" [(ngModel)]="formData.passwordConfirmation"            name="passwordConfirmation" autocomplete="new-password" #passwordConfirmation="ngModel" required #passwordConfirmationInput            [class.input-invalid]="passwordConfirmation.touched && formData.password != formData.passwordConfirmation" />        <app-form-error [errors]="[                {                    condition: formData.passwordConfirmation.length == 0 &&                        ((passwordConfirmation.touched && formData.password.length > 0) || signupForm.submitted),                    msg: \'Please confirm your password\'                },                {                    condition: passwordConfirmation.touched && formData.password != formData.passwordConfirmation,                    msg: \'Passwords do not match.\'                }              ]" />    </div>    <div class="checkbox-field">        <input type="checkbox" name="privacyCheck" #privacyCheck="ngModel" #privacyCheckbox            [(ngModel)]="formData.privacyCheck" required />        <app-custom-checkbox [checked]="formData.privacyCheck" />        <label for="privacyCheckbox">            I accept the<a routerLink="/legal/privacy" target="_blank" class="link-blue">privacy policy</a>        </label>        <app-form-error [errors]="[                {condition: !privacyCheck.valid && signupForm.submitted, msg: \'You need to accept the privacy policy to sign up.\'}            ]" />    </div>    <div class="flex-center btns-container">        <button type="submit" class="btn-primary" [disabled]="loading">Get started</button>        <app-form-error [errors]="[                errorService.getConditionalFieldErrResp(\'unknown\', errorResp),            ]" />        <p *ngIf="emailSent == \'finally\'" class="note">{{emailMsg}}</p>    </div></form><app-toast-notification [show]="emailSent == true" [msg]="emailMsg" (then)="emailSent = \'finally\'" /></div>'
+        var COMPONENT_TEMPLATE = '<div><h1>Sign up</h1><form class="form-std" (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm">    <div class="field" [class.field-active]="formData.email && formData.email.length > 0">        <span class="material-icons-outlined input-icon">mail</span>        <input type="email" placeholder="Email address" [(ngModel)]="formData.email" name="email" autocomplete="off"            #email="ngModel" required pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"            [class.input-invalid]="email.touched && !email.valid" />        <app-form-error [errors]="[                {condition: (email.touched || signupForm.submitted) && !email.valid, msg: \'Please enter a valid email address.\'},                errorService.getConditionalFieldErrResp(\'email\', errorResp),            ]" />    </div>    <div class="field">        <app-dynamic-pw-icon [inputElement]="passwordInput" />        <input type="password" placeholder="Password" [(ngModel)]="formData.password" name="password"            autocomplete="new-password" #password="ngModel" required #passwordInput            [class.input-invalid]="password.touched && !password.valid" />        <app-form-error [errors]="[                {condition: (password.touched || signupForm.submitted) && !password.valid, msg: \'Please enter a password.\'},                errorService.getConditionalFieldErrResp(\'password\', errorResp),            ]" />    </div>    <div class="field">        <app-dynamic-pw-icon [inputElement]="passwordConfirmationInput" />        <input type="password" placeholder="Confirm password" [(ngModel)]="formData.passwordConfirmation"            name="passwordConfirmation" autocomplete="new-password" #passwordConfirmation="ngModel" required            #passwordConfirmationInput            [class.input-invalid]="passwordConfirmation.touched && formData.password != formData.passwordConfirmation" />        <app-form-error [errors]="[                {                    condition: formData.passwordConfirmation && formData.password &&                        formData.passwordConfirmation.length == 0 &&                        ((passwordConfirmation.touched && formData.password.length > 0) || signupForm.submitted),                    msg: \'Please confirm your password\'                },                {                    condition: passwordConfirmation.touched && formData.password !== formData.passwordConfirmation,                    msg: \'Passwords do not match.\'                }              ]" />    </div>    <div class="checkbox-field">        <input type="checkbox" name="privacyCheck" #privacyCheck="ngModel" #privacyCheckbox            [(ngModel)]="formData.privacyCheck" required />        <app-custom-checkbox [checked]="formData.privacyCheck" />        <label for="privacyCheckbox">            I accept the<a routerLink="/legal/privacy" target="_blank" class="link-blue">privacy policy</a>        </label>        <app-form-error [errors]="[                {condition: !privacyCheck.valid && signupForm.submitted, msg: \'You need to accept the privacy policy to sign up.\'}            ]" />    </div>    <div class="flex-center btns-container">        <button type="submit" class="btn-primary" [disabled]="loading">Get started</button>        <app-form-error [errors]="[                errorService.getConditionalUnknownErrResp(errorResp),            ]" />    </div></form><app-toast-notification [show]="emailSent" [msg]="emailMsg" (then)="signupForm.resetForm()" /></div>'
     var COMPONENTS = [{'name': 'AccountActivationComponent', 'selector': 'app-account-activation'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AuthComponent', 'selector': 'app-auth'},{'name': 'BackBtnComponent', 'selector': 'app-back-btn'},{'name': 'CustomCheckboxComponent', 'selector': 'app-custom-checkbox'},{'name': 'DialogComponent', 'selector': 'app-dialog'},{'name': 'DialogContinueWatchingComponent', 'selector': 'app-dialog-continue-watching'},{'name': 'DialogVideoDetailsComponent', 'selector': 'app-dialog-video-details'},{'name': 'DurationComponent', 'selector': 'app-duration'},{'name': 'DynamicPwIconComponent', 'selector': 'app-dynamic-pw-icon'},{'name': 'EmailComponent', 'selector': 'app-email'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormErrorComponent', 'selector': 'app-form-error'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'ImprintComponent', 'selector': 'app-imprint'},{'name': 'LandingPageComponent', 'selector': 'app-landing-page'},{'name': 'LoadingCircleComponent', 'selector': 'app-loading-circle'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'LogoComponent', 'selector': 'app-logo'},{'name': 'NavigationComponent', 'selector': 'app-navigation'},{'name': 'NavSearchComponent', 'selector': 'app-nav-search'},{'name': 'PerformPwResetComponent', 'selector': 'app-perform-pw-reset'},{'name': 'PlayerComponent', 'selector': 'app-player'},{'name': 'PrivacyComponent', 'selector': 'app-privacy'},{'name': 'PwResetComponent', 'selector': 'app-pw-reset'},{'name': 'RequestPwResetComponent', 'selector': 'app-request-pw-reset'},{'name': 'SearchComponent', 'selector': 'app-search'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'ToastNotificationComponent', 'selector': 'app-toast-notification'},{'name': 'VideoCardComponent', 'selector': 'app-video-card'},{'name': 'VideoComponent', 'selector': 'app-video'},{'name': 'VideoPreviewComponent', 'selector': 'app-video-preview'},{'name': 'VideosCategoryComponent', 'selector': 'app-videos-category'},{'name': 'WatchingProgressComponent', 'selector': 'app-watching-progress'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SignupComponent'};

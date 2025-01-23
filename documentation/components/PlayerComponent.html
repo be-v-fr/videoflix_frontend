@@ -232,6 +232,10 @@
                                 <a href="#media" >media</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#requestedCompletion" >requestedCompletion</a>
+                            </li>
+                            <li>
                                 <a href="#showingPlayer" >showingPlayer</a>
                             </li>
                             <li>
@@ -266,10 +270,19 @@
                                 <a href="#handleMouseActivity" >handleMouseActivity</a>
                             </li>
                             <li>
+                                <a href="#handleVideoCompletion" >handleVideoCompletion</a>
+                            </li>
+                            <li>
+                                <a href="#handleVideoCompletionLoading" >handleVideoCompletionLoading</a>
+                            </li>
+                            <li>
                                 <a href="#initBitrates" >initBitrates</a>
                             </li>
                             <li>
                                 <a href="#initVideoCompletion" >initVideoCompletion</a>
+                            </li>
+                            <li>
+                                <a href="#initVideoCompletionLoadingIfNecessary" >initVideoCompletionLoadingIfNecessary</a>
                             </li>
                             <li>
                                 <a href="#ngOnDestroy" >ngOnDestroy</a>
@@ -365,12 +378,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(router: Router, videosService: <a href="../injectables/VideosService.html" target="_self">VideosService</a>)</code>
+<code>constructor(router: Router, videosService: <a href="../injectables/VideosService.html" target="_self">VideosService</a>, globalService: <a href="../injectables/GlobalService.html" target="_self">GlobalService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/video/player/player.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/video/player/player.component.ts:49</a></div>
                             </td>
                         </tr>
 
@@ -411,6 +424,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>globalService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/GlobalService.html" target="_self" >GlobalService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -443,7 +468,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/components/video/player/player.component.ts:40</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/video/player/player.component.ts:42</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -477,8 +502,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="226"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:226</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="274"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:274</a></div>
                         </td>
                     </tr>
 
@@ -517,8 +542,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="124"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:124</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:128</a></div>
                         </td>
                     </tr>
 
@@ -557,8 +582,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="124"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:124</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:128</a></div>
                         </td>
                     </tr>
 
@@ -597,8 +622,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="124"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:124</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:128</a></div>
                         </td>
                     </tr>
 
@@ -638,8 +663,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="242"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:242</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="290"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:290</a></div>
                         </td>
                     </tr>
 
@@ -677,8 +702,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="97"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:97</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:101</a></div>
                         </td>
                     </tr>
 
@@ -763,8 +788,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="124"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:124</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:128</a></div>
                         </td>
                     </tr>
 
@@ -772,6 +797,114 @@
             <tr>
                 <td class="col-md-4">
                         <div class="io-description"><p>Handles mouse movement and click events.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleVideoCompletion"></a>
+                    <span class="name">
+                        <span ><b>handleVideoCompletion</b></span>
+                        <a href="#handleVideoCompletion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleVideoCompletion(completion: <a href="../classes/VideoCompletion.html" target="_self">VideoCompletion</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="192"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:192</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Applies video completion data to the player, setting the playback state.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>completion</td>
+                                            <td>
+                                                            <code><a href="../classes/VideoCompletion.html" target="_self" >VideoCompletion</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleVideoCompletionLoading"></a>
+                    <span class="name">
+                        <span ><b>handleVideoCompletionLoading</b></span>
+                        <a href="#handleVideoCompletionLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleVideoCompletionLoading()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="207"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:207</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handles the current video completion data loading state to retrieve completion data, if available.</p>
 </div>
 
                         <div class="io-description">
@@ -802,8 +935,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="86"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:86</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:90</a></div>
                         </td>
                     </tr>
 
@@ -871,15 +1004,55 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="172"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:172</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="177"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:177</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Initializes the video playback position from saved progress, if available.</p>
+                        <div class="io-description"><p>Initializes the video playback position from saved progress, if available.
+Tries loading video completion from the server, if not.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initVideoCompletionLoadingIfNecessary"></a>
+                    <span class="name">
+                        <span ><b>initVideoCompletionLoadingIfNecessary</b></span>
+                        <a href="#initVideoCompletionLoadingIfNecessary"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initVideoCompletionLoadingIfNecessary()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="226"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:226</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>If video completion is not currently loading, initializes loading.</p>
 </div>
 
                         <div class="io-description">
@@ -910,8 +1083,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:68</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:72</a></div>
                         </td>
                     </tr>
 
@@ -949,8 +1122,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="58"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:58</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:62</a></div>
                         </td>
                     </tr>
 
@@ -988,8 +1161,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:117</a></div>
                         </td>
                     </tr>
 
@@ -1071,8 +1244,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="226"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:226</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="274"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:274</a></div>
                         </td>
                     </tr>
 
@@ -1140,8 +1313,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="78"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:78</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:82</a></div>
                         </td>
                     </tr>
 
@@ -1211,8 +1384,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="146"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:146</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:150</a></div>
                         </td>
                     </tr>
 
@@ -1250,8 +1423,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="198"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:198</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="246"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:246</a></div>
                         </td>
                     </tr>
 
@@ -1289,8 +1462,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="215"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:215</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="263"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:263</a></div>
                         </td>
                     </tr>
 
@@ -1358,8 +1531,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="157"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:157</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="161"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:161</a></div>
                         </td>
                     </tr>
 
@@ -1429,8 +1602,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="133"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:133</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="137"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:137</a></div>
                         </td>
                     </tr>
 
@@ -1468,8 +1641,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="188"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:188</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="236"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:236</a></div>
                         </td>
                     </tr>
 
@@ -1507,8 +1680,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="251"
-                                    class="link-to-prism">src/app/components/video/player/player.component.ts:251</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="299"
+                                    class="link-to-prism">src/app/components/video/player/player.component.ts:299</a></div>
                         </td>
                     </tr>
 
@@ -1556,7 +1729,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/components/video/player/player.component.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/video/player/player.component.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -1583,7 +1756,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/video/player/player.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/video/player/player.component.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -1611,7 +1784,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/video/player/player.component.ts:45</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/video/player/player.component.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -1647,7 +1820,39 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/components/video/player/player.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/video/player/player.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="requestedCompletion"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>requestedCompletion</b></span>
+                        <a href="#requestedCompletion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/video/player/player.component.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -1678,7 +1883,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/video/player/player.component.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/video/player/player.component.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -1705,7 +1910,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/components/video/player/player.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/video/player/player.component.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -1736,7 +1941,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/components/video/player/player.component.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/video/player/player.component.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -1763,6 +1968,8 @@ import { VideosService } from &#x27;../../../shared/services/videos.service&#x27
 import { VideoCompletion } from &#x27;../../../shared/models/video-completion&#x27;;
 import { BackBtnComponent } from &#x27;../../../shared/components/back-btn/back-btn.component&#x27;;
 import { LogoComponent } from &#x27;../../../shared/components/logo/logo.component&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+import { GlobalService } from &#x27;../../../shared/services/global.service&#x27;;
 
 
 /**
@@ -1795,11 +2002,13 @@ export class PlayerComponent implements OnInit, OnDestroy {
   showingPlayer: boolean &#x3D; true;
   private inactivityTimer?: ReturnType&lt;typeof setTimeout&gt;;
   toastBitrateMsg?: string;
+  private requestedCompletion: boolean &#x3D; false;
 
 
   constructor(
     private router: Router,
     private videosService: VideosService,
+    private globalService: GlobalService,
   ) { }
 
 
@@ -1812,7 +2021,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
     this.startProgressTracking();
   }
 
-  
+
   /** 
    * Cleans up resources when the component is destroyed.
    */
@@ -1919,16 +2128,60 @@ export class PlayerComponent implements OnInit, OnDestroy {
 
   /** 
    * Initializes the video playback position from saved progress, if available.
+   * Tries loading video completion from the server, if not.
    */
   initVideoCompletion(): void {
     const completion: VideoCompletion | undefined &#x3D; this.videosService.getVideoCompletion(this.videoMeta.id);
     this.videoCompletion.videoId &#x3D; this.videoMeta.id;
     if (completion) {
-      this.videoCompletion &#x3D; completion;
-      if (completion.currentTime &gt; 0) {
-        const videoElement: HTMLVideoElement &#x3D; this.media.nativeElement;
-        videoElement.currentTime &#x3D; completion.currentTime;
+      this.handleVideoCompletion(completion);
+    } else if (!this.requestedCompletion) {
+      this.handleVideoCompletionLoading();
+      this.requestedCompletion &#x3D; true;
+    }
+  }
+
+
+  /**
+   * Applies video completion data to the player, setting the playback state.
+   */
+  handleVideoCompletion(completion: VideoCompletion): void {
+    this.videoCompletion &#x3D; completion;
+    if (completion.currentTime &gt; 0) {
+      const videoElement: HTMLVideoElement &#x3D; this.media.nativeElement;
+      videoElement.currentTime &#x3D; completion.currentTime;
+      if (this.globalService.userClickedDuringVisit) {
+        videoElement.play();
       }
+    }
+  }
+
+
+  /**
+   * Handles the current video completion data loading state to retrieve completion data, if available.
+   */
+  handleVideoCompletionLoading(): void {
+    if (this.videosService.loadingState.getValue() !&#x3D;&#x3D; &#x27;complete&#x27;) {
+      this.initVideoCompletionLoadingIfNecessary();
+      const loadingSub: Subscription &#x3D; this.videosService.loadingState.subscribe(ls &#x3D;&gt; {
+        if (ls &#x3D;&#x3D;&#x3D; &#x27;complete&#x27;) {
+          const videoCompletion: VideoCompletion | undefined &#x3D; this.videosService.getVideoCompletion(this.videoMeta.id);
+          if (videoCompletion) {
+            this.handleVideoCompletion(videoCompletion);
+          }
+          loadingSub.unsubscribe();
+        }
+      })
+    }
+  }
+
+
+  /**
+   * If video completion is not currently loading, initializes loading.
+   */
+  initVideoCompletionLoadingIfNecessary(): void {
+    if (this.videosService.loadingState.getValue() !&#x3D;&#x3D; &#x27;completion&#x27;) {
+      this.videosService.initVideoCompletionData();
     }
   }
 
@@ -2001,7 +2254,7 @@ export class PlayerComponent implements OnInit, OnDestroy {
    */
   togglePlayState(): void {
     const videoElement: HTMLVideoElement &#x3D; this.media.nativeElement;
-    videoElement.paused ? videoElement.play() : videoElement.pause();   
+    videoElement.paused ? videoElement.play() : videoElement.pause();
   }
 };</code></pre>
     </div>
