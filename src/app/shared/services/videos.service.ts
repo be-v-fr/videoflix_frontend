@@ -32,9 +32,9 @@ export class VideosService {
   /**
    * Sync video metadata if allowed based on the sync interval.
    */
-  public syncVideosMetaIfAllowed(): void {
+  public async syncVideosMetaIfAllowed(): Promise<void> {
     if (this.isVideosMetaSyncingAllowed()) {
-      this.syncVideosMeta();
+      await this.syncVideosMeta();
     }
   }
 
@@ -50,9 +50,9 @@ export class VideosService {
   /**
    * Sync the video metadata by fetching it from the server.
    */
-  private syncVideosMeta(): void {
+  private async syncVideosMeta(): Promise<void> {
     this.loadingState.next('meta');
-    lastValueFrom(this.http.get(this.VIDEOS_URL + 'main/?ordering=-created_at')).then(resp => {
+    await lastValueFrom(this.http.get(this.VIDEOS_URL + 'main/?ordering=-created_at')).then(resp => {
       this.lastVideosMetaSynced = Date.now();
       this.videosMeta = [];
       (resp as Array<any>).forEach(vData => {
