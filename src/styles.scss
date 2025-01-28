@@ -121,7 +121,7 @@ a {
     text-decoration: none;
 }
 
-.material-icons-outlined {
+.material-icons-outlined, .material-icons-sharp {
     @extend .prevent-select;
 }
 

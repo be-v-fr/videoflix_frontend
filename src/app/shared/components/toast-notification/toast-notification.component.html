@@ -2,12 +2,12 @@
     <div class="notification" [class.small]="small">
         <div class="status-mark" [class.error]="status == 'error'" [class.ok]="status == 'ok'"></div>
         <div class="notification-content">
-            <span *ngIf="status != 'neutral'" class="material-icons-outlined status-icon">
+            <span *ngIf="status != 'neutral'" class="notranslate material-icons-outlined status-icon">
                 @if(status == 'ok') {check_circle}
                 @else {error}
             </span>
             <p>{{msg}}</p>
-            <button *ngIf="status == 'error'" class="material-icons-outlined close-toast-btn"
+            <button *ngIf="status == 'error'" class="notranslate material-icons-outlined close-toast-btn"
                 (click)="close()">close_small</button>
         </div>
         <button *ngIf="btn" class="btn-white" (click)="btnClick.emit()">{{btn}}</button>

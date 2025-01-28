@@ -1,5 +1,5 @@
 <app-search class="search-desktop" />
-<button class="material-icons-outlined search-mobile-btn" (click)="toggleMobileOverlay()">search</button>
+<button class="notranslate material-icons-outlined search-mobile-btn" (click)="toggleMobileOverlay()">search</button>
 <div *ngIf="showOnMobile" class="search-mobile-overlay" (click)="toggleMobileOverlay()">
     <app-search [autofocus]="true" [addClosingToClearBtn]="true" (close)="toggleMobileOverlay()" />
 </div>

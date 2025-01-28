@@ -12,15 +12,15 @@
     <section *ngSwitchCase="'home'" [class.slide-down]="awaitingInit === 'complete'">
         <app-nav-search />
         <button class="btn-primary logout-btn" (click)="logout()" [disabled]="loggedOut">
-            <span class="material-icons-outlined">logout</span>
+            <span class="notranslate material-icons-outlined">logout</span>
             Log out
         </button>
         <div class="settings">
-            <span class="material-icons-outlined settings-icon">settings</span>
+            <span class="notranslate material-icons-outlined settings-icon">settings</span>
             <div class="settings-dropdown">
                 <ul>
                     <li class="submenu-title" (click)="showAccountSubmenuResponsive()">
-                        <span class="material-icons-outlined">arrow_left</span>
+                        <span class="notranslate material-icons-outlined">arrow_left</span>
                         My Account
                         <div class="settings-dropdown-submenu"
                             [class.show-submenu-responsive]="accountSubmenuShowingResponsive"
@@ -31,7 +31,7 @@
                         </div>
                     </li>
                     <li class="logout-li" (click)="logout()">
-                        <span class="material-icons-outlined">logout</span>
+                        <span class="notranslate material-icons-outlined">logout</span>
                         Log out
                     </li>
                 </ul>

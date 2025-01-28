@@ -1,7 +1,7 @@
 <div class="overlay" [class.hidden]="!showing" [class.fade-bg-out]="slidingOut" (click)="close()">
     <div class="content" (click)="$event.stopPropagation()" [class.sliding-out]="slidingOut">
         <div class="header">
-            <button class="material-icons-outlined close-btn" (click)="close()">close</button>
+            <button class="notranslate material-icons-outlined close-btn" (click)="close()">close</button>
         </div>
         <ng-container *ngComponentOutlet="dialogContent; injector: dialogContentInjector" (close)="close()" />
     </div>

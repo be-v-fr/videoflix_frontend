@@ -18,7 +18,7 @@
             @extend .flex-center;
             gap: 4px;
             &.resume-icon {
-                .material-icons-sharp {
+                .notranslate material-icons-sharp {
                     margin-right: -6px;
                 }
                 .resume-line {
