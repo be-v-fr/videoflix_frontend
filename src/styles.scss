@@ -107,6 +107,10 @@ button {
     outline: none;
 }
 
+button {
+    @extend .prevent-select;
+}
+
 button,
 a {
     cursor: pointer;

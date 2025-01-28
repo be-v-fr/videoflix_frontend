@@ -3,27 +3,36 @@
 
 $video-height: var(--video-card-height);
 
+:host {
+    position: relative;
+}
+
 header {
     width: 100%;
     justify-content: space-between;
     display: flex;
     align-items: center;
     margin-bottom: 16px;
+
     h4 {
         color: $plain-white;
     }
+
     .expand-btn {
         color: $plain-white;
         color: $grey-light;
         transform: scale(1) rotate(0);
         @include transition-ease($dur: 75ms);
+
         &:hover {
             @include transition-ease($dur: 75ms);
             transform: scale(1.2) rotate(0);
         }
+
         &.expanded {
             @include transition-ease($dur: 75ms);
             transform: scale(1) rotate(180deg) translateY(0.63px);
+
             &:hover {
                 @include transition-ease($dur: 75ms);
                 transform: scale(1.2) rotate(180deg) translateY(0.63px);
@@ -37,20 +46,30 @@ header {
     flex-direction: row;
     gap: 16px;
     flex-wrap: wrap;
-    position: relative;
+    scroll-behavior: smooth;
+
     &.z-top {
         z-index: 100;
     }
+    
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
     .video-container {
         width: calc($video-height / 0.5625);
         height: $video-height;
         overflow: visible;
+        position: relative;
     }
+
     @media screen and (max-width: 800px) {
         height: calc($video-height / 0.8);
         flex-wrap: nowrap;
         overflow-x: auto;
         overflow-y: visible;
+        border-radius: 5px;
+
         app-video-card {
             height: $video-height;
         }
@@ -59,4 +78,44 @@ header {
 
 .hidden {
     display: none;
+}
+
+button.scroll-btn {
+    position: absolute;
+    font-size: 36px;
+    color: greenyellow;
+    background: $purple-trans;
+    backdrop-filter: blur(2px);
+    top: 48px;
+    bottom: 14px;
+    @include transition-ease($dur: 75ms);
+    display: none;
+
+    &.btn-left {
+        left: -2px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+
+    &.btn-right {
+        right: -2px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+
+    &:hover {
+        background: #2E3EDFA6;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    :host {
+        header .expand-btn {
+            display: none;
+        }
+
+        button.scroll-btn {
+            display: initial;
+        }
+    }
 }

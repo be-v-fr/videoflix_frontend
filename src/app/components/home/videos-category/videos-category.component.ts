@@ -26,6 +26,7 @@ export class VideosCategoryComponent implements AfterViewInit {
   expanded: boolean = false;
   @ViewChild('container') containerRef!: ElementRef<HTMLDivElement>;
   moreThanOneRow: boolean = true;
+  containerOverflows: boolean = false;
   private lastWindowEventHandling = 0;
   private onWindowEventThrottleInterval = 100;
   rowLayout: boolean = false;
@@ -40,7 +41,7 @@ export class VideosCategoryComponent implements AfterViewInit {
    * Checks whether the video cards span multiple rows.
    */
   ngAfterViewInit(): void {
-    this.checkRows();
+    this.updateLayout();
   }
 
 
@@ -60,8 +61,7 @@ export class VideosCategoryComponent implements AfterViewInit {
     const now = Date.now();
     if (now - this.lastWindowEventHandling >= this.onWindowEventThrottleInterval) {
       this.lastWindowEventHandling = now;
-      this.checkLayout();
-      this.checkRows();
+      this.updateLayout();
     }
   }
 
@@ -109,5 +109,42 @@ export class VideosCategoryComponent implements AfterViewInit {
     const videoWidth: number = children[0].offsetWidth;
     const videoGap: number = children[1].offsetLeft - children[0].offsetLeft - videoWidth;
     this.moreThanOneRow = containerWidth + videoGap < this.selection.length * (videoWidth + videoGap);
+  }
+
+
+  /**
+   * Checks if the videos container overflows and updates the `containerOverflows` property accordingly.
+   */
+  checkOverflow(): void {
+    if (this.rowLayout) {
+      const container: HTMLDivElement | undefined = this.containerRef.nativeElement;
+      if (container) {
+        this.containerOverflows = container.clientWidth < container.scrollWidth;
+      }
+    }
+  }
+
+
+  /**
+   * Dynamically updates the layout to match the viewport based on the component's content.
+   * Takes into account large as well as small screens.
+   */
+  updateLayout(): void {
+    this.checkLayout();
+    this.checkRows();
+    this.checkOverflow();
+  }
+
+
+  /**
+   * Scrolls the videos container content along the x-axis.
+   * @param direction Scrolling direction.
+   */
+  scroll(direction: 'left' | 'right'): void {
+    let scrollValue: number = 187;
+    if (direction === 'left') {
+      scrollValue *= -1;
+    }
+    this.containerRef.nativeElement.scrollBy(scrollValue, 0);
   }
 }
