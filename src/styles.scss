@@ -71,6 +71,7 @@ $page-top-padding: calc($nav-height - 30px);
     margin: 0;
     box-sizing: border-box;
     font-family: 'DM Sans', sans-serif;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html, body {
