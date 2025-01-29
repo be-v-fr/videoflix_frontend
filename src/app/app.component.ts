@@ -18,7 +18,7 @@ import { GlobalService } from './shared/services/global.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   navigationEndSub: Subscription = new Subscription();
-  title = 'videoflix_frontend';
+  title = 'videoflix';
   navMode?: 'login' | 'home' | 'back';
   toastErrorMsg: string = '';
 
