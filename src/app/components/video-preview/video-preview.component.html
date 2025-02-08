@@ -1,5 +1,5 @@
 <vg-player (onPlayerReady)="onPlayerReady($event)">
-    <video [vgMedia]="$any(media)" #media id="video" preload="auto" autoplay="true" crossorigin #vgHls="vgHls"
+    <video [vgMedia]="$any(media)" #media id="video" preload="none" autoplay="true" crossorigin #vgHls="vgHls"
         [vgHls]="videoMeta.playlistUrl">
     </video>
     <div class="color-gradient"></div>

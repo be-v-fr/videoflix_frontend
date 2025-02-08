@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
 import { VgApiService, VgCoreModule } from '@videogular/ngx-videogular/core';
-import { VgStreamingModule } from '@videogular/ngx-videogular/streaming';
+import { VgHlsDirective, VgStreamingModule } from '@videogular/ngx-videogular/streaming';
 import { VideoMeta } from '../../shared/models/video-meta';
 import { RouterLink } from '@angular/router';
 import { GlobalService } from '../../shared/services/global.service';
@@ -19,9 +19,12 @@ import { GlobalService } from '../../shared/services/global.service';
 })
 export class VideoPreviewComponent {
   @ViewChild('media', { static: true }) media!: ElementRef<HTMLVideoElement>;
+  @ViewChild(VgHlsDirective, { static: true }) vgHls!: VgHlsDirective;
   @Input({ required: true }) videoMeta!: VideoMeta;
   api: VgApiService = new VgApiService;
   settingPlayer: boolean = false;
+  private hls: any;
+
 
   constructor(
     private globalService: GlobalService,
@@ -33,6 +36,19 @@ export class VideoPreviewComponent {
    */
   onPlayerReady(source: VgApiService): void {
     this.api = source;
+    this.initHlsInstance();
+  }
+
+
+  /**
+   * Fetches HLS instance from Videogular.
+   */
+  private initHlsInstance(): void {
+    setTimeout(() => {
+      if (this.vgHls && this.vgHls.hls) {
+        this.hls = this.vgHls.hls;
+      }
+    }, 500);
   }
 
 
@@ -46,6 +62,18 @@ export class VideoPreviewComponent {
 
 
   /**
+   * Pauses the video and stops further video loading.
+   */
+  pauseAndStopLoading(): void {
+    const videoElement: HTMLVideoElement = this.media.nativeElement;
+    videoElement.pause();
+    if (this.hls) {
+      this.hls.stopLoad();
+    }
+  }
+
+
+  /**
    * Handles scrolling events.
    * Automatically pauses or plays the video depending on the scrolling position.
    */
@@ -55,7 +83,7 @@ export class VideoPreviewComponent {
     const videoElement: HTMLVideoElement = this.media.nativeElement;
     if (!this.settingPlayer && this.globalService.userClickedDuringVisit) {
       if (window.scrollY > 0.2 * window.innerHeight && !videoElement.paused) {
-        videoElement.pause();
+        this.pauseAndStopLoading();
       } else if (window.scrollY <= 0.2 * window.innerHeight && videoElement.paused) {
         this.settingPlayer = true;
         videoElement.play()
