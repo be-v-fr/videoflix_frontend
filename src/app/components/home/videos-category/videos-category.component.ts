@@ -26,6 +26,7 @@ export class VideosCategoryComponent implements AfterViewInit {
   expanded: boolean = false;
   @ViewChild('container') containerRef!: ElementRef<HTMLDivElement>;
   moreThanOneRow: boolean = true;
+  videosPerRow: number = 100;
   containerOverflows: boolean = false;
   private lastWindowEventHandling = 0;
   private onWindowEventThrottleInterval = 100;
@@ -80,11 +81,28 @@ export class VideosCategoryComponent implements AfterViewInit {
   checkRows(): void {
     if (this.selection.length > 0 && !this.rowLayout) {
       const children = Array.from(this.containerRef.nativeElement.children) as HTMLElement[];
+      this.updateVideosPerRow(children);
       if (children.length === this.selection.length) {
         this.checkVerticalSize(children);
       } else {
-        this.checkHorizontalSize(children);
+        this.checkHorizontalSize();
       }
+    }
+  }
+
+
+  /**
+   * Calculates the integer number of video cards per row.
+   * @param {HTMLElement[]} children Array of child elements (video cards) in the container.
+   */
+  updateVideosPerRow(children: HTMLElement[]): void {
+    if (children.length > 1) {
+      const containerWidth: number = this.containerRef.nativeElement.offsetWidth;
+      const videoWidth: number = children[0].offsetWidth;
+      const videoGap: number = children[1].offsetLeft - children[0].offsetLeft - videoWidth;
+      this.videosPerRow = Math.floor((containerWidth + videoGap) / (videoWidth + videoGap));
+    } else {
+      this.videosPerRow = 1;
     }
   }
 
@@ -102,13 +120,9 @@ export class VideosCategoryComponent implements AfterViewInit {
 
   /**
    * Checks the horizontal size of the video cards to determine if they span multiple rows.
-   * @param {HTMLElement[]} children Array of child elements (video cards) in the container.
    */
-  checkHorizontalSize(children: HTMLElement[]): void {
-    const containerWidth: number = this.containerRef.nativeElement.offsetWidth;
-    const videoWidth: number = children[0].offsetWidth;
-    const videoGap: number = children[1].offsetLeft - children[0].offsetLeft - videoWidth;
-    this.moreThanOneRow = containerWidth + videoGap < this.selection.length * (videoWidth + videoGap);
+  checkHorizontalSize(): void {
+    this.moreThanOneRow = this.videosPerRow < this.selection.length;
   }
 
 

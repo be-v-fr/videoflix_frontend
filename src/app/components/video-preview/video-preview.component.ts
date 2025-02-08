@@ -21,7 +21,7 @@ export class VideoPreviewComponent {
   @ViewChild('media', { static: true }) media!: ElementRef<HTMLVideoElement>;
   @Input({ required: true }) videoMeta!: VideoMeta;
   api: VgApiService = new VgApiService;
-
+  settingPlayer: boolean = false;
 
   constructor(
     private globalService: GlobalService,
@@ -53,11 +53,13 @@ export class VideoPreviewComponent {
   @HostListener('document:mousedown')
   handleScrolling(): void {
     const videoElement: HTMLVideoElement = this.media.nativeElement;
-    if (this.globalService.userClickedDuringVisit) {
-      if (window.scrollY > 0.3 * window.innerHeight && !videoElement.paused) {
+    if (!this.settingPlayer && this.globalService.userClickedDuringVisit) {
+      if (window.scrollY > 0.2 * window.innerHeight && !videoElement.paused) {
         videoElement.pause();
-      } else if (videoElement.paused) {
-        videoElement.play();
+      } else if (window.scrollY <= 0.2 * window.innerHeight && videoElement.paused) {
+        this.settingPlayer = true;
+        videoElement.play()
+          .then(() => this.settingPlayer = false);
       }
     }
   }

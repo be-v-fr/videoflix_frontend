@@ -1,13 +1,13 @@
 <header>
     <h4>{{ title }}</h4>
-    <button *ngIf="!rowLayout && moreThanOneRow && selection.length > 6"
+    <button *ngIf="!rowLayout && moreThanOneRow && selection.length > 4"
         class="notranslate material-icons-outlined btn-icon expand-btn" [class.expanded]="expanded"
         (click)="toggleExpansion()">expand_circle_down</button>
 </header>
 <div class="videos-container" #container (mouseover)="styleService.lastVideoCategoryHovered = categoryIndex"
     [class.z-top]="styleService.lastVideoCategoryHovered === categoryIndex">
     @for(videoMeta of selection; track videoMeta; let i = $index) {
-    <div class="video-container flex-center" *ngIf="rowLayout || !moreThanOneRow || i < 6 || expanded">
+    <div class="video-container flex-center" *ngIf="rowLayout || !moreThanOneRow || i < videosPerRow || i < 4 || expanded">
         <app-video-card [metaData]="videoMeta" (continue)="continue.emit($event)" (details)="details.emit($event)" />
     </div>
     }
