@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, HostListener, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, HostListener, AfterViewInit } from '@angular/core';
 import { VideoMeta } from '../../../shared/models/video-meta';
 import { VideoCompletion } from '../../../shared/models/video-completion';
 import { VideoCardComponent } from '../video-card/video-card.component';

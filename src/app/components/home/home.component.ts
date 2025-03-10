@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Type } from '@angular/core';
+import { Component, OnInit, OnDestroy, Type, HostListener, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoadingCircleComponent } from '../../shared/components/loading-circle/loading-circle.component';
 import { VideosService } from '../../shared/services/videos.service';
@@ -34,9 +34,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   showingVideoDetailsDialog: boolean = false;
   continueWatchingData?: { meta: VideoMeta, completion: VideoCompletion };
   videoDetailsData?: { meta: VideoMeta, completion?: VideoCompletion };
+  videosContainerLoading: boolean = false; 
 
 
   constructor(
+    private el: ElementRef,
     private authService: AuthService,
     public videosService: VideosService,
   ) { }
@@ -50,6 +52,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.initAppContent();
     }
     this.authSub = this.subAuth();
+    this.setVideosContainerLoading();
   }
 
 
@@ -103,5 +106,14 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.videoDetailsData = data;
     }
     this.showingVideoDetailsDialog = true;
+  }
+
+
+  @HostListener('window:scroll')
+  setVideosContainerLoading() {
+    if(!this.videosContainerLoading) {
+      const rect = this.el.nativeElement.getBoundingClientRect();
+      this.videosContainerLoading = (rect.top < -1);
+    }
   }
 }
