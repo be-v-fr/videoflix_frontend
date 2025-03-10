@@ -42,12 +42,14 @@ export class VideoPreviewComponent {
 
 
   /**
-   * Fetches HLS instance from Videogular.
+   * Fetches HLS instance from Videogular and starts video playback.
    */
   private initHlsInstance(): void {
     setTimeout(() => {
       if (this.vgHls && this.vgHls.hls) {
+        const videoElement: HTMLVideoElement = this.media.nativeElement;
         this.hls = this.vgHls.hls;
+        videoElement.play();
       }
     }, 500);
   }
