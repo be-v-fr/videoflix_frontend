@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   /**
    * Initializes the component by syncing video metadata and initializing user-related data.
-   * */
+   */
   ngOnInit(): void {
     if (this.authService.currentUser) {
       this.initAppContent();
@@ -109,6 +109,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
 
+  /**
+   * If videos container content is not yet loaded, sets loading state according
+   * to the component positioning inside the viewport.
+   */
   @HostListener('window:scroll')
   setVideosContainerLoading() {
     if(!this.videosContainerLoading) {
