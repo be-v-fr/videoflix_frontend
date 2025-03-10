@@ -1,4 +1,5 @@
 import { Component, ElementRef, HostListener, Input, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { VgApiService, VgCoreModule } from '@videogular/ngx-videogular/core';
 import { VgHlsDirective, VgStreamingModule } from '@videogular/ngx-videogular/streaming';
 import { VideoMeta } from '../../shared/models/video-meta';
@@ -13,7 +14,7 @@ import { GlobalService } from '../../shared/services/global.service';
 @Component({
   selector: 'app-video-preview',
   standalone: true,
-  imports: [VgCoreModule, VgStreamingModule, RouterLink],
+  imports: [CommonModule, VgCoreModule, VgStreamingModule, RouterLink],
   templateUrl: './video-preview.component.html',
   styleUrl: './video-preview.component.scss'
 })
@@ -27,7 +28,7 @@ export class VideoPreviewComponent {
 
 
   constructor(
-    private globalService: GlobalService,
+    public globalService: GlobalService,
   ) { }
 
 

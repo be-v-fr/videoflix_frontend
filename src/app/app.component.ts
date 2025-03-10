@@ -172,6 +172,7 @@ export class AppComponent implements OnInit, OnDestroy {
   @HostListener('document:mousedown')
   registerFirstClick(): void {
     if(!this.globalService.userClickedDuringVisit) {
+      console.log('first click registered');
       this.globalService.userClickedDuringVisit = true;
     }
   }

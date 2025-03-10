@@ -17,6 +17,14 @@ $overlay-gap: 32px;
             object-fit: cover;
             object-position: center;
         }
+        .thumb {
+            position: absolute;
+            inset: 0;
+            width: 100vw;
+            height: 100dvh;
+            object-fit: cover;
+            object-position: center;
+        }
         .color-gradient {
             position: absolute;
             inset: 0;
@@ -45,6 +53,14 @@ $overlay-gap: 32px;
         h1 {
             font-size: 88px;
             @include text-line-clamp($number-of-lines: 2);
+            &.desktop-hide {
+                display: none;
+            }
+            @media screen and (max-width: 800px) {
+                &.desktop-hide {
+                    display: initial;
+                }
+            }
         }
         .description-container {
             width: 440px;
@@ -52,8 +68,14 @@ $overlay-gap: 32px;
             display: flex;
             align-items: flex-end;
             @include text-line-clamp($number-of-lines: 5);
+            &.desktop-hide {
+                display: none;
+            }
             @media screen and (max-width: 800px) {
                 width: auto;
+                &.desktop-hide {
+                    display: flex;
+                }
                 @media screen and (max-height: 800px) {
                     line-clamp: 3;
                     -webkit-line-clamp: 3;
@@ -62,6 +84,14 @@ $overlay-gap: 32px;
         }
         .play-btn-container {
             height: calc(50dvh - $overlay-gap);
+            &.play-btn-alt-pos {
+                display: flex;
+                align-items: flex-end;
+                padding-bottom: 28px;
+                @media screen and (max-width: 800px) {
+                    display: initial;
+                }
+            }
             .btn-primary {
                 display: flex;
                 align-items: center;
@@ -87,7 +117,7 @@ $overlay-gap: 32px;
         height: 50dvh;
         flex-direction: column;
         background: $black-bright;
-        video, .color-gradient {
+        video, .thumb, .color-gradient {
             height: inherit;
             min-height: unset;
         }

@@ -2,14 +2,15 @@
     <video [vgMedia]="$any(media)" #media id="video" preload="none" autoplay="true" crossorigin #vgHls="vgHls"
         [vgHls]="videoMeta.playlistUrl">
     </video>
+    <img *ngIf="!globalService.userClickedDuringVisit" [src]="videoMeta.thumbUrl" [alt]="videoMeta.title" class="thumb" />
     <div class="color-gradient"></div>
     <div class="overlay">
         <div class="overlay-content">
-            <h1>{{ videoMeta.title }}</h1>
-            <div class="description-container">
+            <h1 [class.desktop-hide]="!globalService.userClickedDuringVisit">{{ videoMeta.title }}</h1>
+            <div [class.desktop-hide]="!globalService.userClickedDuringVisit" class="description-container">
                 <p>{{ videoMeta.description }}</p>
             </div>
-            <div class="play-btn-container">
+            <div class="play-btn-container" [class.play-btn-alt-pos]="!globalService.userClickedDuringVisit">
                 <button class="btn-primary" [routerLink]="['video', this.videoMeta.id]">
                     <span class="notranslate material-icons-sharp">play_arrow</span>
                     Play
